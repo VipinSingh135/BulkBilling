@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorThemeGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/strSubscriptions"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_16sdp" />
+    </RelativeLayout>
+
+
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:padding="@dimen/_16sdp"
+        android:background="@drawable/bg_curved_dark_grey_outline"
+        android:id="@+id/relativeBasic"
+        >
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_24sdp"
+            android:id="@+id/rdBtnBasic"
+            android:text="@string/strBasicAccount"
+            android:textSize="@dimen/_16sdp"
+            android:fontFamily="@font/raleway_medium"
+            android:paddingLeft="@dimen/_8sdp"
+            android:textColor="@color/colorThemeGreen"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="@string/strFree"
+            android:gravity="center"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@android:color/white"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:background="@drawable/bg_button_green_light"
+            android:layout_alignTop="@+id/rdBtnBasic"
+            android:layout_alignBottom="@+id/rdBtnBasic"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvEmail"
+            android:layout_below="@+id/rdBtnBasic"
+            android:textSize="@dimen/_14sdp"
+            android:fontFamily="@font/raleway_regular"
+            android:text="@string/strDemo"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:textColor="@color/colorGreyDark"/>
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeBasic"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:padding="@dimen/_16sdp"
+        android:background="@drawable/bg_curved_dark_grey_outline"
+        android:id="@+id/relativePremium"
+        >
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_24sdp"
+            android:id="@+id/rdBtnPremium"
+            android:text="@string/strPremiumAccount"
+            android:textSize="@dimen/_16sdp"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/colorThemeGreen"
+            android:paddingLeft="@dimen/_8sdp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="@string/str25"
+            android:gravity="center"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/raleway_bold"
+            android:paddingLeft="@dimen/_12sdp"
+            android:paddingRight="@dimen/_12sdp"
+            android:background="@drawable/bg_button_green_light"
+            android:layout_alignTop="@+id/rdBtnPremium"
+            android:layout_alignBottom="@+id/rdBtnPremium"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rdBtnPremium"
+            android:textSize="@dimen/_14sdp"
+            android:text="@string/strDemo"
+            android:fontFamily="@font/raleway_regular"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:textColor="@color/colorGreyDark"/>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

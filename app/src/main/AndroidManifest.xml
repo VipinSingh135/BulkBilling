@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.acuratechglobal.bulkbilling">
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:name=".application.AppController"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".screens.CommonScreens.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.acuratechglobal.bulkbilling"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_api_keys"/>
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".screens.CommonScreens.login.LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.CommonScreens.mainActivity.MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.CommonScreens.signup.SignUpActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.CommonScreens.phoneVerification.PhoneVerifyActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.CommonScreens.setPassword.SetPassActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.CommonScreens.selectPlan.SelectPlanActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.CommonScreens.forgotPassword.ForgotPassActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.CommonScreens.resetPassword.ResetPassActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.DoctorScreens.createProfile.CreateProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.CommonScreens.changePassword.ChangePassActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.PatientScreens.patientWelcome.WelcomeActivity" android:screenOrientation="portrait"/>
+
+    </application>
+
+</manifest>

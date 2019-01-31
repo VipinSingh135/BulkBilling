@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "759047733838",
+    "firebase_url": "https://bulk-billing.firebaseio.com",
+    "project_id": "bulk-billing",
+    "storage_bucket": "bulk-billing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759047733838:android:e8667c58d5560e1f",
+        "android_client_info": {
+          "package_name": "com.acuratechglobal.bulkbilling"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759047733838-8egbk61l4bpj2p6l0c5j4ohr4hpnuh4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoImTHj-5u7u4AcJUV0aPQZu8jnU_wZWc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

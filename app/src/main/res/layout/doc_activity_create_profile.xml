@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:scrollbars="none">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_16sdp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorThemeGreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/_8sdp"
+                android:src="@drawable/back_white" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/raleway_bold"
+                android:text="@string/strCreateProfile"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_16sdp" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativeProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_16sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayout">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/raleway_regular"
+                android:text="@string/strEdit"
+                android:textAllCaps="false"
+                android:textColor="@color/colorThemeGreen"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/user" />
+
+            <ImageButton
+                android:id="@+id/btnAddImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/imgProfile"
+                android:layout_alignBottom="@+id/imgProfile"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/_2sdp"
+                android:src="@drawable/camera" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgProfile"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                android:fontFamily="@font/raleway_bold"
+                android:gravity="center"
+                android:text="@string/strName"
+                android:textColor="@android:color/background_dark"
+                android:textSize="@dimen/_16sdp" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/raleway_medium"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                android:gravity="center"
+                android:text="@string/strContactNumber"
+                android:textColor="@color/colorGreyDark"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPhone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                android:background="@drawable/bg_curved_yellow"
+                android:fontFamily="@font/raleway_medium"
+                android:gravity="center"
+                android:paddingLeft="@dimen/_16sdp"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingRight="@dimen/_16sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                android:text="@string/strEmail"
+                android:textColor="@color/colorThemeGreen"
+                android:textSize="@dimen/_12sdp" />
+
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constSpeciality"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGreylight"
+            android:paddingBottom="@dimen/_16sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeProfile">
+
+            <TextView
+                android:id="@+id/tvSpecialArea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="@string/strSpecialArea2"
+                android:textColor="@color/colorTextGreen"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/relativeSpecialArea"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpecialArea">
+
+                <!--<androidx.recyclerview.widget.RecyclerView-->
+                <!--android:id="@+id/recyclerSpecialArea"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--</androidx.recyclerview.widget.RecyclerView>-->
+
+                <TextView
+                    android:id="@+id/tvSpclArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_curved_grey_outline"
+                    android:drawableRight="@drawable/arrow"
+                    android:fontFamily="@font/raleway_medium"
+                    android:hint="@string/strAddSpecialArea"
+                    android:paddingLeft="@dimen/_6sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tvSpecialField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="@string/strSpecialField2"
+                android:textColor="@color/colorTextGreen"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeSpecialArea" />
+
+            <RelativeLayout
+                android:id="@+id/relativeSpecialField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                android:fontFamily="@font/raleway_medium"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpecialField">
+
+                <!--<androidx.recyclerview.widget.RecyclerView-->
+                <!--android:id="@+id/recyclerSpecialField"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>-->
+
+                <TextView
+                    android:id="@+id/tvSpclField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_curved_grey_outline"
+                    android:drawableRight="@drawable/arrow"
+                    android:fontFamily="@font/raleway_medium"
+                    android:hint="@string/strAddSpecialField"
+                    android:paddingLeft="@dimen/_6sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvSpeciality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="@string/strSpeciality2"
+                android:textColor="@color/colorTextGreen"
+                android:fontFamily="@font/raleway_medium"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/relativeSpecialField" />
+
+            <RelativeLayout
+                android:id="@+id/relativeSpeciality"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpeciality">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerSpeciality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/tvSpecialty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_curved_grey_outline"
+                    android:drawableRight="@drawable/arrow"
+                    android:fontFamily="@font/raleway_medium"
+                    android:hint="@string/strAddSpeciality"
+                    android:paddingLeft="@dimen/_6sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp" />
+
+            </RelativeLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tvClinicName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/raleway_medium"
+            android:text="@string/strClinicName2"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constSpeciality" />
+
+        <EditText
+            android:id="@+id/edClinicName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:background="@drawable/bg_curved_grey_outline"
+            android:fontFamily="@font/raleway_medium"
+            android:hint="@string/strEnterClinicName"
+            android:maxLength="50"
+            android:paddingLeft="@dimen/_6sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_6sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tvClinicName" />
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:text="@string/strAddress2"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edClinicName" />
+
+        <TextView
+            android:id="@+id/tvClinicAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:background="@drawable/bg_curved_grey_outline"
+            android:drawableRight="@drawable/arrow"
+            android:fontFamily="@font/raleway_medium"
+            android:hint="@string/strEnterClinicAddress"
+            android:paddingLeft="@dimen/_6sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
+
+
+        <TextView
+            android:id="@+id/tvExperience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:fontFamily="@font/raleway_medium"
+            android:text="@string/strExperience2"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvClinicAddress" />
+
+
+        <RadioButton
+            android:id="@+id/rdBtn03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="@string/str0_03"
+            android:textColor="@color/colorGreyDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvExperience" />
+
+        <RadioButton
+            android:id="@+id/rdBtn05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_40sdp"
+            android:fontFamily="@font/raleway_medium"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="@string/str03_05"
+            android:textColor="@color/colorGreyDark"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvExperience" />
+
+        <RadioButton
+            android:id="@+id/rdBtn10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="@string/str05_10"
+            android:textColor="@color/colorGreyDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rdBtn03" />
+
+        <RadioButton
+            android:id="@+id/rdBtn15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_40sdp"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="@string/str10_15"
+            android:textColor="@color/colorGreyDark"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rdBtn05" />
+
+
+        <RadioButton
+            android:id="@+id/rdBtnAbove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:fontFamily="@font/raleway_medium"
+            android:paddingLeft="@dimen/_8sdp"
+            android:text="@string/strAbove15"
+            android:textColor="@color/colorGreyDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rdBtn10" />
+
+
+        <TextView
+            android:id="@+id/tvQualif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:text="@string/strQualification2"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rdBtnAbove" />
+
+        <RelativeLayout
+            android:id="@+id/relativeQualify"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_16sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvQualif">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerQualify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/tvQualifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_curved_grey_outline"
+                android:drawableRight="@drawable/arrow"
+                android:fontFamily="@font/raleway_medium"
+                android:hint="@string/strEnterQualifications"
+                android:paddingLeft="@dimen/_6sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp" />
+
+        </RelativeLayout>
+
+        <!--<TextView-->
+        <!--android:id="@+id/"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/_20sdp"-->
+        <!--android:layout_marginRight="@dimen/_20sdp"-->
+        <!--android:layout_marginTop="@dimen/_8sdp"-->
+        <!--android:background="@drawable/bg_curved_grey_outline"-->
+        <!--android:drawableRight="@drawable/arrow"-->
+        <!--android:hint="@string/strEnterQualifications"-->
+        <!--android:paddingBottom="@dimen/_10sdp"-->
+        <!--android:fontFamily="@font/raleway_medium"-->
+        <!--android:paddingLeft="@dimen/_6sdp"-->
+        <!--android:paddingRight="@dimen/_10sdp"-->
+        <!--android:paddingTop="@dimen/_10sdp"-->
+        <!--android:textSize="@dimen/_12sdp" />-->
+
+
+        <TextView
+            android:id="@+id/tvSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/raleway_medium"
+            android:text="@string/strSelectDays2"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeQualify" />
+
+        <RelativeLayout
+            android:id="@+id/relativeSelectDays"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_16sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSelect">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerSelectDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/tvSelectDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_curved_grey_outline"
+                android:drawableRight="@drawable/arrow"
+                android:fontFamily="@font/raleway_medium"
+                android:hint="@string/strEnterSelectDays"
+                android:paddingLeft="@dimen/_6sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp" />
+
+        </RelativeLayout>
+
+        <!--<TextView-->
+        <!--android:fontFamily="@font/raleway_medium"-->
+        <!--android:id="@+id/tvSelectDays"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/_20sdp"-->
+        <!--android:layout_marginRight="@dimen/_20sdp"-->
+        <!--android:layout_marginTop="@dimen/_8sdp"-->
+        <!--android:background="@drawable/bg_curved_grey_outline"-->
+        <!--android:drawableRight="@drawable/arrow"-->
+        <!--android:hint="@string/strEnterSelectDays"-->
+        <!--android:paddingBottom="@dimen/_10sdp"-->
+        <!--android:paddingLeft="@dimen/_6sdp"-->
+        <!--android:paddingRight="@dimen/_10sdp"-->
+        <!--android:paddingTop="@dimen/_10sdp"-->
+        <!--android:textSize="@dimen/_12sdp"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/" />-->
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeSelectDays">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingRight="@dimen/_4sdp">
+
+                <TextView
+                    android:id="@+id/tvOpen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_medium"
+                    android:text="@string/strOpenTime"
+                    android:textColor="@color/colorTextGreen"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/tvOpenTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvOpen"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_curved_grey_outline"
+                    android:drawableRight="@drawable/arrow"
+                    android:fontFamily="@font/raleway_medium"
+                    android:padding="@dimen/_8sdp"
+                    android:text="@string/strSelect"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_12sdp" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/_4sdp">
+
+                <TextView
+                    android:id="@+id/tvClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_medium"
+                    android:text="@string/strCloseTime"
+                    android:textColor="@color/colorTextGreen"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/tvCloseTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvClose"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/bg_curved_grey_outline"
+                    android:drawableRight="@drawable/arrow"
+                    android:fontFamily="@font/raleway_medium"
+                    android:padding="@dimen/_8sdp"
+                    android:text="@string/strSelect"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_12sdp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:background="@drawable/bg_button_yellow"
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/strSave"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

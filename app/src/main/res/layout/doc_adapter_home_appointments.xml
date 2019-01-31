@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_8sdp"
+    android:layout_margin="@dimen/_8sdp"
+    android:background="@drawable/bg_curved_white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearDate"
+        android:background="@drawable/bg_curved_yellow"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_12sdp"
+        android:paddingRight="@dimen/_12sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:gravity="center_horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Firday"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/colorGreyDarker"
+            android:textSize="@dimen/_14sdp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            android:textColor="@color/colorGreyDarker"
+            android:fontFamily="@font/raleway_bold"
+            android:textStyle="bold"
+            android:textSize="@dimen/_28sdp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGreyDarker"
+            android:fontFamily="@font/raleway_medium"
+            android:text="july 2019"
+            android:textSize="@dimen/_14sdp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/linearDate"
+        app:layout_constraintRight_toLeftOf="@+id/tvViewDetail"
+        android:id="@+id/linearTiming"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:fontFamily="@font/raleway_regular"
+                android:text="@string/strTiming"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textColor="@color/colorGrey"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:text="12:30 pm"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                android:fontFamily="@font/raleway_medium"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textColor="@color/colorGreyDark"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:text="@string/strTiming"
+                android:fontFamily="@font/raleway_regular"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textColor="@color/colorGrey"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:text="12:30 pm"
+                android:fontFamily="@font/raleway_medium"
+                android:textStyle="bold"
+                android:textSize="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textColor="@color/colorGreyDark"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/raleway_regular"
+        android:text="@string/strViewDetail"
+        android:paddingLeft="@dimen/_8sdp"
+        android:paddingTop="@dimen/_12sdp"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:id="@+id/tvViewDetail"
+        />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginLeft="@dimen/_4sdp"
+        android:layout_marginRight="@dimen/_4sdp"
+        android:background="@color/colorGrey"
+        android:layout_marginTop="@dimen/_4sdp"
+        app:layout_constraintLeft_toRightOf="@+id/linearDate"
+        app:layout_constraintRight_toLeftOf="@+id/tvViewDetail"
+        app:layout_constraintTop_toBottomOf="@+id/linearTiming" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/linearDate"
+        app:layout_constraintTop_toBottomOf="@id/view2"
+        android:text="General Checkup"
+        android:fontFamily="@font/raleway_medium"
+        android:textColor="@color/colorGreyDark"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:textSize="@dimen/_14sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:id="@+id/tvTitle"
+        />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="0dp"
+        android:background="@color/colorGrey"
+        android:layout_marginTop="@dimen/_4sdp"
+        app:layout_constraintLeft_toRightOf="@+id/linearTiming"
+        app:layout_constraintRight_toLeftOf="@+id/tvViewDetail"
+        app:layout_constraintTop_toTopOf="@+id/linearTiming"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"/>
+
+    <Button
+        android:id="@+id/btnAccept"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_32sdp"
+        android:background="@drawable/bg_curved_light_green"
+        android:text="@string/strAccept"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_12sdp"
+        android:fontFamily="@font/raleway_medium"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        />
+
+
+    <Button
+        android:id="@+id/btnSuggest"
+        android:layout_width="@dimen/_54sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:background="@android:color/transparent"
+        android:text="@string/strSuggest"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlue"
+        android:textSize="@dimen/_12sdp"
+        android:fontFamily="@font/raleway_medium"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintRight_toLeftOf="@+id/btnAccept"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        />
+
+
+    <Button
+        android:id="@+id/btnReject"
+        android:layout_width="@dimen/_54sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:background="@android:color/transparent"
+        android:text="@string/strReject"
+        android:textAllCaps="false"
+        android:textColor="@color/colorRed"
+        android:fontFamily="@font/raleway_medium"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintRight_toLeftOf="@+id/btnSuggest"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
