@@ -1,4 +1,4 @@
-package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 
 import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.dagger.DaggerHomeComponent;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.core.HomePresenter;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.core.HomeView;
 import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.dagger.DaggerPatHomeComponent;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.dagger.PatHomeModule;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.core.FavouritesPresenter;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.core.FavouritesView;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.dagger.DaggerPatFavouritesComponent;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.dagger.FavouritesModule;
 
 import javax.inject.Inject;
 
@@ -19,22 +19,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class PatHomeFragment extends Fragment {
+public class PatFavouritesFragment extends Fragment {
 
 
     @Inject
-    HomeView view;
+    FavouritesView view;
 
     @Inject
-    HomePresenter presenter;
+    FavouritesPresenter presenter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        DaggerPatHomeComponent.builder()
+        DaggerPatFavouritesComponent.builder()
                 .appComponent(AppController.getAppComponent())
-                .patHomeModule(new PatHomeModule((MainActivity) getActivity()))
+                .favouritesModule(new FavouritesModule((MainActivity) getActivity()))
                 .build()
                 .inject(this);
         presenter.onCreate();

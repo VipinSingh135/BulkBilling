@@ -1,5 +1,6 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile.list;
+package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.list;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,36 +12,45 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
 
 public class SelectedDaysAdapter  extends RecyclerView.Adapter<SelectedDaysViewHolder> {
 
 
-    private final PublishSubject<Integer> itemClicks = PublishSubject.create();
     ArrayList<String> list = new ArrayList<>();
+    ArrayList<String> listDays = new ArrayList<>();
 
-    public void setAdapterList(List<String> strList) {
-        this.list.clear();
-        this.list.addAll(strList);
-        notifyDataSetChanged();
+    public SelectedDaysAdapter() {
+        list.clear();
+        list.add("Sunday");
+        list.add("Monday");
+        list.add("Tuesday");
+        list.add("Wednesday");
+        list.add("Thursday");
+        list.add("Friday");
+        list.add("Saturday");
     }
 
-    public Observable<Integer> observeClicks() {
-        return itemClicks;
+    public void setAdapterList(List<String> strList) {
+        this.listDays.clear();
+        this.listDays.addAll(strList);
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public SelectedDaysViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_selected_items, parent, false);
-        return new SelectedDaysViewHolder(view ,itemClicks);
+        return new SelectedDaysViewHolder(view );
     }
 
     @Override
     public void onBindViewHolder(@NonNull SelectedDaysViewHolder holder, int position) {
         String model = list.get(position);
-        holder.bind(model);
+        if (listDays.contains(list.get(position))) {
+            holder.bind(model,true);
+        }else{
+            holder.bind(model,false);
+        }
     }
 
     @Override

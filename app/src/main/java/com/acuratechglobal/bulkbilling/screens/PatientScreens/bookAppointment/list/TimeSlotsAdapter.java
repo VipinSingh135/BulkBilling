@@ -14,15 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
-public class SelectedDaysAdapter  extends RecyclerView.Adapter<SelectedDaysViewHolder> {
+public class TimeSlotsAdapter extends RecyclerView.Adapter<TimeSlotsViewHolder> {
 
 
     private final PublishSubject<Integer> itemClicks = PublishSubject.create();
     ArrayList<String> list = new ArrayList<>();
-
+    private int selectedPos=-1;
     public void setAdapterList(List<String> strList) {
         this.list.clear();
         this.list.addAll(strList);
+        notifyDataSetChanged();
+    }
+
+    public void setSelectedPos(int pos){
+        this.selectedPos=pos;
         notifyDataSetChanged();
     }
 
@@ -32,15 +37,18 @@ public class SelectedDaysAdapter  extends RecyclerView.Adapter<SelectedDaysViewH
 
     @NonNull
     @Override
-    public SelectedDaysViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_selected_items, parent, false);
-        return new SelectedDaysViewHolder(view ,itemClicks);
+    public TimeSlotsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.pat_adapter_timeslots, parent, false);
+        return new TimeSlotsViewHolder(view ,itemClicks);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SelectedDaysViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TimeSlotsViewHolder holder, int position) {
         String model = list.get(position);
-        holder.bind(model);
+        if (position==selectedPos) {
+            holder.bind(model, true);
+        }else
+            holder.bind(model, false);
     }
 
     @Override
@@ -51,4 +59,5 @@ public class SelectedDaysAdapter  extends RecyclerView.Adapter<SelectedDaysViewH
             return 0;
         }
     }
+
 }

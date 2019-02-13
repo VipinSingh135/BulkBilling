@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import com.acuratechglobal.bulkbilling.R;
 import com.acuratechglobal.bulkbilling.api.request.LoginApiRequest;
 import com.acuratechglobal.bulkbilling.api.request.LoginFbApiRequest;
+import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.login.LoginActivity;
 import com.facebook.GraphResponse;
 import com.jakewharton.rxbinding3.view.RxView;
@@ -39,16 +40,15 @@ public class LoginView {
     private EditText edEmail;
     private EditText edPassword;
     private Button btnLogin;
-    private ImageButton btnShowPass;
+    private ImageButton btnShowPass,btnBack;
     private Button btnForgotPassword;
     private Button btnloginFB;
     private Button btnSignUp;
-    private Button btnDoctor,btnPatient;
+//    private Button btnDoctor,btnPatient;
 
     private final LoginActivity activity;
     private final ProgressDialog progressDialog;
     boolean isShown=false;
-    private int userType= 2;
     private LoginFbApiRequest requestFb ;
 
     public LoginView(LoginActivity context, ProgressDialog dialog) {
@@ -65,9 +65,11 @@ public class LoginView {
         btnSignUp= view.findViewById(R.id.btnSignup);
         edEmail= view.findViewById(R.id.edEmail);
         edPassword= view.findViewById(R.id.edPassword);
-        btnDoctor= view.findViewById(R.id.btnDoctor);
-        btnPatient= view.findViewById(R.id.btnPatient);
+//        btnDoctor= view.findViewById(R.id.btnDoctor);
+//        btnPatient= view.findViewById(R.id.btnPatient);
+        btnBack= view.findViewById(R.id.btnBack);
 //        ButterKnife.bind(view, activity);
+
     }
 
     public View getView() {
@@ -83,8 +85,6 @@ public class LoginView {
         progressDialog.dismiss();
     }
 
-
-    @Nullable
     Observable<Unit> forgotPasswdClick() {
         return RxView.clicks(btnForgotPassword);
     }
@@ -101,46 +101,46 @@ public class LoginView {
         return RxView.clicks(btnSignUp);
     }
 
-//    Observable<Unit> loginFbClick() {
-//        return RxView.clicks(btnloginFB);
+    Observable<Unit> btnBack() {
+        return RxView.clicks(btnBack);
+    }
+
+//    Observable<Unit> doctorClick() {
+//        return RxView.clicks(btnDoctor);
 //    }
-
-    Observable<Unit> doctorClick() {
-        return RxView.clicks(btnDoctor);
-    }
-
-    Observable<Unit> patientClick() {
-        return RxView.clicks(btnPatient);
-    }
+//
+//    Observable<Unit> patientClick() {
+//        return RxView.clicks(btnPatient);
+//    }
 
     LoginApiRequest getParams() {
             LoginApiRequest task = new LoginApiRequest();
             task.setUserName(getInputText(edEmail));
             task.setPassword(getInputText(edPassword));
-            task.setUserType(userType);
+            task.setUserType(AppController.getUserType());
 
             return task;
     }
 
-    void toggleTabs(boolean isDoctor){
-        if (isDoctor){
-            btnDoctor.setBackground(getDrawable(activity,R.drawable.bg_button_green));
-            btnDoctor.setTextColor(Color.WHITE);
-            btnDoctor.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity,R.drawable.doctor_selected),null,null,null);
-            btnPatient.setBackground(getDrawable(activity,R.drawable.bg_curved_green_outline));
-            btnPatient.setTextColor(getColor(activity,R.color.colorTextGreen));
-            btnPatient.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity,R.drawable.patient_select),null,null,null);
-            userType=2;
-        }else{
-            btnDoctor.setBackground(getDrawable(activity,R.drawable.bg_curved_green_outline));
-            btnDoctor.setTextColor(getColor(activity,R.color.colorTextGreen));
-            btnDoctor.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity,R.drawable.doctor_select),null,null,null);
-            btnPatient.setBackground(getDrawable(activity,R.drawable.bg_button_green));
-            btnPatient.setTextColor(Color.WHITE);
-            btnPatient.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity,R.drawable.patient_selected),null,null,null);
-            userType=3;
-        }
-    }
+//    void toggleTabs(boolean isDoctor){
+//        if (isDoctor){
+//            btnDoctor.setBackground(getDrawable(activity,R.drawable.bg_button_green));
+//            btnDoctor.setTextColor(Color.WHITE);
+//            btnDoctor.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity,R.drawable.doctor_selected),null,null,null);
+//            btnPatient.setBackground(getDrawable(activity,R.drawable.bg_curved_green_outline));
+//            btnPatient.setTextColor(getColor(activity,R.color.colorTextGreen));
+//            btnPatient.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity,R.drawable.patient_select),null,null,null);
+//            userType=2;
+//        }else{
+//            btnDoctor.setBackground(getDrawable(activity,R.drawable.bg_curved_green_outline));
+//            btnDoctor.setTextColor(getColor(activity,R.color.colorTextGreen));
+//            btnDoctor.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity,R.drawable.doctor_select),null,null,null);
+//            btnPatient.setBackground(getDrawable(activity,R.drawable.bg_button_green));
+//            btnPatient.setTextColor(Color.WHITE);
+//            btnPatient.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity,R.drawable.patient_selected),null,null,null);
+//            userType=3;
+//        }
+//    }
 
     void showPass(){
         if (isShown){
@@ -164,7 +164,7 @@ public class LoginView {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                requestFb.setUserType(userType);
+                requestFb.setUserType(AppController.getUserType());
                 requestFb.setDevice_ID(1);
                 requestFb.setDevice_Token("");
 //                data.put(WebConstants.PARAM_SOCIAL_ID,fbId);
@@ -201,4 +201,5 @@ public class LoginView {
     LoginFbApiRequest getParamsFb() {
         return requestFb;
     }
+
 }

@@ -1,41 +1,46 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentSetting.dagger;
+package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.dagger;
+
+import android.app.Activity;
 
 import com.acuratechglobal.bulkbilling.api.Api;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentSetting.SettingsFragment;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentSetting.core.SettingsModel;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentSetting.core.SettingsPresenter;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentSetting.core.SettingsView;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.MyProfileDocFragment;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.core.MyProfileModel;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.core.MyProfilePresenter;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.core.MyProfileView;
 import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
+import com.acuratechglobal.bulkbilling.utils.rx.RxSchedulers;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
 @Module
-public class SettingsModule {
+public class MyProfileModule {
 
-    private final SettingsFragment fragment;
+    private final MainActivity activity;
 
-    public SettingsModule(SettingsFragment fragment) {
-        this.fragment = fragment;
+    public MyProfileModule(MainActivity activity) {
+        this.activity = activity;
     }
 
     @Provides
-    @SettingsScope
-    public SettingsView view(SharedPrefsUtil prefs) {
-        return new SettingsView(fragment,prefs);
+    @MyProfileScope
+    public MyProfileView view(SharedPrefsUtil prefs) {
+        return new MyProfileView(activity,prefs);
     }
 
     @Provides
-    @SettingsScope
-    public SettingsPresenter presenter(SettingsView view, SettingsModel model) {
+    @MyProfileScope
+    public MyProfilePresenter presenter(MyProfileView view, MyProfileModel model, RxSchedulers rxSchedulers) {
         CompositeDisposable compositeSubscription = new CompositeDisposable();
-        return new SettingsPresenter(view, model, compositeSubscription);
+        return new MyProfilePresenter(view, model, compositeSubscription,rxSchedulers);
     }
 
     @Provides
-    @SettingsScope
-    SettingsModel model(Api taskApi) {
-        return new SettingsModel(fragment, taskApi);
+    @MyProfileScope
+    MyProfileModel model(Api taskApi) {
+        return new MyProfileModel(activity, taskApi);
     }
 }

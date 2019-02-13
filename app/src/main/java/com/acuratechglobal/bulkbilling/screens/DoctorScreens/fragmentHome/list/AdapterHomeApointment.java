@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
 
-public class adapterHome extends RecyclerView.Adapter<HomeAdapterViewHolder> {
+public class AdapterHomeApointment extends RecyclerView.Adapter<HomeAdapterViewHolder> {
 
     private final PublishSubject<Integer> detailClick = PublishSubject.create();
     private final PublishSubject<Integer> acceptClick = PublishSubject.create();
@@ -25,7 +25,7 @@ public class adapterHome extends RecyclerView.Adapter<HomeAdapterViewHolder> {
     private final PublishSubject<Integer> suggestClick = PublishSubject.create();
     private List<String> timeSlots;
 
-    public adapterHome(List<String> timeslotlist) {
+    public AdapterHomeApointment(List<String> timeslotlist) {
         this.timeSlots= timeslotlist;
     }
 

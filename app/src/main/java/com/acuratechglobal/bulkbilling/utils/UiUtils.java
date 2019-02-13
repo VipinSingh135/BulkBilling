@@ -2,6 +2,7 @@ package com.acuratechglobal.bulkbilling.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
@@ -12,6 +13,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.core.content.ContextCompat;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
@@ -44,6 +47,14 @@ public class UiUtils {
 
   public static void playFailureAnimation(View view) {
     YoYo.with(Techniques.Pulse).duration(200).playOn(view);
+  }
+
+  public static int pxToDp(int px) {
+    return (int) (px / Resources.getSystem().getDisplayMetrics().density);
+  }
+
+  public static int dpToPx(int dp) {
+    return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
   }
 
   @SuppressWarnings("ConstantConditions")
@@ -92,4 +103,32 @@ public class UiUtils {
       activity.getSupportActionBar().setDisplayShowHomeEnabled(false);
     }
   }
+
+  // slide the view from below itself to the current position
+  public static void slideUp(View view){
+    view.setVisibility(View.VISIBLE);
+    TranslateAnimation animate = new TranslateAnimation(
+            0,                 // fromXDelta
+            0,                 // toXDelta
+            view.getHeight(),  // fromYDelta
+            0);                // toYDelta
+    animate.setDuration(300);
+    animate.setFillAfter(true);
+    view.startAnimation(animate);
+
+  }
+
+  // slide the view from its current position to below itself
+  public static Animation slideDown(View view){
+    TranslateAnimation animate = new TranslateAnimation(
+            0,                 // fromXDelta
+            0,                 // toXDelta
+            0,                 // fromYDelta
+            view.getHeight()); // toYDelta
+    animate.setDuration(300);
+    animate.setFillAfter(true);
+    view.startAnimation(animate);
+    return animate;
+  }
+
 }

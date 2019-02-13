@@ -35,7 +35,7 @@ public class SetPassView {
     private Button btnDone;
     private ImageButton btnBack;
 
-    private int userType= 0;
+//    private int userType= 0;
 
     private final SetPassActivity activity;
     private final ProgressDialog progressDialog;
@@ -55,13 +55,13 @@ public class SetPassView {
 
     }
 
-    public int getUserType() {
-        return userType;
-    }
-
-    public void setUserType(int userType) {
-        this.userType = userType;
-    }
+//    public int getUserType() {
+//        return userType;
+//    }
+//
+//    public void setUserType(int userType) {
+//        this.userType = userType;
+//    }
 
     public View getView() {
         return this.view;

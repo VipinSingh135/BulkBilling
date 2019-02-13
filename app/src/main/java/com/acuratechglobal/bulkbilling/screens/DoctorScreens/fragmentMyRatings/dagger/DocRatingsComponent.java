@@ -1,15 +1,15 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.dagger;
+package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyRatings.dagger;
 
 
 import com.acuratechglobal.bulkbilling.application.builder.AppComponent;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.DocAppointmentFragment;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyRatings.DocRatingsFragment;
 
 import dagger.Component;
 
-@DocAppointmentScope
-@Component(modules = {DocAppointmentModule.class }, dependencies = {AppComponent.class})
-public interface DocAppointmentComponent {
+@DocRatingsScope
+@Component(modules = {DocRatingsModule.class }, dependencies = {AppComponent.class})
+public interface DocRatingsComponent {
 
-    void inject(DocAppointmentFragment activity);
+    void inject(DocRatingsFragment activity);
 
 }

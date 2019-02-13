@@ -3,9 +3,7 @@ package com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.core;
 import android.content.Intent;
 
 import com.acuratechglobal.bulkbilling.models.UserData;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.changePassword.ChangePassActivity;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile.CreateProfileActivity;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.login.LoginActivity;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.SplashActivity;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
 import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
 
@@ -27,17 +25,12 @@ public class MainModel {
 //    }
 
 
-    public void gotoCreateProfileActivity() {
 
-        Intent intent = new Intent(activity, CreateProfileActivity.class);
-        intent.putExtra("isUpdate",true);
-        activity.startActivity(intent);
-    }
 
-    public void gotoLoginActivity() {
+    public void gotoLoginActivity()  {
         if (prefs!=null)
             prefs.removeAll();
-        Intent intent = new Intent(activity, LoginActivity.class);
+        Intent intent = new Intent(activity, SplashActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
     }

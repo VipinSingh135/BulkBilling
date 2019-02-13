@@ -1,6 +1,7 @@
 package com.acuratechglobal.bulkbilling.screens.CommonScreens.login.core;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.facebook.GraphResponse;
 import com.google.android.material.snackbar.Snackbar;
@@ -35,14 +36,20 @@ public class LoginPresenter {
     }
 
     public void onCreate() {
+
 //        view.setupView(model.getString(R.string.toolbar_add_task));
         subscriptions.add(loginSubscription());
         subscriptions.add(gotoSignUp());
         subscriptions.add(showPass());
-        subscriptions.add(docClicked());
-        subscriptions.add(patClicked());
+        subscriptions.add(btnBack());
+//        subscriptions.add(docClicked());
+//        subscriptions.add(patClicked());
         subscriptions.add(gotoForgotPass());
 //        subscriptions.add(fbLoginClicked());
+    }
+
+    private Disposable btnBack() {
+        return view.btnBack().subscribe(aVoid -> model.finish());
     }
 
     private Disposable gotoSignUp() {
@@ -50,8 +57,7 @@ public class LoginPresenter {
     }
 
     private Disposable gotoForgotPass() {
-        return view.forgotPasswdClick().
-                subscribe(aVoid -> model.gotoForgotPass(view.getParams().getUserType()));
+        return view.forgotPasswdClick().subscribe(aVoid -> model.gotoForgotPass());
     }
 
     private Disposable showPass() {
@@ -83,12 +89,12 @@ public class LoginPresenter {
                 });
     }
 
-    private Disposable docClicked() {
-        return view.doctorClick().subscribe(aVoid -> view.toggleTabs(true));
-    }
-    private Disposable patClicked() {
-        return view.patientClick().subscribe(aVoid -> view.toggleTabs(false));
-    }
+//    private Disposable docClicked() {
+//        return view.doctorClick().subscribe(aVoid -> view.toggleTabs(true));
+//    }
+//    private Disposable patClicked() {
+//        return view.patientClick().subscribe(aVoid -> view.toggleTabs(false));
+//    }
 
 //    private Disposable fbLoginClicked() {
 //        return view.loginFbClick()

@@ -1,92 +1,162 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentSetting.core;
+package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.core;
 
+import android.app.ProgressDialog;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.acuratechglobal.bulkbilling.R;
-import com.acuratechglobal.bulkbilling.application.AppController;
+import com.acuratechglobal.bulkbilling.models.DoctorProfileModel;
 import com.acuratechglobal.bulkbilling.models.UserData;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentSetting.SettingsFragment;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.list.SelectedDaysAdapter;
 import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.jakewharton.rxbinding3.view.RxView;
 
+import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import io.reactivex.Observable;
 import kotlin.Unit;
 
-public class SettingsView {
+public class MyProfileView {
 
     private View view;
-    private TextView tvChangePassword;
-    private TextView tvProfileSetting;
-    private TextView tvNotifySetting;
-    private TextView tvUpdatePayment;
-    private View view1;
-    private TextView tvUpgradeSubscription;
+    private TextView tvClinicName,tvClinicAddress,tvExperience, tvQualifications;
+    private TextView tvOpenTime, tvCloseTime;
+    private TextView tvName, tvPhone, tvEmail;
+    private RecyclerView recyclerDays;
+    private ImageView imgProfile;
     private ImageButton btnMenu;
-
-    private final SettingsFragment fragment;
+    private Button btnEdit;
+    private final MainActivity activity;
     UserData data;
+    DoctorProfileModel profileData ;
+    private ProgressDialog progressDialog;
 
-    public SettingsView(SettingsFragment context, SharedPrefsUtil prefs) {
-        this.fragment= context;
+    public MyProfileView(MainActivity context, SharedPrefsUtil prefs) {
+        this.activity= context;
 
-        FrameLayout parent = new FrameLayout(fragment.getActivity());
+        FrameLayout parent = new FrameLayout(activity);
         parent.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        view = LayoutInflater.from(fragment.getContext()).inflate(R.layout.doc_fragment_settings, parent, true);
+        view = LayoutInflater.from(activity).inflate(R.layout.doc_fragment_my_profile, parent, true);
+        tvClinicName= view.findViewById(R.id.tvClinicName);
+        tvClinicAddress= view.findViewById(R.id.tvClinicAddress);
+        tvExperience= view.findViewById(R.id.tvExperience);
+        tvQualifications= view.findViewById(R.id.tvQualifications);
+        tvOpenTime= view.findViewById(R.id.tvOpenTime);
+        tvCloseTime= view.findViewById(R.id.tvCloseTime);
+        tvName= view.findViewById(R.id.tvName);
+        tvPhone= view.findViewById(R.id.tvPhone);
+        tvEmail= view.findViewById(R.id.tvEmail);
+        recyclerDays= view.findViewById(R.id.recyclerDays);
+        imgProfile= view.findViewById(R.id.imgProfile);
         btnMenu= view.findViewById(R.id.btnMenu);
-        tvChangePassword= view.findViewById(R.id.tvChangePassword);
-        tvProfileSetting= view.findViewById(R.id.tvProfileSetting);
-        tvNotifySetting= view.findViewById(R.id.tvNotifySetting);
-        tvUpdatePayment= view.findViewById(R.id.tvUpdatePayment);
-        tvUpgradeSubscription= view.findViewById(R.id.tvUpgradeSubscription);
-        view1= view.findViewById(R.id.view1);
+        btnEdit= view.findViewById(R.id.btnEdit);
+
         if (prefs!=null){
-            data= prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA,UserData.class);
+            data= prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA,UserData.class); }
+    }
+
+    String getDocId(){
+        return data.getDocUID();
+    }
+
+    void bindViews(DoctorProfileModel data){
+        this.profileData = data;
+        tvName.setText(profileData.getFirstName() + " " + profileData.getLastName());
+        tvEmail.setText(profileData.getEmail());
+        if (profileData.getPhone()!=null)
+            tvPhone.setText(profileData.getPhone());
+        if (profileData.getCloseTime()!=null)
+            tvCloseTime.setText(profileData.getCloseTime());
+        if (profileData.getOpenTime()!=null)
+            tvOpenTime.setText(profileData.getOpenTime());
+        if (profileData.getClinicName()!=null)
+            tvClinicName.setText(profileData.getClinicName());
+        if (profileData.getClinicAddress()!=null)
+            tvClinicAddress.setText(profileData.getClinicAddress());
+        if (profileData.getQualifications()!=null && profileData.getQualifications().size()>0){
+            String strQalf="";
+            for (int i=0; i<profileData.getQualifications().size() ;++i) {
+                strQalf+=profileData.getQualifications().get(i).getName();
+                if (i!=profileData.getQualifications().size()-1){
+                    strQalf+=" ,";
+                }
+            }
+            tvQualifications.setText(strQalf);
+//            setQualificationAdapter(selectedQualifications);
         }
-        if (data.getUserType()==3){
-            tvProfileSetting.setVisibility(View.GONE);
-            view1.setVisibility(View.GONE);
-            tvUpdatePayment.setVisibility(View.GONE);
-            tvUpgradeSubscription.setVisibility(View.GONE);
+
+        if (profileData.getsPhotoPath()!=null){
+            Glide.with(activity).load(Uri.parse(profileData.getsPhotoPath())).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user)).into(imgProfile);
+        }
+        if (profileData.getExperience()!=null){
+            setExperience(profileData.getExperience());
+        }
+//            toggleRdBtns(profileData.getExperience());
+    }
+
+    private void setExperience(Integer experience) {
+        switch (experience) {
+            case 1:
+                tvExperience.setText("Below 3 years");
+                break;
+            case 2:
+                tvExperience.setText("Above 3 years");
+                break;
+            case 3:
+                tvExperience.setText("Above 5 years");
+                break;
+            case 4:
+                tvExperience.setText("Above 10 years");
+                break;
+            case 5:
+                tvExperience.setText("Above 15 years");
+                break;
         }
     }
 
+    void setDaysAdapter(List<String> selectedDaysList) {
+        recyclerDays.setLayoutManager(new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL));
+        SelectedDaysAdapter selectedDaysAdapter= new SelectedDaysAdapter();
+        recyclerDays.setAdapter(selectedDaysAdapter);
+        selectedDaysAdapter.setAdapterList(selectedDaysList);
+    }
 
     public View getView() {
         return this.view;
     }
 
+    void setProgressDialog() {
+        progressDialog = new ProgressDialog(activity);
+        progressDialog.setCancelable(false);
+    }
+
+    void showLoadingDialog(String loadingText) {
+        progressDialog.setMessage(loadingText);
+        progressDialog.show();
+    }
+
+    void hideLoadingDialog() {
+        progressDialog.dismiss();
+    }
 
     Observable<Unit> btnMenu() {
         return RxView.clicks(btnMenu);
     }
 
-
-    Observable<Unit> changePassClicked() {
-        return RxView.clicks(tvChangePassword);
-    }
-
-
-    Observable<Unit> profileClicked() {
-        return RxView.clicks(tvProfileSetting);
-    }
-
-
-    Observable<Unit> updateSubsClicked() {
-        return RxView.clicks(tvUpgradeSubscription);
-    }
-
-
-    Observable<Unit> notifyClicked() {
-        return RxView.clicks(tvNotifySetting);
-    }
-
-    Observable<Unit> updatePaymentClicked() {
-        return RxView.clicks(tvUpdatePayment);
+    Observable<Unit> btnEdit() {
+        return RxView.clicks(btnEdit);
     }
 
 }

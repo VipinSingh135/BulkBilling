@@ -80,6 +80,12 @@ public class UserData {
     @SerializedName("patUID")
     @Expose
     private String patUID;
+    @SerializedName("docID")
+    @Expose
+    private Integer docID;
+    @SerializedName("patID")
+    @Expose
+    private Integer patID;
     @SerializedName("isNewUser")
     @Expose
     private Boolean IsNewUser;
@@ -291,5 +297,21 @@ public class UserData {
 
     public void setPatUID(String patUID) {
         this.patUID = patUID;
+    }
+
+    public Integer getDocID() {
+        return docID;
+    }
+
+    public void setDocID(Integer docID) {
+        this.docID = docID;
+    }
+
+    public Integer getPatID() {
+        return patID;
+    }
+
+    public void setPatID(Integer patID) {
+        this.patID = patID;
     }
 }

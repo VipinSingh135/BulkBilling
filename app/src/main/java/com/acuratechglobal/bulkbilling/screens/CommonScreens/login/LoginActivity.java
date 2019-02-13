@@ -76,7 +76,6 @@ public class LoginActivity extends AppCompatActivity implements FacebookLoginLis
         presenter.onGetProfileSuccess(object,response);
     }
 
-
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        super.onCreateOptionsMenu(menu);

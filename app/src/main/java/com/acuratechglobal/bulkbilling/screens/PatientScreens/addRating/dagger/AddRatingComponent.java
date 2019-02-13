@@ -1,15 +1,15 @@
-package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.dagger;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.addRating.dagger;
 
 
 import com.acuratechglobal.bulkbilling.application.builder.AppComponent;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.PatFavouritesFragment;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.addRating.AddRatingActivity;
 
 import dagger.Component;
 
-@FavouritesScope
-@Component(modules = {FavouritesModule.class }, dependencies = {AppComponent.class})
-public interface PatFavouritesComponent {
+@AddRatingScope
+@Component(modules = {AddRatingModule.class }, dependencies = {AppComponent.class})
+public interface AddRatingComponent {
 
-    void inject(PatFavouritesFragment activity);
+    void inject(AddRatingActivity activity);
 
 }

@@ -1,4 +1,4 @@
-package com.acuratechglobal.bulkbilling.api.request;
+package com.acuratechglobal.bulkbilling.models;
 
 import com.acuratechglobal.bulkbilling.models.DoctorAvailabilityModel;
 import com.acuratechglobal.bulkbilling.models.DoctorSpecializationModel;
@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class CreateProfileApiRequest {
+public class DoctorProfileModel {
 
     @SerializedName("doctorSpecialization")
     @Expose
@@ -83,9 +83,15 @@ public class CreateProfileApiRequest {
     @SerializedName("docUID")
     @Expose
     private String docUID;
+    @SerializedName("docID")
+    @Expose
+    private Integer docID;
     @SerializedName("patUID")
     @Expose
     private String patUID;
+     @SerializedName("patID")
+    @Expose
+    private Integer patID;
     @SerializedName("base64Photo")
     @Expose
     private String  base64Photo;
@@ -326,5 +332,21 @@ public class CreateProfileApiRequest {
 
     public void setBase64Photo(String base64Photo) {
         this.base64Photo = base64Photo;
+    }
+
+    public Integer getDocID() {
+        return docID;
+    }
+
+    public void setDocID(Integer docID) {
+        this.docID = docID;
+    }
+
+    public Integer getPatID() {
+        return patID;
+    }
+
+    public void setPatID(Integer patID) {
+        this.patID = patID;
     }
 }

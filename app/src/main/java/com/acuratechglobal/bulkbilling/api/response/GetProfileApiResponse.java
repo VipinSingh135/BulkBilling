@@ -1,6 +1,6 @@
 package com.acuratechglobal.bulkbilling.api.response;
 
-import com.acuratechglobal.bulkbilling.api.request.CreateProfileApiRequest;
+import com.acuratechglobal.bulkbilling.models.DoctorProfileModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +8,7 @@ public class GetProfileApiResponse {
 
     @SerializedName("object")
     @Expose
-    private CreateProfileApiRequest object;
+    private DoctorProfileModel object;
     @SerializedName("totalCount")
     @Expose
     private Integer totalCount;
@@ -19,11 +19,11 @@ public class GetProfileApiResponse {
     @Expose
     private String message;
 
-    public CreateProfileApiRequest getObject() {
+    public DoctorProfileModel getObject() {
         return object;
     }
 
-    public void setObject(CreateProfileApiRequest object) {
+    public void setObject(DoctorProfileModel object) {
         this.object = object;
     }
 

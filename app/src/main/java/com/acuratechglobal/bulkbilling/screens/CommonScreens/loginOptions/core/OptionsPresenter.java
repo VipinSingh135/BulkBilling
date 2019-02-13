@@ -1,35 +1,31 @@
-package com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.core;
+package com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.core;
 
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public class SplashPresenter {
+public class OptionsPresenter {
 
-    private SplashModel model;
-    private SplashView view;
+    private OptionsModel model;
+    private OptionsView view;
+    private CompositeDisposable subscriptions;
 
-
-    public SplashPresenter(SplashModel model,SplashView view, CompositeDisposable subscriptions) {
+    public OptionsPresenter(OptionsModel model, OptionsView view, CompositeDisposable subscriptions) {
         this.model = model;
         this.view= view;
+        this.subscriptions= subscriptions;
+
+    }
+
+    public void onCreate() {
         subscriptions.add(docClicked());
         subscriptions.add(patClicked());
     }
 
-
-    public void onCreate() {
-        model.gotoHomeActivity();
-    }
-
     public void onDestroy() {
-//        subscriptions.clear();
-
+        subscriptions.clear();
     }
 
-    public void showOptions() {
-        view.showOptions();
-    }
 
     private Disposable docClicked(){
         return view.doctorClick().subscribe(avoid ->model.gotoLoginActivity(true));
@@ -38,6 +34,7 @@ public class SplashPresenter {
     private Disposable patClicked(){
         return view.patientClick().subscribe(avoid ->model.gotoLoginActivity(false));
     }
+
 
 //    private Subscription getHeroesList() {
 //

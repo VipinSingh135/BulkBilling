@@ -1,4 +1,4 @@
-package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.addRating;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,44 +7,46 @@ import android.view.ViewGroup;
 
 import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.dagger.DaggerPatHomeComponent;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.core.FavouritesPresenter;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.core.FavouritesView;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.addRating.core.AddRatingPresenter;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.addRating.core.AddRatingView;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.addRating.dagger.AddRatingModule;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.addRating.dagger.DaggerAddRatingComponent;
 import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.dagger.DaggerPatFavouritesComponent;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.dagger.FavouritesModule;
 
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-public class PatFavouritesFragment extends Fragment {
+public class AddRatingActivity extends AppCompatActivity {
 
 
     @Inject
-    FavouritesView view;
+    AddRatingView view;
 
     @Inject
-    FavouritesPresenter presenter;
+    AddRatingPresenter presenter;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        DaggerPatFavouritesComponent.builder()
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        DaggerAddRatingComponent.builder()
                 .appComponent(AppController.getAppComponent())
-                .favouritesModule(new FavouritesModule((MainActivity) getActivity()))
+                .addRatingModule(new AddRatingModule(this))
                 .build()
                 .inject(this);
+        setContentView(view.getView());
         presenter.onCreate();
-        return view.getView();
+        view.bindData(getIntent().getExtras());
     }
 
+
     @Override
-    public void onDetach() {
-        super.onDetach();
-        presenter.onDestroy();
+    protected void onDestroy() {
+        super.onDestroy();
+         presenter.onDestroy();
     }
 
 //    @Override

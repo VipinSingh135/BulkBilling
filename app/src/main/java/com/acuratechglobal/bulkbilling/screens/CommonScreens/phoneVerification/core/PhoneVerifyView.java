@@ -36,7 +36,7 @@ public class PhoneVerifyView {
 
     private final PhoneVerifyActivity activity;
     private final ProgressDialog progressDialog;
-    int userType= 0;
+//    int userType= 0;
     public PhoneVerifyView(PhoneVerifyActivity context, ProgressDialog dialog) {
         this.activity= context;
         this.progressDialog= dialog;
@@ -64,13 +64,13 @@ public class PhoneVerifyView {
         return this.view;
     }
 
-    public int getUserType() {
-        return userType;
-    }
-
-    public void setUserType(int userType) {
-        this.userType = userType;
-    }
+//    public int getUserType() {
+//        return userType;
+//    }
+//
+//    public void setUserType(int userType) {
+//        this.userType = userType;
+//    }
 
     Observable<String> edCode1Event() {
         return RxTextView.textChangeEvents(edCode1).map(new Function<TextViewTextChangeEvent, String>() {

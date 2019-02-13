@@ -9,11 +9,10 @@ import android.provider.MediaStore;
 import android.widget.Toast;
 
 import com.acuratechglobal.bulkbilling.api.Api;
-import com.acuratechglobal.bulkbilling.api.request.CreateProfileApiRequest;
+import com.acuratechglobal.bulkbilling.models.DoctorProfileModel;
 import com.acuratechglobal.bulkbilling.api.response.GetProfileApiResponse;
 import com.acuratechglobal.bulkbilling.api.response.LoginApiResponse;
 import com.acuratechglobal.bulkbilling.api.response.SpecializationResponse;
-import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.models.DoctorAvailabilityModel;
 import com.acuratechglobal.bulkbilling.models.UserData;
 import com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile.CreateProfileActivity;
@@ -34,6 +33,7 @@ import java.util.logging.Logger;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.FileProvider;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 
 import static com.acuratechglobal.bulkbilling.utils.ImageUtils.REQUEST_GALLERY;
@@ -45,15 +45,15 @@ public class CreateProfileModel {
     private final CreateProfileActivity activity;
     private final Api apis;
 
-    String level1Id= null;
-    String level2Id= null;
+    private String level1Id= null;
+    private String level2Id= null;
 
     private List<String> daysList=new ArrayList<>();
     private List<String> selectedDaysList=new ArrayList<>();
 
-    File profileFile;
-    UserData data;
-    SharedPrefsUtil prefs;
+    private File profileFile;
+    private UserData data;
+    private SharedPrefsUtil prefs;
     public CreateProfileModel(CreateProfileActivity activity, Api api, SharedPrefsUtil prefs) {
         this.activity = activity;
         this.apis = api;
@@ -83,7 +83,7 @@ public class CreateProfileModel {
     Observable<GetProfileApiResponse> performGetProfile(){
         return apis.apiGetProfile(data.getDocUID());
     }
-    Observable<LoginApiResponse> performCreateProfile(CreateProfileApiRequest request) {
+    Observable<LoginApiResponse> performCreateProfile(DoctorProfileModel request) {
         return apis.apiCreateProfile(request);
     }
 
@@ -96,26 +96,27 @@ public class CreateProfileModel {
     Observable<SpecializationResponse> callLevel3Api(String levelId2) {
         return apis.apiSpecialization3(levelId2);
     }
+
     Observable<SpecializationResponse> callQualificationApi() {
         return apis.apiQualificationList();
     }
 
-    public String getLevel1Id() {
+    String getLevel1Id() {
         return level1Id;
     }
 
-    public void setLevel1Id(String level1Id) {
-        if (this.level1Id!=null && this.level1Id!=level1Id) {
+    void setLevel1Id(String level1Id) {
+        if (this.level1Id!=null && !this.level1Id.equals(level1Id)) {
             level2Id=null;
         }
         this.level1Id = level1Id;
     }
 
-    public String getLevel2Id() {
+    String getLevel2Id() {
         return level2Id;
     }
 
-    public void setLevel2Id(String level2Id) {
+    void setLevel2Id(String level2Id) {
         this.level2Id = level2Id;
     }
 
@@ -132,17 +133,13 @@ public class CreateProfileModel {
     }
 
     private boolean isLevel1Added() {
-        if (level1Id!=null && level1Id.length()>0){
-            return true;
-        }else return false;
+        return level1Id != null && level1Id.length() > 0;
     }
     private boolean isLevel2Added() {
-        if (level2Id!=null && level2Id.length()>0){
-            return true;
-        }else return false;
+        return level2Id != null && level2Id.length() > 0;
     }
 
-    public void selectImage() {
+    void selectImage() {
 
         final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -168,7 +165,7 @@ public class CreateProfileModel {
         builder.show();
     }
 
-    public void openCamera() {
+    private void openCamera() {
         Logger.getAnonymousLogger().info("Beginning of Take Photo");
         Intent callCameraApplicationIntent = new Intent();
         callCameraApplicationIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -184,6 +181,7 @@ public class CreateProfileModel {
             e.printStackTrace();
         }
         // Here we add an extra file to the intent to put the address on to. For this purpose we use the FileProvider, declared in the AndroidManifest.
+        assert photoFile != null;
         Uri outputUri = FileProvider.getUriForFile(
                 activity,
                 activity.getPackageName(),
@@ -212,9 +210,10 @@ public class CreateProfileModel {
         activity.startActivityForResult(i, REQUEST_GALLERY);
     }
 
-    public File getProfileImage(){
+    File getProfileImage(){
         return profileFile;
     }
+
     void cropCameraImage(){
         UCrop.of(Uri.fromFile(profileFile), Uri.fromFile(profileFile))
                 .withAspectRatio(1, 1)
@@ -223,9 +222,8 @@ public class CreateProfileModel {
     }
 
     void cropGalleryImage(Uri data){
-        Uri selectedImageUri = data;
         String[] projection = {MediaStore.MediaColumns.DATA};
-        CursorLoader cursorLoader = new CursorLoader(activity, selectedImageUri, projection, null, null, null);
+        CursorLoader cursorLoader = new CursorLoader(activity, data, projection, null, null, null);
         Cursor cursor = cursorLoader.loadInBackground();
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
         cursor.moveToFirst();
@@ -244,26 +242,15 @@ public class CreateProfileModel {
 
     }
 
-    public List<String> getDaysList() {
+    List<String> getDaysList() {
         return daysList;
     }
 
-    public List<String> getSelectedDaysList() {
+    List<String> getSelectedDaysList() {
         return selectedDaysList;
     }
 
-    public void showGooglePlaces() {
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-        try {
-            activity.startActivityForResult(builder.build(activity), REQUEST_PLACE_PICKER);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setDays(DoctorAvailabilityModel doctorAvailability) {
+    void setDays(DoctorAvailabilityModel doctorAvailability) {
         selectedDaysList.clear();
         if (doctorAvailability.getSunday()){
             selectedDaysList.add("Sunday");
@@ -289,12 +276,23 @@ public class CreateProfileModel {
 
     }
 
-    public void gotoHomeScreen(UserData  userData,String msg) {
-        Toast.makeText(activity,msg,Toast.LENGTH_SHORT).show();
+    void gotoHomeScreen(UserData userData, String msg) {
+        Toasty.success(activity, msg, Toast.LENGTH_SHORT, true).show();
         prefs.save(SharedPrefsUtil.PREFERENCE_USER_DATA,userData);
         Intent intent= new Intent(activity, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
+    }
+
+    void showGooglePlaces() {
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try {
+            activity.startActivityForResult(builder.build(activity), REQUEST_PLACE_PICKER);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
     }
 
 }

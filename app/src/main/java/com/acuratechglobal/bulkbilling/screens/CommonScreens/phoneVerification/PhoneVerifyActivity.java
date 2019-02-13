@@ -22,17 +22,16 @@ public class PhoneVerifyActivity extends AppCompatActivity {
     PhoneVerifyPresenter presenter;
 
     String phoneNumber;
-    Integer userType;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Bundle bundle= getIntent().getExtras();
-        if (bundle!=null){
-            phoneNumber= bundle.getString("phone");
-            userType= bundle.getInt("userType");
-        }
+//        Bundle bundle= getIntent().getExtras();
+//        if (bundle!=null){
+//            phoneNumber= bundle.getString("phone");
+//            userType= bundle.getInt("userType");
+//        }
 
         DaggerPhoneVerifyComponent.builder()
                 .appComponent(AppController.getAppComponent())
@@ -41,7 +40,7 @@ public class PhoneVerifyActivity extends AppCompatActivity {
                 .inject(this);
         setContentView(view.getView());
         presenter.onCreate();
-        view.setUserType(userType);
+//        view.setUserType(userType);
     }
 
     @Override

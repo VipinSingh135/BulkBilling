@@ -5,36 +5,42 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.acuratechglobal.bulkbilling.R;
+import com.acuratechglobal.bulkbilling.models.BookAppointmentModel;
+import com.acuratechglobal.bulkbilling.models.RatingDataModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 
-public class adapterDocRatings extends RecyclerView.Adapter<adapterDocRatings.MyViewHolder> {
+public class AdapterDocMyRatings extends RecyclerView.Adapter<MyRatingsViewHolder> {
 
-    
+    private ArrayList<RatingDataModel> list = new ArrayList<>();
+
+    public void notifyAdapter(List<RatingDataModel> selectedList) {
+        this.list.clear();
+        this.list.addAll(selectedList);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyRatingsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.doc_adapter_ratings, parent, false);
-        return new MyViewHolder(view);
+        return new MyRatingsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull MyRatingsViewHolder holder, int position) {
+        holder.bind(list.get(position));
     }
 
     @Override
     public int getItemCount() {
-
-        return 2;
-
+        return list.size();
     }
-    
-    class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
-    }
 }

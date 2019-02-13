@@ -2,12 +2,12 @@ package com.acuratechglobal.bulkbilling.utils.Validations;
 
 import android.text.TextUtils;
 
-import com.acuratechglobal.bulkbilling.api.request.CreateProfileApiRequest;
-import com.acuratechglobal.bulkbilling.api.request.ResetPassApiRequest;
+import com.acuratechglobal.bulkbilling.models.DoctorProfileModel;
+import com.acuratechglobal.bulkbilling.utils.TimeUtils;
 
 public class CreateProfileValidations {
 
-    public static ValidationResponse validateCreateProfileRequest(CreateProfileApiRequest request) {
+    public static ValidationResponse validateCreateProfileRequest(DoctorProfileModel request) {
         ValidationResponse response = new ValidationResponse();
 
         if (null == request) {
@@ -69,7 +69,14 @@ public class CreateProfileValidations {
             return response;
         }
 
-            response.setSuccess(true);
+        if (TimeUtils.checktimings(request.getCloseTime(),request.getOpenTime())) {
+            response.setSuccess(false);
+            response.setFailReason("Invalid Open/Close timings");
+            return response;
+        }
+
+        response.setSuccess(true);
+
         return response;
     }
 }

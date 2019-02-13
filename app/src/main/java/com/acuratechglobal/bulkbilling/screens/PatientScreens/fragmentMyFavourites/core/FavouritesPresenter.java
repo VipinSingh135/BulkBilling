@@ -1,19 +1,19 @@
-package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.core;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.core;
 
 import com.acuratechglobal.bulkbilling.utils.rx.RxSchedulers;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public class HomePresenter {
+public class FavouritesPresenter {
 
-    private final HomeView view;
-    private final HomeModel model;
+    private final FavouritesView view;
+    private final FavouritesModel model;
     private final CompositeDisposable subscriptions;
     private final RxSchedulers rxSchedulers;
 
 
-    public HomePresenter(HomeView view, HomeModel model, CompositeDisposable subscriptions, RxSchedulers rxSchedulers) {
+    public FavouritesPresenter(FavouritesView view, FavouritesModel model, CompositeDisposable subscriptions, RxSchedulers rxSchedulers) {
         this.view = view;
         this.model = model;
         this.subscriptions = subscriptions;

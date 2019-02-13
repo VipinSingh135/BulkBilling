@@ -16,6 +16,7 @@ public class AppController extends Application{
 
     private static AppComponent appComponent;
     private static String userID;
+    private static int userType;
 
     @Override
     public void onCreate() {
@@ -65,8 +66,16 @@ public class AppController extends Application{
         AppController.userID = userID;
     }
 
+
     public static void setAppComponent(AppComponent appComponent) {
         AppController.appComponent = appComponent;
     }
 
+    public static int getUserType() {
+        return userType;
+    }
+
+    public static void setUserType(int userType) {
+        AppController.userType = userType;
+    }
 }

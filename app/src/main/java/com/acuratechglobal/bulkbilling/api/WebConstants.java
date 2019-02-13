@@ -2,7 +2,8 @@ package com.acuratechglobal.bulkbilling.api;
 
 public interface WebConstants {
 
-    String ACTION_BASE_URL = "http://apibulkbilling.acumobi.com/";
+//    String ACTION_BASE_URL = "http://apibulkbilling.acumobi.com/";
+    String ACTION_BASE_URL = "http://apibulkdev.acumobi.com/";
 //    String ACTION_FCM_PUSH = "https://fcm.googleapis.com/fcm/";
 //    String IMAGE_BASE_URL = "http://www.acuratechglobal.com/joinme/img/users/";
 //    String IMAGE_EVENT_URL = "http://www.acuratechglobal.com/joinme/img/events/";
@@ -15,7 +16,6 @@ public interface WebConstants {
     String URL_SIGNUP = "api/Account/RegisterStep1";
     String URL_LOGIN = "api/Account/login";
     String URL_LOGIN_FB = "api/Account/FbRegister";
-    String URL_UPDATE_PROFILE = "update_profile";
     String URL_FORGOT_PASSWORD = "api/Account/forgotpassword";
     String URL_SET_PASSWORD = "api/Account/SignUpStep3";
     String URL_SET_PLAN = "api/Account/SignUpStep4";
@@ -33,8 +33,25 @@ public interface WebConstants {
 
     String URL_GET_PROFILE = "api/Doctor/getDoctorProfile";
 
+    String URL_GET_DOCTOR_LIST = "api/Doctor/getDoctorlist";
+
+    String URL_BOOK_APPOINTMENT = "api/Appointment/BookAppointment";
+
+    String URL_DOCTOR_APPOINTMENT_LIST = "api/Appointment/getDoctorAppointmentList";
+
+    String URL_DOCTOR_ACCEPT_REJECT_APP = "api/Appointment/AcceptRejectAppointmentByDoctor";
+
+    String URL_PATIENT_APPOINTMENT_LIST = "api/Appointment/getPatientAppointmentList";
+
+    String URL_PATIENT_ACCEPT_REJECT_LIST = "api/Appointment/AcceptRejectSuggestedDateOfAppointmentByPatient";
+
+    String URL_ADD_RATING = "api/Patient/addRate";
+
+    String URL_DOCTOR_GET_RATINGS = "api/Doctor/getDoctorRating";
+
     String PARAM_LEVEL1UID= "lvl1UID";
     String PARAM_LEVEL2UID= "lvl2UID";
     String PARAM_DOC2UID= "docUID";
+    String PARAM_PAT2UID= "patUID";
 
 }

@@ -41,7 +41,7 @@ public class PhoneVerifyPresenter {
                 .flatMap(isVerified ->isVerified())
                 .subscribe(aVoid -> {
 //                    view.showToast("verified number");
-                    model.gotoSetPassword(view.getUserType());
+                    model.gotoSetPassword();
                 });
     }
 

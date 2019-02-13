@@ -1,35 +1,35 @@
-package com.acuratechglobal.bulkbilling.screens.CommonScreens.splash;
+package com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.acuratechglobal.bulkbilling.application.AppController;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.login.LoginActivity;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.core.OptionsPresenter;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.core.OptionsView;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.dagger.DaggerOptionsComponent;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.dagger.OptionsContextModule;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.core.SplashPresenter;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.core.SplashView;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.dagger.DaggerSplashComponent;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.dagger.SplashContextModule;
 
 import javax.inject.Inject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SplashActivity extends AppCompatActivity {
+public class OptionsActivity extends AppCompatActivity {
 
     @Inject
-    SplashView view;
+    OptionsView view;
     @Inject
-    SplashPresenter splashPresenter;
+    OptionsPresenter splashPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DaggerSplashComponent.builder().
+        DaggerOptionsComponent.builder().
                 appComponent(AppController.getAppComponent()).
-                splashContextModule(new SplashContextModule(this)).
+                optionsContextModule(new OptionsContextModule(this)).
                 build().inject(this);
 
         setContentView(view.constructView());
@@ -44,15 +44,4 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-
-    public void gotoHomeActivity() {
-        Log.d("loaded", "ok showed");
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-        this.finish();
-    }
-
-    public void showOptions() {
-        splashPresenter.showOptions();
-    }
 }

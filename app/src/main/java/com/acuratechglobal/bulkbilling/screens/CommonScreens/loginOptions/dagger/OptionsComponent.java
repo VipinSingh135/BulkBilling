@@ -1,12 +1,12 @@
-package com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.dagger;
+package com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.dagger;
 
 import com.acuratechglobal.bulkbilling.application.builder.AppComponent;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.SplashActivity;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.OptionsActivity;
 
 import dagger.Component;
 
-@SplashScope
-@Component(modules = {SplashContextModule.class, SplashModule.class}, dependencies = {AppComponent.class})
-public interface SplashComponent {
-    void inject(SplashActivity activity);
+@OptionsScope
+@Component(modules = {OptionsContextModule.class, OptionsModule.class}, dependencies = {AppComponent.class})
+public interface OptionsComponent {
+    void inject(OptionsActivity activity);
 }

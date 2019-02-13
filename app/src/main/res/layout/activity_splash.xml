@@ -17,4 +17,79 @@
         tools:ignore="ContentDescription"
         android:scaleType="centerCrop"/>
 
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:text="@string/strContinueAs"
+        android:textColor="@android:color/white"
+        android:fontFamily="@font/raleway_medium"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_marginBottom="@dimen/_54sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="@dimen/_4sdp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@drawable/custom_tab_button"
+                android:drawableLeft="@drawable/doctor_select"
+                android:paddingLeft="@dimen/_24sdp"
+                android:text="@string/strDoctor"
+                android:id="@+id/btnDoctor"
+                android:textAllCaps="false"
+                android:fontFamily="@font/raleway_medium"
+                android:textColor="@color/colorTextGreen"
+                android:textSize="@dimen/_14sdp" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/_4sdp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_36sdp"
+                android:background="@drawable/custom_tab_button"
+                android:drawableLeft="@drawable/custom_tab_patient_button"
+                android:paddingLeft="@dimen/_24sdp"
+                android:text="@string/strPatient"
+                android:id="@+id/btnPatient"
+                android:textAllCaps="false"
+                android:fontFamily="@font/raleway_medium"
+                android:textColor="@color/colorTextGreen"
+                android:textSize="@dimen/_14sdp" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

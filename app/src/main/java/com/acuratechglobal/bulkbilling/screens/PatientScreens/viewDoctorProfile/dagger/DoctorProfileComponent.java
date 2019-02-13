@@ -1,15 +1,15 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile.dagger;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.dagger;
 
 
 import com.acuratechglobal.bulkbilling.application.builder.AppComponent;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile.CreateProfileActivity;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.DoctorProfileActivity;
 
 import dagger.Component;
 
-@CreateProfileScope
-@Component(modules = {CreateProfileModule.class }, dependencies = {AppComponent.class})
-public interface CreateProfileComponent {
+@DoctorProfileScope
+@Component(modules = {DoctorProfileModule.class }, dependencies = {AppComponent.class})
+public interface DoctorProfileComponent {
 
-    void inject(CreateProfileActivity activity);
+    void inject(DoctorProfileActivity activity);
 
 }

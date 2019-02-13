@@ -7,6 +7,7 @@ import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.core.H
 import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.core.HomePresenter;
 import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.core.HomeView;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
+import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
 import com.acuratechglobal.bulkbilling.utils.rx.RxSchedulers;
 
 import dagger.Module;
@@ -39,7 +40,8 @@ public class HomeModule {
 
     @Provides
     @HomeScope
-    HomeModel model(Api taskApi) {
-        return new HomeModel(activity, taskApi);
+    HomeModel model(Api taskApi , SharedPrefsUtil prefs) {
+        return new HomeModel(activity, taskApi,prefs);
     }
+
 }

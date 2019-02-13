@@ -157,4 +157,24 @@
     <string name="strBetterHealth">Wish you a better health</string>
     <string name="strContinue">Continue</string>
     <string name="strSearchForDoctor">Search for the doctor</string>
+    <string name="strMyAppointment">My Appointments</string>
+    <string name="strMyFavourites">My Favourites</string>
+    <string name="strFilter">Filter</string>
+    <string name="strRating">Rating</string>
+    <string name="strClearAll">Clear All</string>
+    <string name="strGetappointment">Get Appointment</string>
+    <string name="strHealth">Health Issue :</string>
+    <string name="strDescribe">Describe your health issue here..</string>
+    <string name="strSubmitRequest">Submit Request</string>
+    <string name="strFor">For</string>
+    <string name="strDateDay">Date and Day</string>
+    <string name="strClose">Close</string>
+    <string name="strCancel">Cancel</string>
+    <string name="strConfirmed">Confirmed</string>
+    <string name="strConfirm">Confirm</string>
+    <string name="strStatus">Status :</string>
+    <string name="strSuggested">Suggested</string>
+    <string name="strPending">Pending</string>
+    <string name="strRejected">Rejected</string>
+    <string name="strContinueAs">Continue As :-</string>
 </resources>

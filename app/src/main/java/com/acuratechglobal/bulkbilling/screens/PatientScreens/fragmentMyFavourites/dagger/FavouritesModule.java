@@ -1,12 +1,12 @@
-package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.dagger;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.dagger;
 
 import android.app.ProgressDialog;
 
 import com.acuratechglobal.bulkbilling.api.Api;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.core.HomeModel;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.core.HomePresenter;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.core.HomeView;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.core.FavouritesModel;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.core.FavouritesPresenter;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.core.FavouritesView;
 import com.acuratechglobal.bulkbilling.utils.rx.RxSchedulers;
 
 import dagger.Module;
@@ -14,32 +14,32 @@ import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
 @Module
-public class PatHomeModule {
+public class FavouritesModule {
 
     private final MainActivity activity;
 
-    public PatHomeModule(MainActivity activity) {
+    public FavouritesModule(MainActivity activity) {
         this.activity = activity;
     }
 
     @Provides
-    @HomeScope
-    public HomeView view() {
+    @FavouritesScope
+    public FavouritesView view() {
         ProgressDialog progressDialog = new ProgressDialog(activity);
         progressDialog.setCancelable(false);
-        return new HomeView(activity, progressDialog);
+        return new FavouritesView(activity, progressDialog);
     }
 
     @Provides
-    @HomeScope
-    public HomePresenter presenter(HomeView view, HomeModel model, RxSchedulers rxSchedulers) {
+    @FavouritesScope
+    public FavouritesPresenter presenter(FavouritesView view, FavouritesModel model, RxSchedulers rxSchedulers) {
         CompositeDisposable compositeSubscription = new CompositeDisposable();
-        return new HomePresenter(view, model, compositeSubscription, rxSchedulers);
+        return new FavouritesPresenter(view, model, compositeSubscription, rxSchedulers);
     }
 
     @Provides
-    @HomeScope
-    HomeModel model(Api taskApi) {
-        return new HomeModel(activity, taskApi);
+    @FavouritesScope
+    FavouritesModel model(Api taskApi) {
+        return new FavouritesModel(activity, taskApi);
     }
 }

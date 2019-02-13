@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import com.acuratechglobal.bulkbilling.R;
 import com.acuratechglobal.bulkbilling.api.request.SignUpApiRequest;
+import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.signup.SignUpActivity;
 import com.facebook.GraphResponse;
 import com.jakewharton.rxbinding3.view.RxView;
@@ -47,7 +48,7 @@ public class SignUpView {
     private EditText edLastName;
     private EditText edContactNumber;
     private Button btnLogin;
-    private Button btnDoctor, btnPatient;
+//    private Button btnDoctor, btnPatient;
     private Button btnSignUpFB;
     private Button btnNext;
     private ImageButton btnBack;
@@ -56,7 +57,7 @@ public class SignUpView {
     private ImageView imgEmail, imgSMS;
     private CheckBox checkbox;
     private int notifyType = 1;
-    private int userType = 2;
+//    private int userType = 2;
     private final SignUpActivity activity;
     private final ProgressDialog progressDialog;
     private boolean isEmail = false, isSMS = false;
@@ -74,8 +75,8 @@ public class SignUpView {
         edFirstName = view.findViewById(R.id.edFirstName);
         edLastName = view.findViewById(R.id.edLastName);
         edContactNumber = view.findViewById(R.id.edContactNumber);
-        btnDoctor = view.findViewById(R.id.btnDoctor);
-        btnPatient = view.findViewById(R.id.btnPatient);
+//        btnDoctor = view.findViewById(R.id.btnDoctor);
+//        btnPatient = view.findViewById(R.id.btnPatient);
         btnSignUpFB = view.findViewById(R.id.btnSignUpFB);
         btnNext = view.findViewById(R.id.btnNext);
         btnBack = view.findViewById(R.id.btnBack);
@@ -113,13 +114,13 @@ public class SignUpView {
 //        return RxView.clicks(btnSignUpFB);
 //    }
 
-    Observable<Unit> doctorClick() {
-        return RxView.clicks(btnDoctor);
-    }
-
-    Observable<Unit> patientClick() {
-        return RxView.clicks(btnPatient);
-    }
+//    Observable<Unit> doctorClick() {
+//        return RxView.clicks(btnDoctor);
+//    }
+//
+//    Observable<Unit> patientClick() {
+//        return RxView.clicks(btnPatient);
+//    }
 
     Observable<Unit> emailClick() {
         return RxView.clicks(linearEmail);
@@ -161,25 +162,25 @@ public class SignUpView {
         }
     }
 
-    void toggleTabs(boolean isDoctor) {
-        if (isDoctor) {
-            btnDoctor.setBackground(getDrawable(activity, R.drawable.bg_button_green));
-            btnDoctor.setTextColor(Color.WHITE);
-            btnDoctor.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity, R.drawable.doctor_selected), null, null, null);
-            btnPatient.setBackground(getDrawable(activity, R.drawable.bg_curved_green_outline));
-            btnPatient.setTextColor(getColor(activity, R.color.colorTextGreen));
-            btnPatient.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity, R.drawable.patient_select), null, null, null);
-            userType = 2;
-        } else {
-            btnDoctor.setBackground(getDrawable(activity, R.drawable.bg_curved_green_outline));
-            btnDoctor.setTextColor(getColor(activity, R.color.colorTextGreen));
-            btnDoctor.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity, R.drawable.doctor_select), null, null, null);
-            btnPatient.setBackground(getDrawable(activity, R.drawable.bg_button_green));
-            btnPatient.setTextColor(Color.WHITE);
-            btnPatient.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity, R.drawable.patient_selected), null, null, null);
-            userType = 3;
-        }
-    }
+//    void toggleTabs(boolean isDoctor) {
+//        if (isDoctor) {
+//            btnDoctor.setBackground(getDrawable(activity, R.drawable.bg_button_green));
+//            btnDoctor.setTextColor(Color.WHITE);
+//            btnDoctor.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity, R.drawable.doctor_selected), null, null, null);
+//            btnPatient.setBackground(getDrawable(activity, R.drawable.bg_curved_green_outline));
+//            btnPatient.setTextColor(getColor(activity, R.color.colorTextGreen));
+//            btnPatient.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity, R.drawable.patient_select), null, null, null);
+//            userType = 2;
+//        } else {
+//            btnDoctor.setBackground(getDrawable(activity, R.drawable.bg_curved_green_outline));
+//            btnDoctor.setTextColor(getColor(activity, R.color.colorTextGreen));
+//            btnDoctor.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity, R.drawable.doctor_select), null, null, null);
+//            btnPatient.setBackground(getDrawable(activity, R.drawable.bg_button_green));
+//            btnPatient.setTextColor(Color.WHITE);
+//            btnPatient.setCompoundDrawablesWithIntrinsicBounds(getDrawable(activity, R.drawable.patient_selected), null, null, null);
+//            userType = 3;
+//        }
+//    }
 
     SignUpApiRequest getParams() {
         task = new SignUpApiRequest();
@@ -188,7 +189,7 @@ public class SignUpView {
         task.setLastName(getInputText(edLastName));
         task.setPhone(getInputText(edContactNumber));
         task.setSignUpType(1);
-        task.setUserType(userType);
+        task.setUserType(AppController.getUserType());
         if (isEmail && isSMS) {
             notifyType = 3;
         } else if (isSMS) {
@@ -265,7 +266,7 @@ public class SignUpView {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            task.setUserType(userType);
+            task.setUserType(AppController.getUserType());
             task.setNotificationType(notifyType);
             task.setSignUpType(2);
         }

@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_medium"
                 android:text="Firday"
+                android:id="@+id/tvDay"
                 android:textColor="@color/colorGreyDarker"
                 android:textSize="@dimen/_14sdp" />
 
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_bold"
                 android:text="25"
+                android:id="@+id/tvDate"
                 android:textColor="@color/colorGreyDarker"
                 android:textSize="@dimen/_28sdp"
                 android:textStyle="bold" />
@@ -51,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_medium"
                 android:text="july 2019"
+                android:id="@+id/tvMonth"
                 android:textColor="@color/colorGreyDarker"
                 android:textSize="@dimen/_14sdp" />
 
@@ -88,6 +91,7 @@
                     android:layout_marginTop="@dimen/_4sdp"
                     android:fontFamily="@font/raleway_medium"
                     android:text="12:30 pm "
+                    android:id="@+id/tvTime"
                     android:textColor="@color/colorGreyDark"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
@@ -104,7 +108,7 @@
                     android:layout_marginLeft="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_4sdp"
                     android:fontFamily="@font/raleway_regular"
-                    android:text="@string/strName2"
+                    android:text="@string/strFor"
                     android:textSize="@dimen/_10sdp"
                     android:textColor="@color/colorTextGreen" />
 
@@ -117,6 +121,7 @@
                     android:text="Dr. John Wright"
                     android:textColor="@color/colorGreyDark"
                     android:textSize="@dimen/_12sdp"
+                    android:id="@+id/tvName"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -129,6 +134,7 @@
             android:fontFamily="@font/raleway_regular"
             android:paddingLeft="@dimen/_8sdp"
             android:paddingTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
             android:text="@string/strViewDetail"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintRight_toRightOf="parent"
@@ -147,25 +153,29 @@
             app:layout_constraintTop_toBottomOf="@+id/linearTiming" />
 
         <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvDescription"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_6sdp"
             android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
             android:fontFamily="@font/raleway_medium"
             android:text="General Checkup"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="@color/colorGreyDark"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintEnd_toStartOf="@+id/view3"
+            app:layout_constraintStart_toEndOf="@id/linearDate"
             app:layout_constraintLeft_toRightOf="@+id/linearDate"
             app:layout_constraintTop_toBottomOf="@id/view2" />
-
         <View
             android:id="@+id/view3"
             android:layout_width="@dimen/_1sdp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_4sdp"
             android:background="@color/colorGreylight"
-            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDescription"
             app:layout_constraintLeft_toRightOf="@+id/linearTiming"
             app:layout_constraintRight_toLeftOf="@+id/tvViewDetail"
             app:layout_constraintTop_toTopOf="@+id/linearTiming" />
@@ -177,7 +187,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/_4sdp"
+        android:id="@+id/linearStatus"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/_12sdp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint">
 
@@ -193,7 +205,7 @@
             android:textSize="@dimen/_12sdp" />
 
         <TextView
-            android:id="@+id/tvAppointmentStatus"
+            android:id="@+id/tvStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_8sdp"
@@ -209,7 +221,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:id="@+id/relativeSuggest"
+        android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint">
 
@@ -241,6 +255,7 @@
             android:layout_height="@dimen/_28sdp"
             android:layout_alignParentRight="true"
             android:text="@string/strOk"
+            android:id="@+id/btnOkay"
             android:fontFamily="@font/raleway_bold"
             android:layout_centerVertical="true"
             android:textColor="@android:color/white"

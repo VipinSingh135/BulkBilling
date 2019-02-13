@@ -18,6 +18,7 @@ public class SelectedDaysAdapter  extends RecyclerView.Adapter<SelectedDaysViewH
 
 
     private final PublishSubject<Integer> itemClicks = PublishSubject.create();
+
     ArrayList<String> list = new ArrayList<>();
 
     public void setAdapterList(List<String> strList) {

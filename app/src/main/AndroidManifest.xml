@@ -61,6 +61,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".screens.CommonScreens.loginOptions.OptionsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".screens.CommonScreens.login.LoginActivity" android:screenOrientation="portrait"/>
         <activity android:name=".screens.CommonScreens.mainActivity.MainActivity" android:screenOrientation="portrait"/>
         <activity android:name=".screens.CommonScreens.signup.SignUpActivity" android:screenOrientation="portrait"/>
@@ -69,9 +70,12 @@
         <activity android:name=".screens.CommonScreens.selectPlan.SelectPlanActivity" android:screenOrientation="portrait"/>
         <activity android:name=".screens.CommonScreens.forgotPassword.ForgotPassActivity" android:screenOrientation="portrait"/>
         <activity android:name=".screens.CommonScreens.resetPassword.ResetPassActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".screens.DoctorScreens.createProfile.CreateProfileActivity" android:screenOrientation="portrait"/>
         <activity android:name=".screens.CommonScreens.changePassword.ChangePassActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.DoctorScreens.createProfile.CreateProfileActivity" android:screenOrientation="portrait"/>
         <activity android:name=".screens.PatientScreens.patientWelcome.WelcomeActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.PatientScreens.viewDoctorProfile.DoctorProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.PatientScreens.bookAppointment.BookAppointmentActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.PatientScreens.addRating.AddRatingActivity" android:screenOrientation="portrait"/>
 
     </application>
 

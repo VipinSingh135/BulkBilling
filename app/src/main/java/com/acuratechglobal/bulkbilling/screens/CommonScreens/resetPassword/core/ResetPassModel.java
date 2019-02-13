@@ -8,8 +8,10 @@ import com.acuratechglobal.bulkbilling.api.request.ResetPassApiRequest;
 import com.acuratechglobal.bulkbilling.api.response.CommonApiResponse;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.login.LoginActivity;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.resetPassword.ResetPassActivity;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.SplashActivity;
 import com.acuratechglobal.bulkbilling.utils.NetworkUtils;
 
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 
 public class ResetPassModel {
@@ -41,8 +43,10 @@ public class ResetPassModel {
 
     public void gotoLogin() {
 
-        Toast.makeText(activity,"Password reset successfully, please login to continue",Toast.LENGTH_LONG).show();
-        Intent intent= new Intent(activity, LoginActivity.class);
+        Toasty.success(activity, "Password reset successfully, please login to continue", Toast.LENGTH_SHORT, true).show();
+
+//        Toast.makeText(activity,"Password reset successfully, please login to continue",Toast.LENGTH_LONG).show();
+        Intent intent= new Intent(activity, SplashActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
 

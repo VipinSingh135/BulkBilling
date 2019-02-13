@@ -1,6 +1,5 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.list;
+package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.list;
 
-import android.graphics.Color;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -13,11 +12,10 @@ import com.acuratechglobal.bulkbilling.utils.TimeUtils;
 
 import java.text.ParseException;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.subjects.PublishSubject;
 
-class HomeAdapterViewHolder extends RecyclerView.ViewHolder {
+class DocAppointmentsAdapterViewHolder extends RecyclerView.ViewHolder {
     private View view;
 
     private TextView tvName;
@@ -26,7 +24,7 @@ class HomeAdapterViewHolder extends RecyclerView.ViewHolder {
     private TextView tvViewDetail;
     private Button btnSuggest,btnAccept,btnReject;
 
-    HomeAdapterViewHolder(View itemView, PublishSubject<Integer> suggestClick, PublishSubject<Integer> acceptClick, PublishSubject<Integer> rejectClick, PublishSubject<Integer> detailClick) {
+    DocAppointmentsAdapterViewHolder(View itemView, PublishSubject<Integer> detailClick) {
         super(itemView);
         this.view = itemView;
         tvName = view.findViewById(R.id.tvName);
@@ -40,15 +38,16 @@ class HomeAdapterViewHolder extends RecyclerView.ViewHolder {
         btnAccept = view.findViewById(R.id.btnAccept);
         btnReject = view.findViewById(R.id.btnReject);
 
+        btnAccept.setVisibility(View.GONE);
+        btnReject.setVisibility(View.GONE);
+        btnSuggest.setVisibility(View.GONE);
         tvViewDetail.setOnClickListener(v -> detailClick.onNext(getAdapterPosition()));
-        btnAccept.setOnClickListener(v -> acceptClick.onNext(getAdapterPosition()));
-        btnReject.setOnClickListener(v -> rejectClick.onNext(getAdapterPosition()));
-        btnSuggest.setOnClickListener(v -> suggestClick.onNext(getAdapterPosition()));
+
     }
 
     void bind(BookAppointmentModel model, String s) {
 
-        tvName.setText(TextUtils.isEmpty(model.getFkPatientName()) ? "missing name" : model.getFkPatientName());
+        tvName.setText(TextUtils.isEmpty(model.getFkDoctorName()) ? "missing name" : model.getFkDoctorName());
         tvDescription.setText(TextUtils.isEmpty(model.getIssue()) ? "missing name" : model.getIssue());
         tvTime.setText(TextUtils.isEmpty(s) ? "missing name" : s);
 

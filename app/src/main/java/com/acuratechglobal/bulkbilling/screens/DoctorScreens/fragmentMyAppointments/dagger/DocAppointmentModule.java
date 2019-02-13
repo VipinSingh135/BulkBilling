@@ -1,12 +1,13 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.dagger;
+package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.dagger;
 
 import android.app.ProgressDialog;
 
 import com.acuratechglobal.bulkbilling.api.Api;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.core.HomeModel;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.core.HomePresenter;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.core.HomeView;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppointmentModel;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppointmentPresenter;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppiontmentView;
+import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
 import com.acuratechglobal.bulkbilling.utils.rx.RxSchedulers;
 
 import dagger.Module;
@@ -14,32 +15,32 @@ import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
 @Module
-public class HomeModule {
+public class DocAppointmentModule {
 
     private final MainActivity activity;
 
-    public HomeModule(MainActivity activity) {
+    public DocAppointmentModule(MainActivity activity) {
         this.activity = activity;
     }
 
     @Provides
-    @HomeScope
-    public HomeView view() {
+    @DocAppointmentScope
+    public DocAppiontmentView view() {
         ProgressDialog progressDialog = new ProgressDialog(activity);
         progressDialog.setCancelable(false);
-        return new HomeView(activity, progressDialog);
+        return new DocAppiontmentView(activity, progressDialog);
     }
 
     @Provides
-    @HomeScope
-    public HomePresenter presenter(HomeView view, HomeModel model, RxSchedulers rxSchedulers) {
+    @DocAppointmentScope
+    public DocAppointmentPresenter presenter(DocAppiontmentView view, DocAppointmentModel model, RxSchedulers rxSchedulers) {
         CompositeDisposable compositeSubscription = new CompositeDisposable();
-        return new HomePresenter(view, model, compositeSubscription, rxSchedulers);
+        return new DocAppointmentPresenter(view, model, compositeSubscription, rxSchedulers);
     }
 
     @Provides
-    @HomeScope
-    HomeModel model(Api taskApi) {
-        return new HomeModel(activity, taskApi);
+    @DocAppointmentScope
+    DocAppointmentModel model(Api taskApi, SharedPrefsUtil prefs) {
+        return new DocAppointmentModel(activity, taskApi,prefs);
     }
 }

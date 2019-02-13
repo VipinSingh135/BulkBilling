@@ -39,8 +39,8 @@ public class SignUpPresenter {
     public void onCreate() {
 //        view.setupView(model.getString(R.string.toolbar_add_task));
         subscriptions.add(SignUpSubscription());
-        subscriptions.add(docClicked());
-        subscriptions.add(patClicked());
+//        subscriptions.add(docClicked());
+//        subscriptions.add(patClicked());
         subscriptions.add(loginClicked());
         subscriptions.add(emailClicked());
         subscriptions.add(smsClicked());
@@ -59,12 +59,12 @@ public class SignUpPresenter {
         return view.smsClick().subscribe(aVoid -> view.isSms());
     }
 
-    private Disposable docClicked() {
-        return view.doctorClick().subscribe(aVoid -> view.toggleTabs(true));
-    }
-    private Disposable patClicked() {
-        return view.patientClick().subscribe(aVoid -> view.toggleTabs(false));
-    }
+//    private Disposable docClicked() {
+//        return view.doctorClick().subscribe(aVoid -> view.toggleTabs(true));
+//    }
+//    private Disposable patClicked() {
+//        return view.patientClick().subscribe(aVoid -> view.toggleTabs(false));
+//    }
 //    private Disposable fbSignUpClicked() {
 //        return view.signupFbClick()
 //                .flatMap(validationResponse -> validateNetwork())
@@ -87,7 +87,7 @@ public class SignUpPresenter {
                     view.hideLoadingDialog();
                     if (SignUpResponse.getStatus()==1) {
                         AppController.setUserID(SignUpResponse.getSUID());
-                        model.gotoPhoneVerification(view.getPhone(),view.getParams().getUserType());
+                        model.gotoPhoneVerification(view.getPhone());
 //                        model.finish();
                     } else {
                         String errorMessage =

@@ -1,208 +1,207 @@
-package com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.core;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.bookAppointment.core;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.acuratechglobal.bulkbilling.R;
-import com.acuratechglobal.bulkbilling.api.request.CreateProfileApiRequest;
-import com.acuratechglobal.bulkbilling.models.DoctorAvailabilityModel;
-import com.acuratechglobal.bulkbilling.models.DoctorSpecializationModel;
-import com.acuratechglobal.bulkbilling.models.QualificationModel;
-import com.acuratechglobal.bulkbilling.models.SpecializationModel;
+import com.acuratechglobal.bulkbilling.models.BookAppointmentModel;
+import com.acuratechglobal.bulkbilling.models.DoctorProfileModel;
 import com.acuratechglobal.bulkbilling.models.UserData;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.DoctorProfileActivity;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.list.MultiSelectAdapter;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.list.MultiSelectDaysAdapter;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.list.OptionsAdapter;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.list.SelectedDaysAdapter;
-import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.list.SelectedItemAdapter;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.bookAppointment.BookAppointmentActivity;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.bookAppointment.list.TimeSlotsAdapter;
 import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
+import com.acuratechglobal.bulkbilling.utils.TimeUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.jakewharton.rxbinding3.view.RxView;
-import com.salah.rxdatetimepicker.RxDateConverters;
-import com.salah.rxdatetimepicker.RxDateTimePicker;
-import com.yalantis.ucrop.UCrop;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
+//import devs.mulham.horizontalcalendar.HorizontalCalendar;
+//import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener;
+import com.github.badoualy.datepicker.DatePickerTimeline;
+import com.github.badoualy.datepicker.MonthView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 import kotlin.Unit;
 
 import static com.acuratechglobal.bulkbilling.utils.UiUtils.getInputText;
-import static com.acuratechglobal.bulkbilling.utils.UiUtils.playFailureAnimation;
-import static com.acuratechglobal.bulkbilling.utils.Validations.SignUpValidations.CONTACT_EMPTY;
-import static com.acuratechglobal.bulkbilling.utils.Validations.SignUpValidations.FIRSTNAME_EMPTY;
-import static com.acuratechglobal.bulkbilling.utils.Validations.SignUpValidations.FIRSTNAME_INVALID;
-import static com.acuratechglobal.bulkbilling.utils.Validations.SignUpValidations.USERNAME_EMPTY;
-import static com.acuratechglobal.bulkbilling.utils.Validations.SignUpValidations.USERNAME_INAVALID;
 
-public class DoctorProfileView {
+public class AppointmentView {
 
     private View view;
 
-    private TextView tvClinicAddress,tvClinicName,tvHeaderTitle, tvQualifications;
-    private TextView tvAvailibility;
-    private TextView tvName, tvPhone, tvEmail;
-    private TextView tvSpecialty,tvExperience;
-    private ImageView imgProfile,imgFav;
-    private Button btnGetAppointment,btnRecommend;
+    private TextView tvName, tvPhone;
+    private ImageView imgProfile;
+    private EditText edHealthIssue;
     private ImageButton btnBack;
-    private final DoctorProfileActivity activity;
+    private Button btnSubmit;
+    private RecyclerView recyclerTimeSlot;
+    private final BookAppointmentActivity activity;
     private ProgressDialog progressDialog;
-  
-    UserData data;
+    private TimeSlotsAdapter adapter;
 
-    public DoctorProfileView(DoctorProfileActivity context, SharedPrefsUtil prefs) {
+    private String selectedTime=null;
+    private String selectedDate=null;
+    private UserData userData;
+    private DoctorProfileModel docData;
+    private List<String> timeStampList= new ArrayList<>();
+    private List<String> list= new ArrayList<>();
+
+    public AppointmentView(BookAppointmentActivity context, SharedPrefsUtil prefs) {
         this.activity = context;
         if (prefs!=null){
-            data= prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA,UserData.class);
+            userData= prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA,UserData.class);
         }
         FrameLayout parent = new FrameLayout(activity);
         parent.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        view = LayoutInflater.from(activity).inflate(R.layout.pat_activity_doc_profile_info, parent, true);
+        view = LayoutInflater.from(activity).inflate(R.layout.pat_activity_book_appointment, parent, true);
 
-      
-        tvSpecialty = view.findViewById(R.id.tvSpecialty);
-        tvClinicName = view.findViewById(R.id.tvClinicName);
-        tvClinicAddress = view.findViewById(R.id.tvClinicAddress);
-        tvQualifications = view.findViewById(R.id.tvQualifications);
-        tvExperience = view.findViewById(R.id.tvExperience);
-        tvAvailibility = view.findViewById(R.id.tvAvailibility);
         tvName = view.findViewById(R.id.tvName);
-        tvHeaderTitle = view.findViewById(R.id.tvTitle);
+        edHealthIssue = view.findViewById(R.id.edHealthIssue);
         tvPhone = view.findViewById(R.id.tvPhone);
-        tvEmail = view.findViewById(R.id.tvEmail);
         imgProfile = view.findViewById(R.id.imgProfile);
-
-        btnGetAppointment = view.findViewById(R.id.btnGetAppointment);
-        btnRecommend = view.findViewById(R.id.btnRecommend);
+        recyclerTimeSlot = view.findViewById(R.id.recyclerTimeSlot);
         btnBack = view.findViewById(R.id.btnBack);
-        imgFav = view.findViewById(R.id.imgFav);
+        btnSubmit = view.findViewById(R.id.btnSubmit);
 
     }
 
-    void bindViews(CreateProfileApiRequest data){
-       
+    void bindViews(DoctorProfileModel data) {
+        this.docData=data;
         tvName.setText(data.getFirstName() + " " + data.getLastName());
-        tvEmail.setText(data.getEmail());
         if (data.getPhone()!=null)
             tvPhone.setText(data.getPhone());
-        if (data.getClinicName()!=null)
-            tvClinicName.setText(data.getClinicName());
-        if (data.getClinicAddress()!=null)
-            tvClinicAddress.setText(data.getClinicAddress());
-        if (data.getDoctorSpecialization()!=null && data.getDoctorSpecialization().size()>0){
-            String strSpec="";
-            for (int i=0; i<data.getDoctorSpecialization().size() ;++i) {
-                strSpec+=data.getDoctorSpecialization().get(i).getName();
-                if (i!=data.getDoctorSpecialization().size()-1){
-                    strSpec+=" ,";
-                }
-            }
-            tvQualifications.setText(strSpec);
-        }
-        if (data.getQualifications()!=null && data.getQualifications().size()>0){
-            String strQalf="";
-            for (int i=0; i<data.getQualifications().size() ;++i) {
-                strQalf+=data.getQualifications().get(i).getName();
-                if (i!=data.getQualifications().size()-1){
-                    strQalf+=" ,";
-                }
-            }
-            tvQualifications.setText(strQalf);
-        }
 
         if (data.getsPhotoPath()!=null){
             Glide.with(activity).load(Uri.parse(data.getsPhotoPath())).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user)).into(imgProfile);
         }
-        
-        if (data.getExperience()!=null) {
-            setExperience(data.getExperience());
-        }
-        if (data.getDoctorAvailability()!=null){
-            setAvailibility(data.getDoctorAvailability());
+
+        setCalenderView();
+        setTimestamplist();
+        if (data.getOpenTime()!=null && data.getCloseTime()!=null){
+            setRecyclerView(data.getOpenTime(),data.getCloseTime());
         }
     }
 
-    private void setAvailibility(DoctorAvailabilityModel doctorAvailability) {
-        String strDays="";
-        if (doctorAvailability.getSunday()){
-            strDays+="Sun, ";
-        }
-        if (doctorAvailability.getMonday()){
-            strDays+="Mon, ";
-        }
-        if (doctorAvailability.getTuesday()){
-            strDays+="Tue, ";
-        }
-        if (doctorAvailability.getWednesday()){
-            strDays+="Wed, ";
-        }
-        if (doctorAvailability.getThursday()){
-            strDays+="Thu, ";
-        }
-        if (doctorAvailability.getFriday()){
-            strDays+="Fri, ";
-        }
-        if (doctorAvailability.getSaturday()){
-            strDays+="Sat";
-        }
-        
-        if (strDays.endsWith(", ")){
-            tvAvailibility.setText(strDays.substring(0,strDays.length()-2));
-        }else
-        tvAvailibility.setText(strDays);
+    private void setTimestamplist() {
+        timeStampList.clear();
+        timeStampList.add("00:00 AM");
+        timeStampList.add("00:30 AM");
+        timeStampList.add("01:00 AM");
+        timeStampList.add("01:30 AM");
+        timeStampList.add("02:00 AM");
+        timeStampList.add("02:30 AM");
+        timeStampList.add("03:00 AM");
+        timeStampList.add("03:30 AM");
+        timeStampList.add("04:00 AM");
+        timeStampList.add("04:30 AM");
+        timeStampList.add("05:00 AM");
+        timeStampList.add("05:30 AM");
+        timeStampList.add("06:00 AM");
+        timeStampList.add("06:30 AM");
+        timeStampList.add("07:00 AM");
+        timeStampList.add("07:30 AM");
+        timeStampList.add("08:00 AM");
+        timeStampList.add("08:30 AM");
+        timeStampList.add("09:00 AM");
+        timeStampList.add("09:30 AM");
+        timeStampList.add("10:00 AM");
+        timeStampList.add("10:30 AM");
+        timeStampList.add("11:00 AM");
+        timeStampList.add("11:30 AM");
+        timeStampList.add("12:00 PM");
+        timeStampList.add("12:30 PM");
+        timeStampList.add("01:00 PM");
+        timeStampList.add("01:30 PM");
+        timeStampList.add("02:00 PM");
+        timeStampList.add("02:30 PM");
+        timeStampList.add("03:00 PM");
+        timeStampList.add("03:30 PM");
+        timeStampList.add("04:00 PM");
+        timeStampList.add("04:30 PM");
+        timeStampList.add("05:00 PM");
+        timeStampList.add("05:30 PM");
+        timeStampList.add("06:00 PM");
+        timeStampList.add("06:30 PM");
+        timeStampList.add("07:00 PM");
+        timeStampList.add("07:30 PM");
+        timeStampList.add("08:00 PM");
+        timeStampList.add("08:30 PM");
+        timeStampList.add("09:00 PM");
+        timeStampList.add("09:30 PM");
+        timeStampList.add("10:00 PM");
+        timeStampList.add("10:30 PM");
+        timeStampList.add("11:00 PM");
+        timeStampList.add("11:30 PM");
     }
 
-    private void setExperience(Integer experience) {
-        switch (experience) {
-            case 1:
-                tvExperience.setText("Below 3 years");
-                break;
-            case 2:
-                tvExperience.setText("Above 3 years");
-                break;
-            case 3:
-                tvExperience.setText("Above 5 years");
-                break;
-            case 4:
-                tvExperience.setText("Above 10 years");
-                break;
-            case 5:
-                tvExperience.setText("Above 15 years");
-                break;
+    private void setRecyclerView(String openTime, String closeTime) {
+        for (String time: timeStampList){
+            if (TimeUtils.checktimings(openTime,time) && TimeUtils.checktimings(time,closeTime)){
+                list.add(time);
+            }
         }
+
+        adapter = new TimeSlotsAdapter();
+        recyclerTimeSlot.setLayoutManager(new GridLayoutManager(activity,4));
+        recyclerTimeSlot.setAdapter(adapter);
+        adapter.setAdapterList(list);
     }
-  
+
+    private void setCalenderView() {
+
+        Date startDate = Calendar.getInstance().getTime();
+
+        Calendar calendar= Calendar.getInstance();
+        calendar.add(Calendar.MONTH, 2);
+        Date endDate = calendar.getTime();
+
+        DatePickerTimeline timeline = view.findViewById(R.id.timeline);
+        timeline.setDateLabelAdapter(new MonthView.DateLabelAdapter() {
+            @Override
+            public CharSequence getLabel(Calendar calendar, int index) {
+                SimpleDateFormat timeStampFormat = new SimpleDateFormat("MMM");
+                return timeStampFormat.format(calendar.getTime());
+            }
+        });
+
+        timeline.setOnDateSelectedListener(new DatePickerTimeline.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(int year, int month, int day, int index) {
+                String strDay= String.valueOf(day);
+                if (day<10)
+                    strDay = "0" + day;
+
+                String strMonth= String.valueOf(month+1);
+                if ((month+1)<10)
+                    strMonth = "0" + (month + 1);
+
+                selectedDate= String.format("%d/%s/%s", year, strMonth, strDay);
+            }
+        });
+
+        timeline.setFirstVisibleDate(startDate.getYear()+1900, startDate.getMonth(), startDate.getDate());
+        timeline.setLastVisibleDate(endDate.getYear()+1900, endDate.getMonth(), endDate.getDate());
+
+    }
+
     void setProgressDialog() {
         progressDialog = new ProgressDialog(activity);
         progressDialog.setCancelable(false);
@@ -221,22 +220,38 @@ public class DoctorProfileView {
         progressDialog.dismiss();
     }
 
-    Observable<Unit> appointmentClick() {
-        return RxView.clicks(btnGetAppointment);
-    }
-
-  
-    Observable<Unit> favClick() {
-        return RxView.clicks(imgFav);
-    }
-
     Observable<Unit> backClicked() {
         return RxView.clicks(btnBack);
     }
-    
-    Observable<Unit> reccomend() {
-        return RxView.clicks(btnRecommend);
+    Observable<Unit> submitClicked() {
+        return RxView.clicks(btnSubmit);
     }
-    
+
+    Observable<Integer> itemclicked(){
+        return adapter.observeClicks();
+    }
+
+    void setCurrentItem(int pos){
+        adapter.setSelectedPos(pos);
+        selectedTime= list.get(pos);
+    }
+
+    //Set Params
+    BookAppointmentModel getParams() {
+        BookAppointmentModel request= new BookAppointmentModel();
+        request.setFkDoctorId(docData.getDocID());
+        request.setFkDoctorName(docData.getFirstName()+" "+docData.getLastName());
+        request.setFkPatientId(userData.getPatID());
+        request.setFkPatientName(userData.getFirstName()+" "+userData.getLastName());
+        request.setIssue(getInputText(edHealthIssue));
+        int slotPos= timeStampList.indexOf(selectedTime);
+        request.setTimeSlot(slotPos);
+        request.setDate(selectedDate);
+        return request;
+    }
+
+    void showToast(String msg){
+        Toasty.success(activity,msg).show();
+    }
 
 }

@@ -1,21 +1,21 @@
-package com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.dagger;
+package com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.dagger;
 
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.SplashActivity;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.OptionsActivity;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class SplashContextModule {
-    SplashActivity splashContext;
+public class OptionsContextModule {
+    OptionsActivity splashContext;
 
-    public SplashContextModule(SplashActivity context) {
+    public OptionsContextModule(OptionsActivity context) {
         this.splashContext = context;
     }
 
-    @SplashScope
+    @OptionsScope
     @Provides
-    SplashActivity provideSplashContext() {
+    OptionsActivity provideSplashContext() {
         return splashContext;
     }
 }

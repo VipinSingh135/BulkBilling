@@ -29,9 +29,9 @@ public class PhoneVerifyModel {
         return activity.getString(stringResourceId);
     }
 
-    void gotoSetPassword(int userType){
+    void gotoSetPassword(){
         Intent intent= new Intent(activity, SetPassActivity.class);
-        intent.putExtra("userType",userType);
+//        intent.putExtra("userType",userType);
         activity.startActivity(intent);
     }
 

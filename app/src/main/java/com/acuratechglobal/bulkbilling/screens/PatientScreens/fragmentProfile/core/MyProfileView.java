@@ -41,7 +41,7 @@ public class MyProfileView {
         imgProfile= view.findViewById(R.id.imgProfile);
         recyclerHistory= view.findViewById(R.id.recyclerHistory);
 
-         Glide.with(activity).load(R.drawable.patient_img).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user)).into(imgProfile);
+        Glide.with(activity).load(R.drawable.patient_img).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user)).into(imgProfile);
         recyclerHistory.setLayoutManager(new LinearLayoutManager(activity));
         recyclerHistory.setAdapter(new adapterHistory());
 //        ButterKnife.bind(view, activity);
@@ -60,10 +60,8 @@ public class MyProfileView {
         progressDialog.dismiss();
     }
 
-    @Nullable
     Observable<Unit> menuClick() {
         return RxView.clicks(btnMenu);
     }
-
 
 }

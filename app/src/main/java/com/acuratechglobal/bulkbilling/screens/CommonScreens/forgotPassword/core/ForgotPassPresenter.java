@@ -32,7 +32,6 @@ public class ForgotPassPresenter {
     }
 
     public void onCreate() {
-//        view.setupView(model.getString(R.string.toolbar_add_task));
         subscriptions.add(doneClicked());
         subscriptions.add(backClicked());
     }

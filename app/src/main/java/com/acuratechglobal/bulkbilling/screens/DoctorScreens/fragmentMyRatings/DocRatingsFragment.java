@@ -1,4 +1,4 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments;
+package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyRatings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
 import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.dagger.DaggerHomeComponent;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppointmentPresenter;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppiontmentView;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.dagger.DocAppointmentModule;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyRatings.core.DocRatingsView;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyRatings.core.DocRatingsPresenter;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyRatings.dagger.DaggerDocRatingsComponent;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyRatings.dagger.DocRatingsModule;
 
 import javax.inject.Inject;
 
@@ -18,22 +19,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class DocAppointmentFragment extends Fragment {
+public class DocRatingsFragment extends Fragment {
 
 
     @Inject
-    DocAppiontmentView view;
+    DocRatingsView view;
 
     @Inject
-    DocAppointmentPresenter presenter;
+    DocRatingsPresenter presenter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        DaggerHomeComponent.builder()
+        DaggerDocRatingsComponent.builder()
                 .appComponent(AppController.getAppComponent())
-                .homeModule(new DocAppointmentModule((MainActivity) getActivity()))
+                .docRatingsModule(new DocRatingsModule((MainActivity) getActivity()))
                 .build()
                 .inject(this);
         presenter.onCreate();

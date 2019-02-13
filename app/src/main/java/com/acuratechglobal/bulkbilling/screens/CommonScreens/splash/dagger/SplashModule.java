@@ -8,14 +8,15 @@ import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 @Module
 public class SplashModule {
 
     @SplashScope
     @Provides
-    SplashPresenter providePresenter( SplashModel model) {
-        return new SplashPresenter(model);
+    SplashPresenter providePresenter( SplashModel model,SplashView view) {
+        return new SplashPresenter(model,view);
     }
 
 

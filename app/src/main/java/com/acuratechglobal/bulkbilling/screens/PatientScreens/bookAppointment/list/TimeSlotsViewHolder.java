@@ -1,5 +1,6 @@
 package com.acuratechglobal.bulkbilling.screens.PatientScreens.bookAppointment.list;
 
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -9,12 +10,12 @@ import com.acuratechglobal.bulkbilling.R;
 import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.subjects.PublishSubject;
 
-public class SelectedDaysViewHolder extends RecyclerView.ViewHolder {
-    View view;
+class TimeSlotsViewHolder extends RecyclerView.ViewHolder {
+    private View view;
 
-    TextView tvName;
+    private TextView tvName;
 
-    public SelectedDaysViewHolder(View itemView, PublishSubject<Integer> clickSubject) {
+    TimeSlotsViewHolder(View itemView, PublishSubject<Integer> clickSubject) {
         super(itemView);
         this.view = itemView;
         tvName = view.findViewById(R.id.tvName);
@@ -22,7 +23,15 @@ public class SelectedDaysViewHolder extends RecyclerView.ViewHolder {
         );
     }
 
-    void bind(String model) {
+    void bind(String model,boolean isSelected) {
         tvName.setText(TextUtils.isEmpty(model) ? "missing name" : model);
+
+        if (isSelected) {
+            tvName.setBackgroundResource(R.drawable.bg_curved_grey);
+            tvName.setTextColor(Color.parseColor("#ffffff"));
+        }else {
+            tvName.setBackgroundResource(R.drawable.bg_curved_grey_outline);
+            tvName.setTextColor(Color.parseColor("#6c6c6c"));
+        }
     }
 }

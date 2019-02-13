@@ -45,9 +45,8 @@ public class LoginModel {
         activity.startActivity(intent);
     }
 
-    void gotoForgotPass(int userType) {
+    void gotoForgotPass() {
         Intent intent= new Intent(activity, ForgotPassActivity.class);
-        intent.putExtra("userType",userType);
         activity.startActivity(intent);
     }
 

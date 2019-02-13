@@ -22,15 +22,10 @@ public class ForgotPassActivity extends AppCompatActivity {
     @Inject
     ForgotPassPresenter presenter;
 
-    int userType=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Bundle bundle= getIntent().getExtras();
-        if (bundle!=null){
-            userType= bundle.getInt("userType");
-        }
         DaggerForgotPassComponent.builder()
                 .appComponent(AppController.getAppComponent())
                 .forgotPassModule(new ForgotPassModule(this))
@@ -38,7 +33,6 @@ public class ForgotPassActivity extends AppCompatActivity {
                 .inject(this);
         setContentView(view.getView());
         presenter.onCreate();
-        view.setUserType(userType);
 
     }
 

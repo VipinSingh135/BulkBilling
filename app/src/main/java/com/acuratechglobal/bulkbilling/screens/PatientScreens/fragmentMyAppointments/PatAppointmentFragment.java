@@ -1,4 +1,4 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 
 import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentHome.dagger.DaggerHomeComponent;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppointmentPresenter;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppiontmentView;
 import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.dagger.DaggerDocAppointmentComponent;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.dagger.DocAppointmentModule;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments.core.PatAppiontmentView;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments.core.PatAppointmentPresenter;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments.dagger.DaggerPatAppointmentComponent;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments.dagger.PatAppointmentModule;
 
 import javax.inject.Inject;
 
@@ -19,22 +19,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class DocAppointmentFragment extends Fragment {
+public class PatAppointmentFragment extends Fragment {
 
 
     @Inject
-    DocAppiontmentView view;
+    PatAppiontmentView view;
 
     @Inject
-    DocAppointmentPresenter presenter;
+    PatAppointmentPresenter presenter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        DaggerDocAppointmentComponent.builder()
+        DaggerPatAppointmentComponent.builder()
                 .appComponent(AppController.getAppComponent())
-                .docAppointmentModule(new DocAppointmentModule((MainActivity) getActivity()))
+                .patAppointmentModule(new PatAppointmentModule((MainActivity) getActivity()))
                 .build()
                 .inject(this);
         presenter.onCreate();

@@ -1,27 +1,28 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.acuratechglobal.bulkbilling.application.AppController;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile.core.CreateProfilePresenter;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile.core.CreateProfileView;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile.dagger.CreateProfileModule;
 import com.acuratechglobal.bulkbilling.screens.DoctorScreens.createProfile.dagger.DaggerCreateProfileComponent;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.core.DoctorProfilePresenter;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.core.DoctorProfileView;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.dagger.DaggerDoctorProfileComponent;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.viewDoctorProfile.dagger.DoctorProfileModule;
 
 import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CreateProfileActivity extends AppCompatActivity {
+public class DoctorProfileActivity extends AppCompatActivity {
 
 
     @Inject
-    CreateProfileView view;
+    DoctorProfileView view;
 
     @Inject
-    CreateProfilePresenter presenter;
+    DoctorProfilePresenter presenter;
 
 //    public static void start(Context context) {
 //        Intent intent = new Intent(context, CreateProfileActivity.class);
@@ -32,19 +33,13 @@ public class CreateProfileActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DaggerCreateProfileComponent.builder()
+        DaggerDoctorProfileComponent.builder()
                 .appComponent(AppController.getAppComponent())
-                .createProfileModule(new CreateProfileModule(this))
+                .doctorProfileModule(new DoctorProfileModule(this))
                 .build()
                 .inject(this);
         setContentView(view.getView());
-        Bundle bundle= getIntent().getExtras();
-        boolean isUpdate = false;
-        if (bundle!=null){
-            isUpdate= bundle.getBoolean("isUpdate",false);
-        }
-        presenter.onCreate();
-        view.setData(isUpdate);
+        presenter.onCreate(getIntent().getExtras());
     }
 
     @Override
@@ -52,11 +47,6 @@ public class CreateProfileActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    @Override
-    protected void onResume() {
-        presenter.onResume();
-        super.onResume();
-    }
 
     @Override
     protected void onDestroy() {
@@ -64,11 +54,6 @@ public class CreateProfileActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode,resultCode,data);
-    }
 
 
     //

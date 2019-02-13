@@ -37,10 +37,10 @@ public class SignUpModel {
         return apis.apiSignUp(request);
     }
 
-    void gotoPhoneVerification(String phone,int userType){
+    void gotoPhoneVerification(String phone){
         Intent intent= new Intent(activity, PhoneVerifyActivity.class);
         intent.putExtra("phone",phone);
-        intent.putExtra("userType", userType);
+//        intent.putExtra("userType", userType);
         activity.startActivity(intent);
     }
 

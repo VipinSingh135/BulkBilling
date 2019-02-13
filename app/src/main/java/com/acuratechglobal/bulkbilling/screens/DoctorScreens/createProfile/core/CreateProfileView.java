@@ -20,8 +20,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.acuratechglobal.bulkbilling.R;
-import com.acuratechglobal.bulkbilling.api.request.CreateProfileApiRequest;
-import com.acuratechglobal.bulkbilling.application.AppController;
+import com.acuratechglobal.bulkbilling.models.DoctorProfileModel;
 import com.acuratechglobal.bulkbilling.models.DoctorSpecializationModel;
 import com.acuratechglobal.bulkbilling.models.QualificationModel;
 import com.acuratechglobal.bulkbilling.models.SpecializationModel;
@@ -83,7 +82,7 @@ public class CreateProfileView {
     private final CreateProfileActivity activity;
     private ProgressDialog progressDialog;
 
-    Dialog dialog, dialogMultiSelect, dialogMultiSelect2, dialogMultiSelect3;
+    private Dialog dialog, dialogMultiSelect, dialogMultiSelect2, dialogMultiSelect3;
     private TextView tvTitle, tvTitle2, tvTitle3;
     private Button btnDone, btnDone2, btnDone3;
     private RecyclerView recyclerMultiselect, recyclerMultiselect2, recyclerMultiselect3, recyclerSelectDays;
@@ -93,23 +92,22 @@ public class CreateProfileView {
     private SelectedItemAdapter adapterLevel3, adapterQualifications;
     private SelectedDaysAdapter adapterSelectedDays;
 
-    int experience = 0;
+    private int experience = 0;
 
-    CreateProfileApiRequest profileData = new CreateProfileApiRequest();
+    private DoctorProfileModel profileData = new DoctorProfileModel();
 
-    Double lat = 0.0;
-    Double lon = 0.0;
+    private Double lat = 0.0;
+    private Double lon = 0.0;
 
     private File profileImage = null;
     private List<SpecializationModel> selectedlistLevel3 = new ArrayList<>();
     private List<SpecializationModel> selectedQualifications = new ArrayList<>();
     private List<String> selectedDays = new ArrayList<>();
-    UserData data;
 
     public CreateProfileView(CreateProfileActivity context, SharedPrefsUtil prefs) {
         this.activity = context;
         if (prefs!=null){
-            data= prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA,UserData.class);
+            UserData data = prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA, UserData.class);
         }
         FrameLayout parent = new FrameLayout(activity);
         parent.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -186,7 +184,7 @@ public class CreateProfileView {
 //        setProgressDialog();
     }
 
-    void bindViews(CreateProfileApiRequest data){
+    void bindViews(DoctorProfileModel data){
         this.profileData = data;
         tvName.setText(profileData.getFirstName() + " " + profileData.getLastName());
         tvEmail.setText(profileData.getEmail());
@@ -232,7 +230,6 @@ public class CreateProfileView {
 
         if (profileData.getsPhotoPath()!=null){
             Glide.with(activity).load(Uri.parse(profileData.getsPhotoPath())).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user)).into(imgProfile);
-            data.setsPhotoPath(profileData.getsPhotoPath());
 //            AppController.setUserImage(profileData.getsPhotoPath());
         }
         if (profileData.getExperience()!=null)
@@ -381,54 +378,7 @@ public class CreateProfileView {
         return RxView.clicks(tvQualifications);
     }
 
-    void showDialogLevel1(String title, List<SpecializationModel> strList) {
-        dialog = createDialog();
-        TextView tvTitle = dialog.findViewById(R.id.tVDialogTitle);
-        RecyclerView listView;
-        optionAdapter.setAdapter(strList);
-        listView = dialog.findViewById(R.id.listView);
-        listView.setAdapter(optionAdapter);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
-        listView.setLayoutManager(mLayoutManager);
-        tvTitle.setText(title);
-        dialog.show();
-    }
-
-    void showDialogLevel2(String title, List<SpecializationModel> strList) {
-        dialog = createDialog();
-        TextView tvTitle = dialog.findViewById(R.id.tVDialogTitle);
-        RecyclerView listView;
-        optionAdapter2.setAdapter(strList);
-        listView = dialog.findViewById(R.id.listView);
-        listView.setAdapter(optionAdapter2);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
-        listView.setLayoutManager(mLayoutManager);
-        tvTitle.setText(title);
-        dialog.show();
-    }
-
-    void setTvSpclArea(String name) {
-        if (!name.equals(getInputText(tvSpclArea))){
-            tvSpclField.setText(null);
-            tvSpecialty.setVisibility(View.VISIBLE);
-            recyclerSpeciality.setVisibility(View.GONE);
-            selectedlistLevel3.clear();
-        }
-        tvSpclArea.setText(name);
-        dialog.dismiss();
-    }
-
-    void setTvSpclField(String name) {
-        if (!name.equals(getInputText(tvSpclField))){
-            tvSpecialty.setVisibility(View.VISIBLE);
-            recyclerSpeciality.setVisibility(View.GONE);
-            selectedlistLevel3.clear();
-        }
-        tvSpclField.setText(name);
-        dialog.dismiss();
-    }
-
-    public Observable<Unit> clinicAddressClicked() {
+    Observable<Unit> clinicAddressClicked() {
         return RxView.clicks(tvClinicAddress);
     }
 
@@ -464,23 +414,61 @@ public class CreateProfileView {
         }
     }
 
-    private Dialog createDialog() {
-        Dialog dialog = new Dialog(activity);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dailog_options);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        return dialog;
-    }
 
-    public Observable<Integer> itemClicksLevel1() {
+    //Specialization Level 1
+    Observable<Integer> itemClicksLevel1() {
         return optionAdapter.observeClicks();
     }
-
-    public Observable<Integer> itemClicksLevel2() {
-        return optionAdapter2.observeClicks();
+    void showDialogLevel1(String title, List<SpecializationModel> strList) {
+        dialog = createDialog();
+        TextView tvTitle = dialog.findViewById(R.id.tVDialogTitle);
+        RecyclerView listView;
+        optionAdapter.setAdapter(strList);
+        listView = dialog.findViewById(R.id.listView);
+        listView.setAdapter(optionAdapter);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
+        listView.setLayoutManager(mLayoutManager);
+        tvTitle.setText(title);
+        dialog.show();
+    }
+    void setTvSpclArea(String name) {
+        if (!name.equals(getInputText(tvSpclArea))){
+            tvSpclField.setText(null);
+            tvSpecialty.setVisibility(View.VISIBLE);
+            recyclerSpeciality.setVisibility(View.GONE);
+            selectedlistLevel3.clear();
+        }
+        tvSpclArea.setText(name);
+        dialog.dismiss();
     }
 
+    //Specialization Level 2
+    Observable<Integer> itemClicksLevel2() {
+        return optionAdapter2.observeClicks();
+    }
+    void showDialogLevel2(String title, List<SpecializationModel> strList) {
+        dialog = createDialog();
+        TextView tvTitle = dialog.findViewById(R.id.tVDialogTitle);
+        RecyclerView listView;
+        optionAdapter2.setAdapter(strList);
+        listView = dialog.findViewById(R.id.listView);
+        listView.setAdapter(optionAdapter2);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
+        listView.setLayoutManager(mLayoutManager);
+        tvTitle.setText(title);
+        dialog.show();
+    }
+    void setTvSpclField(String name) {
+        if (!name.equals(getInputText(tvSpclField))){
+            tvSpecialty.setVisibility(View.VISIBLE);
+            recyclerSpeciality.setVisibility(View.GONE);
+            selectedlistLevel3.clear();
+        }
+        tvSpclField.setText(name);
+        dialog.dismiss();
+    }
+
+    //Specialization Level 1 & 2 Dialog
     private Dialog createMultiSelectDialog() {
         Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -490,6 +478,7 @@ public class CreateProfileView {
         return dialog;
     }
 
+    //Specialization Level 3
     void showDialogLevel3(String title, List<SpecializationModel> list) {
 
         multiSelectAdapter.setAdapterItems(list, selectedlistLevel3);
@@ -500,11 +489,11 @@ public class CreateProfileView {
         dialogMultiSelect.show();
     }
 
-    public Observable<Integer> itemClicksLevel3() {
+    Observable<Integer> itemClicksLevel3() {
         return multiSelectAdapter.observeClicks();
     }
 
-    public void notifyItemChangedlevel3(List<SpecializationModel> list, Integer pos) {
+    void notifyItemChangedlevel3(List<SpecializationModel> list, Integer pos) {
         boolean isSelected=false;
         for (SpecializationModel obj:selectedlistLevel3) {
             if (obj.getId()==list.get(pos).getId()){
@@ -520,24 +509,7 @@ public class CreateProfileView {
         multiSelectAdapter.notifyAdapter(selectedlistLevel3);
     }
 
-    public void showDialogQualifications(String title, List<SpecializationModel> list, List<SpecializationModel> selectedlist) {
-        multiSelectAdapter2.setAdapterItems(list, selectedlist);
-        recyclerMultiselect2.setAdapter(multiSelectAdapter2);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
-        recyclerMultiselect2.setLayoutManager(mLayoutManager);
-        tvTitle2.setText(title);
-        dialogMultiSelect2.show();
-    }
-
-    public Observable<Integer> itemClicksQualification() {
-        return multiSelectAdapter2.observeClicks();
-    }
-
-    public void notifyItemChangedQualifications(List<SpecializationModel> list) {
-        multiSelectAdapter2.notifyAdapter(list);
-    }
-
-    public void setSpecialityAdapter() {
+    void setSpecialityAdapter() {
         dialogMultiSelect.dismiss();
         if (selectedlistLevel3 == null || selectedlistLevel3.size() == 0) {
             tvSpecialty.setVisibility(View.VISIBLE);
@@ -551,7 +523,25 @@ public class CreateProfileView {
 //        selectedlistLevel3.addAll(selectedlistLevel3);
     }
 
-    public void setQualificationAdapter(List<SpecializationModel> list) {
+    Observable<Integer> itemClickslevel3Selected() {
+        return adapterLevel3.observeClicks();
+    }
+
+    //Qualification
+    void showDialogQualifications(String title, List<SpecializationModel> list, List<SpecializationModel> selectedlist) {
+        multiSelectAdapter2.setAdapterItems(list, selectedlist);
+        recyclerMultiselect2.setAdapter(multiSelectAdapter2);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(activity);
+        recyclerMultiselect2.setLayoutManager(mLayoutManager);
+        tvTitle2.setText(title);
+        dialogMultiSelect2.show();
+    }
+
+    void notifyItemChangedQualifications(List<SpecializationModel> list) {
+        multiSelectAdapter2.notifyAdapter(list);
+    }
+
+    void setQualificationAdapter(List<SpecializationModel> list) {
         dialogMultiSelect2.dismiss();
         if (list == null || list.size() == 0) {
             tvQualifications.setVisibility(View.VISIBLE);
@@ -565,20 +555,55 @@ public class CreateProfileView {
         selectedQualifications.addAll(list);
     }
 
-    public Observable<Integer> itemClicksQualificationSelected() {
+    Observable<Integer> itemClicksQualification() {
+        return multiSelectAdapter2.observeClicks();
+    }
+
+    Observable<Integer> itemClicksQualificationSelected() {
         return adapterQualifications.observeClicks();
     }
 
-    public Observable<Integer> itemClickslevel3Selected() {
-        return adapterLevel3.observeClicks();
+    //Profile Image
+    private Dialog createDialog() {
+        Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dailog_options);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        return dialog;
     }
 
-    public void setProfileImage(Intent data, File profileImage) {
+    //Base 64 image
+    private String getBase64Image() {
+        InputStream inputStream = null;//You can get an inputStream using any IO API
+        try {
+            inputStream = new FileInputStream(profileImage);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        byte[] bytes;
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try {
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                output.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        bytes = output.toByteArray();
+        String base= Base64.encodeToString(bytes, Base64.DEFAULT);;
+        return base;
+    }
+
+    void setProfileImage(Intent data, File profileImage) {
         this.profileImage = profileImage;
         final Uri resultUri = UCrop.getOutput(data);
         Glide.with(activity).load(resultUri).apply(RequestOptions.circleCropTransform()).into(imgProfile);
     }
 
+    //Select Days
     void showDialogDays(String title, List<String> list, List<String> selectedList) {
 
         multiSelectAdapter3.setAdapterItems(list, selectedList);
@@ -589,15 +614,15 @@ public class CreateProfileView {
         dialogMultiSelect3.show();
     }
 
-    public Observable<Integer> itemClicksDays() {
+    Observable<Integer> itemClicksDays() {
         return multiSelectAdapter3.observeClicks();
     }
 
-    public void notifyItemChangedDays(List<String> list) {
+    void notifyItemChangedDays(List<String> list) {
         multiSelectAdapter3.notifyAdapter(list);
     }
 
-    public void setDaysAdapter(List<String> list) {
+    void setDaysAdapter(List<String> list) {
         dialogMultiSelect3.dismiss();
         if (list == null || list.size() == 0) {
             tvSelectDays.setVisibility(View.VISIBLE);
@@ -611,11 +636,12 @@ public class CreateProfileView {
         selectedDays.addAll(list);
     }
 
-    public Observable<Integer> itemClicksDaysSelected() {
+    Observable<Integer> itemClicksDaysSelected() {
         return adapterSelectedDays.observeClicks();
     }
 
-    public void setClinicAddresss(Intent data) {
+    //Clinic Address
+    void setClinicAddresss(Intent data) {
 
         Place place = PlacePicker.getPlace(data, activity);
         lat = place.getLatLng().latitude;
@@ -624,6 +650,7 @@ public class CreateProfileView {
 //        tvClinicAddress.setError(null);
     }
 
+    //Open Time
     Disposable openTimePicker() {
         return RxDateTimePicker
                 .with(activity)
@@ -635,18 +662,18 @@ public class CreateProfileView {
                 );
     }
 
+    //Close Time
     Disposable closeTimePicker() {
         return RxDateTimePicker
                 .with(activity)
                 .pickTimeOnly()
                 .show()
-                .flatMap(date -> RxDateConverters.toString(date, "hh:mm a"))
-                .subscribe(time ->
-                        tvCloseTime.setText(time.toString())
-                );
+                .flatMap(date -> RxDateConverters.toString(date, "hh:mm aa"))
+                .subscribe(time -> tvCloseTime.setText(time.toString()));
     }
 
-    CreateProfileApiRequest getParams() {
+    //Set Params
+    DoctorProfileModel getParams() {
         profileData.setDocUID(profileData.getDocUID());
         profileData.setAddress(getInputText(tvClinicAddress));
         profileData.setClinicAddress(getInputText(tvClinicAddress));
@@ -729,34 +756,11 @@ public class CreateProfileView {
         return profileData;
     }
 
-    private String getBase64Image() {
-        InputStream inputStream = null;//You can get an inputStream using any IO API
-        try {
-            inputStream = new FileInputStream(profileImage);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        byte[] bytes;
-        byte[] buffer = new byte[8192];
-        int bytesRead;
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        try {
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                output.write(buffer, 0, bytesRead);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        bytes = output.toByteArray();
-        String base= Base64.encodeToString(bytes, Base64.DEFAULT);;
-        return base;
-    }
-
     public List<SpecializationModel> getSelectedlistLevel3() {
         return selectedlistLevel3;
     }
 
-    public List<SpecializationModel> getSelectedQualifications() {
+    List<SpecializationModel> getSelectedQualifications() {
         return selectedQualifications;
     }
 

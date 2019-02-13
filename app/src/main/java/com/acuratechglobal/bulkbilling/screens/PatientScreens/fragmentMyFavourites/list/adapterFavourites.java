@@ -1,10 +1,11 @@
-package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.list;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.list;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.acuratechglobal.bulkbilling.R;
 import com.bumptech.glide.Glide;
@@ -13,11 +14,11 @@ import com.bumptech.glide.request.RequestOptions;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class adapterHome extends RecyclerView.Adapter<adapterHome.MyViewHolder> {
+public class adapterFavourites extends RecyclerView.Adapter<adapterFavourites.MyViewHolder> {
 
     Context context;
 
-    public adapterHome(Context context) {
+    public adapterFavourites(Context context) {
         this.context = context;
     }
 
@@ -31,6 +32,8 @@ public class adapterHome extends RecyclerView.Adapter<adapterHome.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Glide.with(context).load(R.drawable.doctor_img).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user)).into(holder.imgProfile);
+        holder.imgfav.setVisibility(View.VISIBLE);
+        holder.tvExperience.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -42,10 +45,14 @@ public class adapterHome extends RecyclerView.Adapter<adapterHome.MyViewHolder> 
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
+        TextView tvExperience;
+        ImageView imgfav;
         ImageView imgProfile;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imgProfile = itemView.findViewById(R.id.imgProfile);
+            imgfav = itemView.findViewById(R.id.imgFav);
+            tvExperience = itemView.findViewById(R.id.tvExperience);
         }
     }
 }

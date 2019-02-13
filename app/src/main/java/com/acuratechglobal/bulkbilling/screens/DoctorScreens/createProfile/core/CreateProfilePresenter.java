@@ -4,11 +4,10 @@ import android.Manifest;
 import android.content.Intent;
 
 import com.acuratechglobal.bulkbilling.R;
-import com.acuratechglobal.bulkbilling.api.request.CreateProfileApiRequest;
+import com.acuratechglobal.bulkbilling.models.DoctorProfileModel;
 import com.acuratechglobal.bulkbilling.api.response.GetProfileApiResponse;
 import com.acuratechglobal.bulkbilling.api.response.LoginApiResponse;
 import com.acuratechglobal.bulkbilling.api.response.SpecializationResponse;
-import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.models.SpecializationModel;
 import com.acuratechglobal.bulkbilling.utils.UiUtils;
 import com.acuratechglobal.bulkbilling.utils.Validations.CreateProfileValidations;
@@ -570,7 +569,7 @@ public class CreateProfilePresenter {
                 })
                 .filter(ValidationResponse::getSuccess);
     }
-    private CreateProfileApiRequest getCreateProfileRequest() {
+    private DoctorProfileModel getCreateProfileRequest() {
         return view.getParams();
     }
 

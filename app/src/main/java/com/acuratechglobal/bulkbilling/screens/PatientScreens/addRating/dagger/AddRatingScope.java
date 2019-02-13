@@ -1,4 +1,4 @@
-package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.dagger;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.addRating.dagger;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,5 +7,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.CLASS)
-public @interface FavouritesScope {
+public @interface AddRatingScope {
 }

@@ -27,6 +27,7 @@
                 android:layout_margin="@dimen/_8sdp"
                 android:background="@android:color/transparent"
                 android:padding="@dimen/_8sdp"
+                android:id="@+id/btnBack"
                 android:src="@drawable/back_white" />
 
             <TextView
@@ -56,6 +57,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_12sdp"
+                android:padding="@dimen/_4sdp"
+                android:id="@+id/imgFav"
                 android:src="@drawable/fav_on"/>
 
             <ImageView

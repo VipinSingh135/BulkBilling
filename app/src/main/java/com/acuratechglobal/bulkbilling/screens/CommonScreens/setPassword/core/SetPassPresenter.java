@@ -4,6 +4,7 @@ import com.acuratechglobal.bulkbilling.R;
 import com.acuratechglobal.bulkbilling.api.request.SetPassApiRequest;
 import com.acuratechglobal.bulkbilling.api.request.SetPlanApiRequest;
 import com.acuratechglobal.bulkbilling.api.response.CommonApiResponse;
+import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.utils.UiUtils;
 import com.acuratechglobal.bulkbilling.utils.Validations.SetPasswordValidation;
 import com.acuratechglobal.bulkbilling.utils.Validations.ValidationResponse;
@@ -51,11 +52,11 @@ public class SetPassPresenter {
                 .doOnNext(hasNetwork -> view.showLoadingDialog(model.getString(R.string.loading_add_task)))
                 .flatMap(hasNetwork -> SignUp())
                 .subscribe(SignUpResponse -> {
-                    if (view.getUserType()!=3){
+                    if (AppController.getUserType()!=3){
                         view.hideLoadingDialog();
                     }
                     if (SignUpResponse.getStatus()==1) {
-                        if (view.getUserType()!=3){
+                        if (AppController.getUserType()!=3){
                             model.gotoSelectPlan();
                         }else{
                             subscriptions.add(patientScreen());

@@ -22,15 +22,15 @@ public class SetPassActivity extends AppCompatActivity {
     @Inject
     SetPassPresenter presenter;
 
-    int userType=0;
+//    int userType=0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Bundle bundle= getIntent().getExtras();
-        if (bundle!=null){
-            userType= bundle.getInt("userType");
-        }
+//        Bundle bundle= getIntent().getExtras();
+//        if (bundle!=null){
+//            userType= bundle.getInt("userType");
+//        }
         DaggerSetPassComponent.builder()
                 .appComponent(AppController.getAppComponent())
                 .setPassModule(new SetPassModule(this))
@@ -38,7 +38,7 @@ public class SetPassActivity extends AppCompatActivity {
                 .inject(this);
         setContentView(view.getView());
         presenter.onCreate();
-        view.setUserType(userType);
+//        view.setUserType(userType);
     }
 
     @Override

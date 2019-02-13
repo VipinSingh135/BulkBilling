@@ -1,15 +1,18 @@
 package com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.core;
 
+import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
 
 import com.acuratechglobal.bulkbilling.models.UserData;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.login.LoginActivity;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.SplashActivity;
 import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
 
 public class SplashModel {
 
     private SplashActivity splashContext;
-    UserData data;
+    private UserData data;
     public SplashModel(SplashActivity splashCtx, SharedPrefsUtil prefs) {
         this.splashContext = splashCtx;
         if (prefs!=null){
@@ -21,7 +24,7 @@ public class SplashModel {
 //        return NetworkUtils.networkAvailable(splashContext);
 //    }
 
-    public void gotoLoginActivity() {
+    public void gotoHomeActivity() {
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -29,10 +32,12 @@ public class SplashModel {
                 if (data!=null && data.getUserUniqueId()!=null){
                     splashContext.gotoHomeActivity();
                 }else{
-                    splashContext.gotoLoginActivity();
+                    splashContext.gotoOptionsActivity();
                 }
             }
         },2000);
     }
+
+
 
 }

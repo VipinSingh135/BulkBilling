@@ -1,4 +1,4 @@
-package com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.dagger;
+package com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.dagger;
 
 
 import java.lang.annotation.Retention;
@@ -8,5 +8,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.CLASS)
-public @interface SplashScope {
+public @interface OptionsScope {
 }

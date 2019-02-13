@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.login.LoginActivity;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.OptionsActivity;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.core.SplashPresenter;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.core.SplashView;
@@ -40,15 +41,10 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        splashPresenter.onDestroy();
+//        splashPresenter.onDestroy();
     }
 
-    public void gotoLoginActivity() {
-        Log.d("loaded", "ok showed");
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
-        this.finish();
-    }
+
 
     public void gotoHomeActivity() {
         Log.d("loaded", "ok showed");
@@ -57,4 +53,10 @@ public class SplashActivity extends AppCompatActivity {
         this.finish();
     }
 
+    public void gotoOptionsActivity() {
+        Log.d("loaded", "ok showed");
+        Intent i = new Intent(this, OptionsActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

@@ -1,9 +1,9 @@
-package com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.dagger;
+package com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.dagger;
 
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.SplashActivity;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.core.SplashModel;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.core.SplashPresenter;
-import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.core.SplashView;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.OptionsActivity;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.core.OptionsModel;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.core.OptionsPresenter;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.loginOptions.core.OptionsView;
 import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
 
 import dagger.Module;
@@ -11,26 +11,26 @@ import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
 @Module
-public class SplashModule {
+public class OptionsModule {
 
-    @SplashScope
+    @OptionsScope
     @Provides
-    SplashPresenter providePresenter( SplashModel model,SplashView view) {
+    OptionsPresenter providePresenter(OptionsModel model, OptionsView view) {
         CompositeDisposable compositeSubscription = new CompositeDisposable();
-        return new SplashPresenter(model,view,compositeSubscription);
+        return new OptionsPresenter(model,view,compositeSubscription);
     }
 
 
-    @SplashScope
+    @OptionsScope
     @Provides
-    SplashView provideSplashView(SplashActivity context) {
-        return new SplashView(context);
+    OptionsView provideSplashView(OptionsActivity context) {
+        return new OptionsView(context);
     }
 
 
-    @SplashScope
+    @OptionsScope
     @Provides
-    SplashModel provideSplashModel(SplashActivity ctx , SharedPrefsUtil prefs) {
-        return new SplashModel(ctx, prefs);
+    OptionsModel provideSplashModel(OptionsActivity ctx , SharedPrefsUtil prefs) {
+        return new OptionsModel(ctx, prefs);
     }
 }

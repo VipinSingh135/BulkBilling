@@ -8,8 +8,10 @@ import com.acuratechglobal.bulkbilling.api.request.SetPlanApiRequest;
 import com.acuratechglobal.bulkbilling.api.response.CommonApiResponse;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.login.LoginActivity;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.selectPlan.SelectPlanActivity;
+import com.acuratechglobal.bulkbilling.screens.CommonScreens.splash.SplashActivity;
 import com.acuratechglobal.bulkbilling.utils.NetworkUtils;
 
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 
 public class SelectPlanModel {
@@ -36,7 +38,9 @@ public class SelectPlanModel {
     }
 
     void gotoHomeScreen(){
-        Toast.makeText(activity,"Registered successfully, please login to continue",Toast.LENGTH_LONG).show();
+        Toasty.success(activity, "Registered successfully, please login to continue", Toast.LENGTH_SHORT, true).show();
+
+//        Toast.makeText(activity,"Registered successfully, please login to continue",Toast.LENGTH_LONG).show();
         Intent intent= new Intent(activity, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);

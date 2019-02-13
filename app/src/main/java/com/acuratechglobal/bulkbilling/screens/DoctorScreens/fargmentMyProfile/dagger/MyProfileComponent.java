@@ -1,15 +1,15 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentSetting.dagger;
+package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.dagger;
 
 
 import com.acuratechglobal.bulkbilling.application.builder.AppComponent;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentSetting.SettingsFragment;
+import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fargmentMyProfile.MyProfileDocFragment;
 
 import dagger.Component;
 
-@SettingsScope
-@Component(modules = {SettingsModule.class }, dependencies = {AppComponent.class})
-public interface SettingsComponent {
+@MyProfileScope
+@Component(modules = {MyProfileModule.class }, dependencies = {AppComponent.class})
+public interface MyProfileComponent {
 
-    void inject(SettingsFragment activity);
+    void inject(MyProfileDocFragment activity);
 
 }

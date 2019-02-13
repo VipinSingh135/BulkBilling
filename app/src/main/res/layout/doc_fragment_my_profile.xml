@@ -27,6 +27,7 @@
                 android:layout_margin="@dimen/_8sdp"
                 android:background="@android:color/transparent"
                 android:padding="@dimen/_8sdp"
+                android:id="@+id/btnMenu"
                 android:src="@drawable/menu" />
 
             <TextView
@@ -37,15 +38,19 @@
                 android:textColor="@android:color/white"
                 android:fontFamily="@font/raleway_bold"
                 android:textSize="@dimen/_16sdp" />
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:fontFamily="@font/raleway_medium"
-                android:background="@android:color/transparent"
-                android:text="@string/strEdit"
-                android:textAllCaps="false"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="0dp"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/raleway_medium"
+                android:text="@string/strEdit"
+                android:id="@+id/btnEdit"
+                android:textAllCaps="false"
                 android:textColor="@android:color/white" />
 
         </RelativeLayout>
@@ -208,10 +213,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_20sdp"
+
             android:orientation="horizontal"
             android:weightSum="100"
             app:layout_constraintEnd_toEndOf="parent"
@@ -246,6 +248,7 @@
                     android:layout_below="@+id/txtExperience">
 
                 </TextView>
+
             </RelativeLayout>
 
 

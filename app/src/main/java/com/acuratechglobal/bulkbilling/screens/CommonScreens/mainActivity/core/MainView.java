@@ -90,13 +90,22 @@ public class MainView {
 
     private void setMenuList() {
         menuList.clear();
-        menuList.add("Home");
-        menuList.add("My Appointments");
-        menuList.add("My Favourites");
-        menuList.add("My Profile");
-        menuList.add("Ratings");
-        menuList.add("Notification");
-        menuList.add("Settings");
+        if(data.getUserType()==3) {
+            menuList.add("Home");
+            menuList.add("My Appointments");
+            menuList.add("My Favourites");
+            menuList.add("My Profile");
+            menuList.add("Ratings");
+            menuList.add("Notification");
+            menuList.add("Settings");
+        }else{
+            menuList.add("Home");
+            menuList.add("My Appointments");
+            menuList.add("My Profile");
+            menuList.add("My Ratings");
+            menuList.add("Notification");
+            menuList.add("Settings");
+        }
     }
 
     void setMenuAdapter(int pos) {

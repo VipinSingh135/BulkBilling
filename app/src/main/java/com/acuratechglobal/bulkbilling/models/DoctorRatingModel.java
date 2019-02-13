@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class DoctorRatimgModel {
+public class DoctorRatingModel {
 
     @SerializedName("docUID")
     @Expose

@@ -1,12 +1,13 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.dagger;
+package com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments.dagger;
 
 import android.app.ProgressDialog;
 
 import com.acuratechglobal.bulkbilling.api.Api;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainActivity;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppointmentModel;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppointmentPresenter;
-import com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.core.DocAppiontmentView;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments.core.PatAppiontmentView;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments.core.PatAppointmentModel;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments.core.PatAppointmentPresenter;
+import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
 import com.acuratechglobal.bulkbilling.utils.rx.RxSchedulers;
 
 import dagger.Module;
@@ -14,32 +15,32 @@ import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
 @Module
-public class DocAppointmentModule {
+public class PatAppointmentModule {
 
     private final MainActivity activity;
 
-    public DocAppointmentModule(MainActivity activity) {
+    public PatAppointmentModule(MainActivity activity) {
         this.activity = activity;
     }
 
     @Provides
-    @DocAppointmentScope
-    public DocAppiontmentView view() {
+    @PatAppointmentScope
+    public PatAppiontmentView view() {
         ProgressDialog progressDialog = new ProgressDialog(activity);
         progressDialog.setCancelable(false);
-        return new DocAppiontmentView(activity, progressDialog);
+        return new PatAppiontmentView(activity, progressDialog);
     }
 
     @Provides
-    @DocAppointmentScope
-    public DocAppointmentPresenter presenter(DocAppiontmentView view, DocAppointmentModel model, RxSchedulers rxSchedulers) {
+    @PatAppointmentScope
+    public PatAppointmentPresenter presenter(PatAppiontmentView view, PatAppointmentModel model, RxSchedulers rxSchedulers) {
         CompositeDisposable compositeSubscription = new CompositeDisposable();
-        return new DocAppointmentPresenter(view, model, compositeSubscription, rxSchedulers);
+        return new PatAppointmentPresenter(view, model, compositeSubscription, rxSchedulers);
     }
 
     @Provides
-    @DocAppointmentScope
-    DocAppointmentModel model(Api taskApi) {
-        return new DocAppointmentModel(activity, taskApi);
+    @PatAppointmentScope
+    PatAppointmentModel model(Api taskApi, SharedPrefsUtil prefs) {
+        return new PatAppointmentModel(activity, taskApi,prefs);
     }
 }

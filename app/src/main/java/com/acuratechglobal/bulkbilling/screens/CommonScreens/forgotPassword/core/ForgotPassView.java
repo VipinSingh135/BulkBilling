@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 
 import com.acuratechglobal.bulkbilling.R;
 import com.acuratechglobal.bulkbilling.api.request.SendOtpRequest;
+import com.acuratechglobal.bulkbilling.application.AppController;
 import com.acuratechglobal.bulkbilling.screens.CommonScreens.forgotPassword.ForgotPassActivity;
 import com.jakewharton.rxbinding3.view.RxView;
 
@@ -26,9 +27,6 @@ public class ForgotPassView {
     private EditText edPhone;
     private Button btnNext;
     private ImageButton btnBack;
-
-    private int notifyType = 1;
-    private int userType = 2;
 
     private final ForgotPassActivity activity;
     private final ProgressDialog progressDialog;
@@ -72,11 +70,8 @@ public class ForgotPassView {
     SendOtpRequest getParams() {
         SendOtpRequest task = new SendOtpRequest();
         task.setPhone(getInputText(edPhone));
-        task.setUserType(userType);
+        task.setUserType(AppController.getUserType());
         return task;
     }
 
-    public void setUserType(int userType) {
-        this.userType = userType;
-    }
 }

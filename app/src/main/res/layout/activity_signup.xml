@@ -130,77 +130,77 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/strSignup"
-            android:textColor="@color/colorTextGreen"
-            android:fontFamily="@font/raleway_medium"
-            android:textSize="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        <!--<TextView-->
+            <!--android:id="@+id/textView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/_20sdp"-->
+            <!--android:layout_marginStart="@dimen/_20sdp"-->
+            <!--android:layout_marginTop="@dimen/_20sdp"-->
+            <!--android:text="@string/strSignup"-->
+            <!--android:textColor="@color/colorTextGreen"-->
+            <!--android:fontFamily="@font/raleway_medium"-->
+            <!--android:textSize="@dimen/_18sdp"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearLayout2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="@dimen/_20sdp"-->
+            <!--android:layout_marginLeft="@dimen/_20sdp"-->
+            <!--android:layout_marginRight="@dimen/_20sdp"-->
+            <!--android:layout_marginStart="@dimen/_20sdp"-->
+            <!--android:layout_marginTop="@dimen/_12sdp"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:weightSum="2"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/textView">-->
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingRight="@dimen/_4sdp">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:paddingRight="@dimen/_4sdp">-->
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/bg_button_green"
-                    android:drawableLeft="@drawable/doctor_selected"
-                    android:paddingLeft="@dimen/_24sdp"
-                    android:text="@string/strDoctor"
-                    android:id="@+id/btnDoctor"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/raleway_medium"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/_14sdp" />
-            </RelativeLayout>
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/_36sdp"-->
+                    <!--android:background="@drawable/bg_button_green"-->
+                    <!--android:drawableLeft="@drawable/doctor_selected"-->
+                    <!--android:paddingLeft="@dimen/_24sdp"-->
+                    <!--android:text="@string/strDoctor"-->
+                    <!--android:id="@+id/btnDoctor"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:fontFamily="@font/raleway_medium"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--android:textSize="@dimen/_14sdp" />-->
+            <!--</RelativeLayout>-->
 
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="@dimen/_4sdp">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:paddingLeft="@dimen/_4sdp">-->
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_36sdp"
-                    android:background="@drawable/custom_tab_button"
-                    android:drawableLeft="@drawable/custom_tab_patient_button"
-                    android:paddingLeft="@dimen/_24sdp"
-                    android:text="@string/strPatient"
-                    android:id="@+id/btnPatient"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/raleway_medium"
-                    android:textColor="@color/colorTextGreen"
-                    android:textSize="@dimen/_14sdp" />
-            </RelativeLayout>
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/_36sdp"-->
+                    <!--android:background="@drawable/custom_tab_button"-->
+                    <!--android:drawableLeft="@drawable/custom_tab_patient_button"-->
+                    <!--android:paddingLeft="@dimen/_24sdp"-->
+                    <!--android:text="@string/strPatient"-->
+                    <!--android:id="@+id/btnPatient"-->
+                    <!--android:textAllCaps="false"-->
+                    <!--android:fontFamily="@font/raleway_medium"-->
+                    <!--android:textColor="@color/colorTextGreen"-->
+                    <!--android:textSize="@dimen/_14sdp" />-->
+            <!--</RelativeLayout>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <TextView
             android:id="@+id/tvName"
@@ -214,7 +214,7 @@
             android:textColor="@color/colorTextGreen"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
         <LinearLayout
             android:id="@+id/linearLayout3"
