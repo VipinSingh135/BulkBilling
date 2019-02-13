@@ -1,4 +1,4 @@
-package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyAppointments.list;
+package com.acuratechglobal.bulkbilling.screens.DoctorScreens.fragmentMyRatings.list;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +9,13 @@ import com.acuratechglobal.bulkbilling.R;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class adapterDocAppointment extends RecyclerView.Adapter<adapterDocAppointment.MyViewHolder> {
+public class adapterDocRatings extends RecyclerView.Adapter<adapterDocRatings.MyViewHolder> {
 
     
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.doc_adapter_home_appointments, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.doc_adapter_ratings, parent, false);
         return new MyViewHolder(view);
     }
 
