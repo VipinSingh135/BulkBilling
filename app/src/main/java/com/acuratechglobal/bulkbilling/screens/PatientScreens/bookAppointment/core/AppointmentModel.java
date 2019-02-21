@@ -46,4 +46,5 @@ public class AppointmentModel {
     Observable<CommonApiResponse> performBookAppointment(BookAppointmentModel request) {
         return  apis.apiBookAppointment(request);
     }
+
 }

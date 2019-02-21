@@ -85,6 +85,7 @@ public class DocRatingsView {
         if (userData!=null) {
             tvName.setText(userData.getFirstName() + " " + userData.getLastName());
             tvEmail.setText(userData.getEmail());
+//            tvEmail.setText(userData.getPhone());
             if (userData.getPhone() != null)
                 tvPhone.setText(userData.getPhone());
             if (userData.getsPhotoPath() != null) {
@@ -113,43 +114,75 @@ public class DocRatingsView {
         return RxView.clicks(btnMenu);
     }
 
-
     public void setAdapterList(List<RatingDataModel> list) {
         adapter.notifyAdapter(list);
     }
 
     void bindRatings(DoctorRatingModel object) {
 
-        setRatingStars(object.getAvgRate());
-        tv1.setText(object.getOneStar()+" people");
-        tv2.setText(object.getTwoStar()+" people");
-        tv3.setText(object.getThreeStar()+" people");
-        tv4.setText(object.getFourStar()+" people");
-        tv5.setText(object.getFiveStar()+" people");
+
+        if (object!=null) {
+            setRatingStars(object.getAvgRate());
+            tv1.setText(object.getOneStar() + " people");
+            tv2.setText(object.getTwoStar() + " people");
+            tv3.setText(object.getThreeStar() + " people");
+            tv4.setText(object.getFourStar() + " people");
+            tv5.setText(object.getFiveStar() + " people");
 
 //        Display display = activity.getWindowManager().getDefaultDisplay();
-        int width = UiUtils.dpToPx(view5.getWidth());
+            int width = UiUtils.dpToPx(view5.getWidth());
 
-        int totalRange= object.getTotalPeople();
-        int rangeBlocks= width/totalRange;
+            int totalRange = object.getTotalPeople();
+            int rangeBlocks = width / totalRange;
 
-        int w1 = rangeBlocks*object.getOneStar() ;
-        int w2 = rangeBlocks*object.getTwoStar() ;
-        int w3 = rangeBlocks*object.getThreeStar() ;
-        int w4 = rangeBlocks*object.getFourStar() ;
-        int w5 = rangeBlocks*object.getFiveStar() ;
+            int w1 = rangeBlocks * object.getOneStar();
+            int w2 = rangeBlocks * object.getTwoStar();
+            int w3 = rangeBlocks * object.getThreeStar();
+            int w4 = rangeBlocks * object.getFourStar();
+            int w5 = rangeBlocks * object.getFiveStar();
 
-        view1.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w1),15));
-        view2.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w2),15));
-        view3.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w3),15));
-        view4.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w4),15));
-        view5.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w5),15));
+            view1.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w1), 15));
+            view2.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w2), 15));
+            view3.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w3), 15));
+            view4.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w4), 15));
+            view5.setLayoutParams(new LinearLayout.LayoutParams(UiUtils.pxToDp(w5), 15));
+        }else{
+            setRatingStars(0);
+            tv1.setText(0 + " people");
+            tv2.setText(0 + " people");
+            tv3.setText(0 + " people");
+            tv4.setText(0 + " people");
+            tv5.setText(0 + " people");
+
+            view1.setLayoutParams(new LinearLayout.LayoutParams(0, 15));
+            view2.setLayoutParams(new LinearLayout.LayoutParams(0, 15));
+            view3.setLayoutParams(new LinearLayout.LayoutParams(0, 15));
+            view4.setLayoutParams(new LinearLayout.LayoutParams(0, 15));
+            view5.setLayoutParams(new LinearLayout.LayoutParams(0, 15));
+        }
+        tv1.setVisibility(View.VISIBLE);
+        view1.setVisibility(View.VISIBLE);
+        tv2.setVisibility(View.VISIBLE);
+        view2.setVisibility(View.VISIBLE);
+        tv3.setVisibility(View.VISIBLE);
+        view3.setVisibility(View.VISIBLE);
+        tv4.setVisibility(View.VISIBLE);
+        view4.setVisibility(View.VISIBLE);
+        tv5.setVisibility(View.VISIBLE);
+        view5.setVisibility(View.VISIBLE);
 
     }
 
     private void setRatingStars(int rating){
         switch (rating){
-            case 1:
+            case 0:
+                star1.setImageResource(R.drawable.info_star_select);
+                star2.setImageResource(R.drawable.info_star_select);
+                star3.setImageResource(R.drawable.info_star_select);
+                star4.setImageResource(R.drawable.info_star_select);
+                star5.setImageResource(R.drawable.info_star_select);
+                break;
+             case 1:
                 star1.setImageResource(R.drawable.info_star_selected);
                 star2.setImageResource(R.drawable.info_star_select);
                 star3.setImageResource(R.drawable.info_star_select);

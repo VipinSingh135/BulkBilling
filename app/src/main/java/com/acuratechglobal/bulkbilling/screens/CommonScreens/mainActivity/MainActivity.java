@@ -43,5 +43,8 @@ public class MainActivity extends AppCompatActivity {
         mainPresenter.openDrawer();;
     }
 
+    public void setNavigationHeader(){
+        view.setNavigationHeader();
+    }
 
 }

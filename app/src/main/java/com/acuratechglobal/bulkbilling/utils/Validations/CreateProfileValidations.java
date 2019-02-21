@@ -3,6 +3,7 @@ package com.acuratechglobal.bulkbilling.utils.Validations;
 import android.text.TextUtils;
 
 import com.acuratechglobal.bulkbilling.models.DoctorProfileModel;
+import com.acuratechglobal.bulkbilling.models.PatientProfileModel;
 import com.acuratechglobal.bulkbilling.utils.TimeUtils;
 
 public class CreateProfileValidations {
@@ -74,6 +75,33 @@ public class CreateProfileValidations {
             response.setFailReason("Invalid Open/Close timings");
             return response;
         }
+
+        response.setSuccess(true);
+
+        return response;
+    }
+
+    public static ValidationResponse validatePatientProfileRequest(PatientProfileModel request) {
+        ValidationResponse response = new ValidationResponse();
+
+        if (null == request) {
+            response.setSuccess(false);
+            response.setFailReason("Missing request object!");
+            return response;
+        }
+
+
+        if (TextUtils.isEmpty(request.getFirstName())) {
+            response.setSuccess(false);
+            response.setFailReason("Please enter first name");
+            return response;
+        }
+        if (TextUtils.isEmpty(request.getLastName())) {
+            response.setSuccess(false);
+            response.setFailReason("Please enter last name");
+            return response;
+        }
+
 
         response.setSuccess(true);
 

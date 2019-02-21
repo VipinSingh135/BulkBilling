@@ -40,7 +40,7 @@ public class ChangePassModule {
 
     @Provides
     @ChangePassScope
-    ChangePassModel model(Api taskApi) {
-        return new ChangePassModel(activity, taskApi);
+    ChangePassModel model(Api taskApi,SharedPrefsUtil prefs) {
+        return new ChangePassModel(activity, taskApi, prefs);
     }
 }

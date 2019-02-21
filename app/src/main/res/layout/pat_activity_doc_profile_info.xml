@@ -308,21 +308,21 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 
-        <TextView
-            android:id="@+id/tvFees"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:text="@string/strConsultationFee"
-            android:textColor="@color/colorGreyDark"
-            android:textSize="@dimen/_11sdp"
-            android:fontFamily="@font/raleway_medium"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
+        <!--<TextView-->
+            <!--android:id="@+id/tvFees"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="@dimen/_8sdp"-->
+            <!--android:text="@string/strConsultationFee"-->
+            <!--android:textColor="@color/colorGreyDark"-->
+            <!--android:textSize="@dimen/_11sdp"-->
+            <!--android:fontFamily="@font/raleway_medium"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/view2"-->
 
-            />
+            <!--/>-->
 
 
         <TextView
@@ -337,7 +337,7 @@
             android:textSize="@dimen/_12sdp"
             android:layout_marginLeft="@dimen/_20sdp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFees"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
             />
         <TextView
             android:id="@+id/tvSpecialization"

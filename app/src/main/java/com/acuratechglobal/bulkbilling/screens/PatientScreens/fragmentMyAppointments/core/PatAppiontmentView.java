@@ -165,6 +165,10 @@ public class PatAppiontmentView {
         return RxView.clicks(linearNewDateTime);
     }
 
+//    Observable<Unit> cancelClicked() {
+//        return RxView.clicks(tvCancel);
+//    }
+
     public void setAdapterList(List<BookAppointmentModel> list) {
         this.list.clear();
         this.list.addAll(list);
@@ -179,7 +183,6 @@ public class PatAppiontmentView {
     Observable<Unit> cancelClick() {
         return RxView.clicks(tvCancel);
     }
-
 
 //    int getCurrentPos() {
 //        return currentPos;
@@ -229,6 +232,7 @@ public class PatAppiontmentView {
             tvStatus.setText(activity.getString(R.string.strPending));
             tvStatus.setTextColor(activity.getResources().getColor(R.color.colorBlue));
             tvCancel.setText(activity.getString(R.string.strCancel));
+            tvCancel.setVisibility(View.VISIBLE);
             tvCancel.setTextColor(activity.getResources().getColor(R.color.colorRed));
 
         }else if(list.get(currentPos).getStatus()==1){
@@ -238,7 +242,11 @@ public class PatAppiontmentView {
             tvStatus.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
             tvCancel.setText(activity.getString(R.string.strAddRating));
             tvCancel.setTextColor(activity.getResources().getColor(R.color.colorTextGreen));
-
+            if (list.get(currentPos).getRated()){
+                tvCancel.setVisibility(View.INVISIBLE);
+            }else{
+                tvCancel.setVisibility(View.VISIBLE);
+            }
         }else if(list.get(currentPos).getStatus()==2){
             linearNewDateTime.setVisibility(View.GONE);
             tvStatusTitle.setText(activity.getString(R.string.strStatus));
@@ -246,8 +254,9 @@ public class PatAppiontmentView {
             tvStatus.setTextColor(activity.getResources().getColor(R.color.colorRed));
             tvCancel.setText(activity.getString(R.string.strCancel));
             tvCancel.setTextColor(activity.getResources().getColor(R.color.colorRed));
+            tvCancel.setVisibility(View.VISIBLE);
 
-        }else {
+        }else if(list.get(currentPos).getStatus()==3){
             linearNewDateTime.setVisibility(View.VISIBLE);
             tvStatusTitle.setText(activity.getString(R.string.strSuggested));
             try {
@@ -259,8 +268,19 @@ public class PatAppiontmentView {
             tvStatus.setTextColor(activity.getResources().getColor(R.color.colorBlue));
             tvCancel.setText(activity.getString(R.string.strCancel));
             tvCancel.setTextColor(activity.getResources().getColor(R.color.colorRed));
+            tvCancel.setVisibility(View.VISIBLE);
+
+        }else{
+            linearNewDateTime.setVisibility(View.GONE);
+            tvStatusTitle.setText(activity.getString(R.string.strStatus));
+            tvStatus.setText(activity.getString(R.string.strCanceled));
+            tvStatus.setTextColor(activity.getResources().getColor(R.color.colorRed));
+            tvCancel.setText(activity.getString(R.string.strCancel));
+            tvCancel.setTextColor(activity.getResources().getColor(R.color.colorRed));
+            tvCancel.setVisibility(View.INVISIBLE);
 
         }
+
     }
 
     void hideDetails() {
@@ -271,10 +291,10 @@ public class PatAppiontmentView {
         return adapter.confirmClick();
     }
 
-    AcceptRejectApiRequest getParams(int pos){
+    AcceptRejectApiRequest getParams(int pos,int status){
         currentPos=pos;
         AcceptRejectApiRequest request= new AcceptRejectApiRequest();
-        request.setStatus(1);
+        request.setStatus(status);
         request.setAppointmentUID(list.get(pos).getUid());
         return request;
     }
@@ -287,8 +307,17 @@ public class PatAppiontmentView {
         return currentPos;
     }
 
-    void updateList() {
-        list.get(currentPos).setStatus(1);
+    void updateList(boolean b) {
+        if (b) {
+            list.get(currentPos).setStatus(1);
+            list.get(currentPos).setConfirmed(true);
+            list.get(currentPos).setSuggested(true);
+        }else{
+            list.get(currentPos).setStatus(4);
+            list.get(currentPos).setConfirmed(null);
+            list.get(currentPos).setSuggested(null);
+        }
         adapter.notifyItemChanged(currentPos);
     }
+
 }

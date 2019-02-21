@@ -33,10 +33,10 @@ public class AddRatingView {
     private ImageButton btnBack;
     private Button btnSubmit,btnRateUs;
     private ImageView imgProfile,star1,star2,star3,star4,star5;
-    private TextView tvName,tvRatingText,tvContactNumber,tvClinicName,tvClinicAddress ;
+    private TextView tvName,tvRatingText,tvContactNumber,tvQualifications,tvSpecialization ;
     private final AddRatingActivity activity;
     private final ProgressDialog progressDialog;
-    private int docId,patId,rating;
+    private int docId,patId,appointmentId,rating;
     private UserData userData;
 
     public AddRatingView(AddRatingActivity context, ProgressDialog dialog, SharedPrefsUtil prefs) {
@@ -57,12 +57,13 @@ public class AddRatingView {
         star5= view.findViewById(R.id.star5);
         tvName= view.findViewById(R.id.tvName);
         tvRatingText= view.findViewById(R.id.tvRatingText);
-        tvContactNumber= view.findViewById(R.id.tvContactNumber);
-        tvClinicName= view.findViewById(R.id.tvClinicName);
-        tvClinicAddress= view.findViewById(R.id.tvClinicAddress);
+//        tvContactNumber= view.findViewById(R.id.tvContactNumber);
+        tvQualifications= view.findViewById(R.id.tvQualifications);
+        tvSpecialization= view.findViewById(R.id.tvSpecialization);
 
         userData= prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA,UserData.class);
         patId= userData.getPatID();
+        setRatingStars(5);
     }
 
     public View getView() {
@@ -74,8 +75,36 @@ public class AddRatingView {
         if (extras!=null){
             BookAppointmentModel data= new Gson().fromJson(extras.getString("data"),BookAppointmentModel.class);
             docId=data.getFkDoctorId();
+            appointmentId=data.getId();
             tvName.setText(data.getFkDoctorName());
             Glide.with(activity).load(data.getDoctorPhotoPath()).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user)).into(imgProfile);
+
+            if (data.getQualifications()!=null && data.getQualifications().size()>0){
+                String strQalf="";
+                for (int i=0; i<data.getQualifications().size() ;++i) {
+                    strQalf+=data.getQualifications().get(i).getName();
+                    if (i!=data.getQualifications().size()-1){
+                        strQalf+=" ,";
+                    }
+                }
+                tvQualifications.setText(strQalf);
+            }else {
+                tvQualifications.setText("Qualification not mentioned");
+            }
+
+            if (data.getDoctorSpecialization()!=null && data.getDoctorSpecialization().size()>0){
+                String strSpec="";
+                for (int i=0; i<data.getDoctorSpecialization().size() ;++i) {
+                    strSpec+=data.getDoctorSpecialization().get(i).getName();
+                    if (i!=data.getDoctorSpecialization().size()-1){
+                        strSpec+=" ,";
+                    }
+                }
+                tvSpecialization.setText("Dr. "+data.getFkDoctorName()+" is specialized in "+strSpec);
+            }else {
+                tvSpecialization.setText("Specialization not mentioned");
+            }
+
         }
     }
 
@@ -117,6 +146,7 @@ public class AddRatingView {
         request.setComments("");
         request.setFkDoctorId(docId);
         request.setFkPatientId(patId);
+        request.setFkAppointmentId(appointmentId);
         request.setRate(rating);
         return request;
     }
@@ -129,6 +159,8 @@ public class AddRatingView {
                 star4.setImageResource(R.drawable.info_star_select);
                 star5.setImageResource(R.drawable.info_star_select);
                 this.rating=1;
+                tvRatingText.setText("Not Satisfied");
+                tvRatingText.setTextColor(activity.getResources().getColor(R.color.colorRed));
                 break;
             case 2:
                 star1.setImageResource(R.drawable.info_star_selected);
@@ -137,6 +169,8 @@ public class AddRatingView {
                 star4.setImageResource(R.drawable.info_star_select);
                 star5.setImageResource(R.drawable.info_star_select);
                 this.rating=2;
+                tvRatingText.setText("Okay");
+                tvRatingText.setTextColor(activity.getResources().getColor(R.color.colorYellow));
                 break;
             case 3:
                 star1.setImageResource(R.drawable.info_star_selected);
@@ -144,6 +178,8 @@ public class AddRatingView {
                 star3.setImageResource(R.drawable.info_star_selected);
                 star4.setImageResource(R.drawable.info_star_select);
                 star5.setImageResource(R.drawable.info_star_select);
+                tvRatingText.setText("Satisfactory");
+                tvRatingText.setTextColor(activity.getResources().getColor(R.color.colorYellow));
                 this.rating=3;
                 break;
             case 4:
@@ -152,6 +188,8 @@ public class AddRatingView {
                 star3.setImageResource(R.drawable.info_star_selected);
                 star4.setImageResource(R.drawable.info_star_selected);
                 star5.setImageResource(R.drawable.info_star_select);
+                tvRatingText.setText("Good");
+                tvRatingText.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
                 this.rating=4;
                 break;
             case 5:
@@ -160,6 +198,8 @@ public class AddRatingView {
                 star3.setImageResource(R.drawable.info_star_selected);
                 star4.setImageResource(R.drawable.info_star_selected);
                 star5.setImageResource(R.drawable.info_star_selected);
+                tvRatingText.setText("Excellent");
+                tvRatingText.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
                 this.rating=5;
                 break;
 

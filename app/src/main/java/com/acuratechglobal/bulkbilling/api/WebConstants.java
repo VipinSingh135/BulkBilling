@@ -49,9 +49,16 @@ public interface WebConstants {
 
     String URL_DOCTOR_GET_RATINGS = "api/Doctor/getDoctorRating";
 
+    String URL_EDIT_PATIENT_PROFILE = "api/Patient/updatePatientProfile";
+
+    String URL_GET_PATIENT_PROFILE = "api/Patient/getPatientProfile";
+
+    String URL_GET_PATIENT_RATING = "api/Patient/getPatientRating";
+
     String PARAM_LEVEL1UID= "lvl1UID";
     String PARAM_LEVEL2UID= "lvl2UID";
-    String PARAM_DOC2UID= "docUID";
-    String PARAM_PAT2UID= "patUID";
+    String PARAM_DOCUID= "docUID";
+    String PARAM_PATUID= "patUID";
+    String PARAM_PUID= "pUID";
 
 }

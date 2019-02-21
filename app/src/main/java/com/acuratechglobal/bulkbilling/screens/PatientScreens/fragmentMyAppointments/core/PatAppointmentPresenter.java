@@ -31,12 +31,12 @@ public class PatAppointmentPresenter {
 
     public void onCreate() {
 //        view.setupView(model.getString(R.string.toolbar_add_task));
-        subscriptions.add(GetAppointmentListSubscription());
         subscriptions.add(menuClick());
         subscriptions.add(detailClick());
         subscriptions.add(hideDetail());
         subscriptions.add(cancelClick());
         subscriptions.add(AcceptRejectSubscription());
+//        subscriptions.add(CancelSubscription());
         subscriptions.add(ConfirmSubscription());
     }
 
@@ -60,6 +60,8 @@ public class PatAppointmentPresenter {
             view.hideDetails();
             if (view.getDetails().getStatus()!=null && view.getDetails().getStatus()==1){
                 model.gotoAddRatingScreen(view.getDetails());
+            }else {
+                subscriptions.add(CancelSubscription());
             }
         });
     }
@@ -124,19 +126,19 @@ public class PatAppointmentPresenter {
 
 
 
-    //AcceptRejectApi
+    //AcceptApi
     private Disposable ConfirmSubscription() {
         return view.confirmClicked()
                 .throttleFirst(1, TimeUnit.SECONDS)// maybe you want to ignore multiple clicks
                 .flatMap(isNetworkAvailable -> validateNetwork())
                 .doOnNext(showDialog -> view.showLoadingDialog(model.getString(R.string.loading_add_task)))
-                .flatMap(networAvailable -> AcceptRejectAppointment(view.getCurrentPos()))
+                .flatMap(networAvailable -> AcceptRejectAppointment(view.getCurrentPos(),1))
                 .subscribe(response -> {
                     view.hideLoadingDialog();
                     if (response.getStatus() == 1) {
                         view.hideDetails();
                         view.showToast(response.getMessage());
-                        view.updateList();
+                        view.updateList(true);
                     } else {
                         String errorMessage =
                                 null == response.getMessage() ? model.getString(R.string.error_signUp)
@@ -151,16 +153,51 @@ public class PatAppointmentPresenter {
                 });
     }
 
+    //RejectApi
+    private Disposable CancelSubscription() {
+        return model.networkAvailable()
+                .subscribeOn(rxSchedulers.network())
+                .observeOn(rxSchedulers.androidUI())
+                .doOnNext(networkAvailable -> {
+                    if (!networkAvailable) {
+                        UiUtils.showSnackbar(view.getView(), model.getString(R.string.error_no_internet),
+                                Snackbar.LENGTH_SHORT);
+                    }
+                })
+                .filter(networkAvailable -> networkAvailable)
+                .doOnNext(showDialog -> view.showLoadingDialog(model.getString(R.string.loading_add_task)))
+                .flatMap(networAvailable -> AcceptRejectAppointment(view.getCurrentPos(),4))
+                .subscribe(response -> {
+                    view.hideLoadingDialog();
+                    if (response.getStatus() == 1) {
+                        view.hideDetails();
+                        view.showToast(response.getMessage());
+                        view.updateList(false);
+                    } else {
+                        String errorMessage =
+                                null == response.getMessage() ? model.getString(R.string.error_signUp)
+                                        : response.getMessage();
+                        UiUtils.showSnackbar(view.getView(), errorMessage, Snackbar.LENGTH_SHORT);
+                    }
+                }, throwable -> {
+                    subscriptions.add(ConfirmSubscription());
+                    view.hideLoadingDialog();
+                    UiUtils.handleThrowable(throwable);
+                    UiUtils.showSnackbar(view.getView(), model.getString(R.string.error_signUp), Snackbar.LENGTH_SHORT);
+                });
+    }
+
+    //AcceptApi
     private Disposable AcceptRejectSubscription() {
         return view.confirmClick()
                 .throttleFirst(1, TimeUnit.SECONDS)// maybe you want to ignore multiple clicks
                 .doOnNext(showDialog -> view.showLoadingDialog(model.getString(R.string.loading_add_task)))
-                .flatMap(this::AcceptRejectAppointment)
+                .flatMap(pos ->AcceptRejectAppointment(pos,1))
                 .subscribe(response -> {
                     view.hideLoadingDialog();
                     if (response.getStatus() == 1) {
                         view.showToast(response.getMessage());
-                        view.updateList();
+                        view.updateList(true);
                     } else {
                         String errorMessage =
                                 null == response.getMessage() ? model.getString(R.string.error_signUp)
@@ -175,16 +212,17 @@ public class PatAppointmentPresenter {
                 });
     }
 
-    private Observable<CommonApiResponse> AcceptRejectAppointment(Integer pos) {
-        return model.performAcceptRejectTime(getRequest(pos))
+    private Observable<CommonApiResponse> AcceptRejectAppointment(Integer pos ,Integer status) {
+        return model.performAcceptRejectTime(getRequest(pos,status))
                 .subscribeOn(rxSchedulers.network())
                 .observeOn(rxSchedulers.androidUI());
     }
 
-    private AcceptRejectApiRequest getRequest(Integer pos) {
-        return view.getParams(pos);
+    private AcceptRejectApiRequest getRequest(Integer pos, Integer status) {
+        return view.getParams(pos,status);
     }
 
-
-
+    public void onResume() {
+        subscriptions.add(GetAppointmentListSubscription());
+    }
 }

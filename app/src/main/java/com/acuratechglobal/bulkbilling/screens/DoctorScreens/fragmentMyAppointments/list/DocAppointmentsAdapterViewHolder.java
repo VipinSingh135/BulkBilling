@@ -47,7 +47,7 @@ class DocAppointmentsAdapterViewHolder extends RecyclerView.ViewHolder {
 
     void bind(BookAppointmentModel model, String s) {
 
-        tvName.setText(TextUtils.isEmpty(model.getFkDoctorName()) ? "missing name" : model.getFkDoctorName());
+        tvName.setText(TextUtils.isEmpty(model.getFkPatientName()) ? "missing name" : model.getFkPatientName());
         tvDescription.setText(TextUtils.isEmpty(model.getIssue()) ? "missing name" : model.getIssue());
         tvTime.setText(TextUtils.isEmpty(s) ? "missing name" : s);
 

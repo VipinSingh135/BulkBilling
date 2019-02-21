@@ -48,13 +48,15 @@ public class MainView {
     private SideMenuAdapter adapter;
     private List<String> menuList=new ArrayList<>();
     private Button btnLogout;
-    UserData data;
+    private UserData data;
+    private SharedPrefsUtil prefs;
 
     public MainView(MainActivity context, SharedPrefsUtil prefs) {
         this.activity = context;
         FrameLayout parent = new FrameLayout(context);
         parent.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         view = LayoutInflater.from(context).inflate(R.layout.activity_main, parent, true);
+        this.prefs= prefs;
         if (prefs!=null){
             data= prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA,UserData.class);
         }
@@ -68,11 +70,7 @@ public class MainView {
         recyclerItems = view.findViewById(R.id.recyclerItems);
 
         setMenuList();
-        tvName.setText(data.getFirstName()+" "+data.getLastName());
-        tvEmail.setText(data.getEmail());
-        if (data.getsPhotoPath()!=null){
-            Glide.with(activity).load(Uri.parse(data.getsPhotoPath())).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user)).into(imgProfile);
-        }
+        setNavigationHeader();
         adapter= new SideMenuAdapter();
         recyclerItems.setLayoutManager(new LinearLayoutManager(activity));
         recyclerItems.setAdapter(adapter);
@@ -84,6 +82,14 @@ public class MainView {
         setMenuAdapter(0);
     }
 
+    public void setNavigationHeader(){
+        data= prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA,UserData.class);
+        tvName.setText(data.getFirstName()+" "+data.getLastName());
+        tvEmail.setText(data.getEmail());
+        if (data.getsPhotoPath()!=null){
+            Glide.with(activity).load(Uri.parse(data.getsPhotoPath())).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.user)).into(imgProfile);
+        }
+    }
     public View constructView() {
         return view;
     }
@@ -135,4 +141,5 @@ public class MainView {
     Observable<Unit> btnLogout(){
         return RxView.clicks(btnLogout);
     }
+
 }

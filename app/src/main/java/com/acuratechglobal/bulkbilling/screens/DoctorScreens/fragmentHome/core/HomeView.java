@@ -250,7 +250,8 @@ public class HomeView {
     //DateTime
     RxDateTimePicker DateTimePicker() {
         return RxDateTimePicker
-                .with(activity);
+                .with(activity)
+                .is24HourView(true);
     }
 
     void showDetails(){

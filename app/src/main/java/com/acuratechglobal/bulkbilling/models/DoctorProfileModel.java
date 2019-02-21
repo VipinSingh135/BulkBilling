@@ -50,6 +50,9 @@ public class DoctorProfileModel {
     @SerializedName("deletedOn")
     @Expose
     private String deletedOn;
+    @SerializedName("rating")
+    @Expose
+    private Integer rating;
     @SerializedName("userId")
     @Expose
     private Integer userId;
@@ -348,5 +351,13 @@ public class DoctorProfileModel {
 
     public void setPatID(Integer patID) {
         this.patID = patID;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }

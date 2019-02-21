@@ -64,6 +64,8 @@ public class HomePresenter {
 
         subscriptions.add(applyClicked());
         subscriptions.add(clearClicked());
+
+        subscriptions.add(searchDoctors());
     }
 
     private Disposable menuClick() {
@@ -370,4 +372,13 @@ public class HomePresenter {
             subscriptions.add(GetDoctorListSubscription());
         });
     }
+
+    // Search Params
+    private Disposable searchDoctors() {
+        return view.searchDoctors().subscribe(query -> {
+            view.setSearchParams(query);
+            subscriptions.add(GetDoctorListSubscription());
+        });
+    }
+
 }

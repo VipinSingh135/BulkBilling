@@ -56,6 +56,20 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/relativeLayout">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/strEdit"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_12sdp"
+            android:fontFamily="@font/raleway_bold"
+            android:background="@android:color/transparent"
+            android:id="@+id/btnEdit"
+            />
+
         <ImageView
             android:id="@+id/imgProfile"
             android:layout_width="@dimen/_72sdp"
@@ -63,16 +77,16 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_12sdp"
             android:src="@drawable/user" />
-        <ImageButton
-            android:id="@+id/btnAddImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/imgProfile"
-            android:layout_alignBottom="@+id/imgProfile"
-            android:background="@android:color/transparent"
-            android:paddingTop="@dimen/_2sdp"
-            android:paddingLeft="@dimen/_2sdp"
-            android:src="@drawable/camera" />
+        <!--<ImageButton-->
+            <!--android:id="@+id/btnAddImage"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignRight="@+id/imgProfile"-->
+            <!--android:layout_alignBottom="@+id/imgProfile"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:paddingTop="@dimen/_2sdp"-->
+            <!--android:paddingLeft="@dimen/_2sdp"-->
+            <!--android:src="@drawable/camera" />-->
 
         <TextView
             android:id="@+id/tvName"
@@ -128,7 +142,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeProfile" />
 
-
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
@@ -157,7 +170,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
-
 
     <TextView
         android:layout_width="wrap_content"

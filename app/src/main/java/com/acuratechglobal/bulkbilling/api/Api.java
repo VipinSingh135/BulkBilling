@@ -2,8 +2,11 @@ package com.acuratechglobal.bulkbilling.api;
 
 import com.acuratechglobal.bulkbilling.api.request.AcceptRejectApiRequest;
 import com.acuratechglobal.bulkbilling.api.request.AddRatingRequest;
+import com.acuratechglobal.bulkbilling.api.request.GetPatientRatingListRequest;
 import com.acuratechglobal.bulkbilling.api.response.GetAppointmentListApiResponse;
 import com.acuratechglobal.bulkbilling.api.response.GetMyRatingsApiResponse;
+import com.acuratechglobal.bulkbilling.api.response.GetPatientProfileApiResponse;
+import com.acuratechglobal.bulkbilling.api.response.GetPatientRatingApiResponse;
 import com.acuratechglobal.bulkbilling.models.BookAppointmentModel;
 import com.acuratechglobal.bulkbilling.api.request.ChangePassApiRequest;
 import com.acuratechglobal.bulkbilling.models.DoctorProfileModel;
@@ -21,6 +24,7 @@ import com.acuratechglobal.bulkbilling.api.response.LoginApiResponse;
 import com.acuratechglobal.bulkbilling.api.response.ResetPassApiResponse;
 import com.acuratechglobal.bulkbilling.api.response.CommonApiResponse;
 import com.acuratechglobal.bulkbilling.api.response.SpecializationResponse;
+import com.acuratechglobal.bulkbilling.models.PatientProfileModel;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;
@@ -68,7 +72,7 @@ public interface Api {
     Observable<LoginApiResponse> apiCreateProfile(@Body DoctorProfileModel request);
 
     @GET(WebConstants.URL_GET_PROFILE)
-    Observable<GetProfileApiResponse> apiGetProfile(@Query(WebConstants.PARAM_DOC2UID) String id);
+    Observable<GetProfileApiResponse> apiGetProfile(@Query(WebConstants.PARAM_DOCUID) String id);
 
     @POST(WebConstants.URL_CHANGE_PASSWORD)
     Observable<CommonApiResponse> apiChangePassword(@Body ChangePassApiRequest request);
@@ -80,13 +84,13 @@ public interface Api {
     Observable<CommonApiResponse> apiBookAppointment(@Body BookAppointmentModel request);
 
     @GET(WebConstants.URL_DOCTOR_APPOINTMENT_LIST)
-    Observable<GetAppointmentListApiResponse> apiGetAppointmentList(@Query(WebConstants.PARAM_DOC2UID) String id);
+    Observable<GetAppointmentListApiResponse> apiGetAppointmentList(@Query(WebConstants.PARAM_DOCUID) String id);
 
     @POST(WebConstants.URL_DOCTOR_ACCEPT_REJECT_APP)
     Observable<CommonApiResponse> apiAcceptReject(@Body AcceptRejectApiRequest request);
 
     @GET(WebConstants.URL_PATIENT_APPOINTMENT_LIST)
-    Observable<GetAppointmentListApiResponse> apiGetPatientAppointmentList(@Query(WebConstants.PARAM_PAT2UID) String id);
+    Observable<GetAppointmentListApiResponse> apiGetPatientAppointmentList(@Query(WebConstants.PARAM_PATUID) String id);
 
     @POST(WebConstants.URL_PATIENT_ACCEPT_REJECT_LIST)
     Observable<CommonApiResponse> apiAcceptRejectTime(@Body AcceptRejectApiRequest request);
@@ -95,6 +99,15 @@ public interface Api {
     Observable<CommonApiResponse> apiAddRating(@Body AddRatingRequest request);
 
     @GET(WebConstants.URL_DOCTOR_GET_RATINGS)
-    Observable<GetMyRatingsApiResponse> apiGetMyRatings(@Query(WebConstants.PARAM_DOC2UID) String id);
+    Observable<GetMyRatingsApiResponse> apiGetMyRatings(@Query(WebConstants.PARAM_DOCUID) String id);
+
+    @POST(WebConstants.URL_EDIT_PATIENT_PROFILE)
+    Observable<CommonApiResponse> apiEditProfile(@Body PatientProfileModel request);
+
+    @GET(WebConstants.URL_GET_PATIENT_PROFILE)
+    Observable<GetPatientProfileApiResponse> apiGetPatientProfile(@Query(WebConstants.PARAM_PUID) String id);
+
+    @POST(WebConstants.URL_GET_PATIENT_RATING)
+    Observable<GetPatientRatingApiResponse> apiGetPatientRating(@Body GetPatientRatingListRequest request);
 
 }

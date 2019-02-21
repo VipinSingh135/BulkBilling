@@ -51,16 +51,16 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/relativeLayout">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/raleway_regular"
-                android:text="@string/strEdit"
-                android:textAllCaps="false"
-                android:textColor="@color/colorThemeGreen"
-                android:visibility="gone" />
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:fontFamily="@font/raleway_regular"-->
+                <!--android:text="@string/strEdit"-->
+                <!--android:textAllCaps="false"-->
+                <!--android:textColor="@color/colorThemeGreen"-->
+                <!--android:visibility="gone" />-->
 
             <ImageView
                 android:id="@+id/imgProfile"

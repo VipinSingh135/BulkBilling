@@ -46,7 +46,7 @@ public class ResetPassModel {
         Toasty.success(activity, "Password reset successfully, please login to continue", Toast.LENGTH_SHORT, true).show();
 
 //        Toast.makeText(activity,"Password reset successfully, please login to continue",Toast.LENGTH_LONG).show();
-        Intent intent= new Intent(activity, SplashActivity.class);
+        Intent intent= new Intent(activity, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
 

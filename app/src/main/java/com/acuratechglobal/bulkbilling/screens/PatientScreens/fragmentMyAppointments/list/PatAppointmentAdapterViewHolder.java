@@ -56,15 +56,28 @@ public class PatAppointmentAdapterViewHolder extends RecyclerView.ViewHolder {
     void bind(BookAppointmentModel model, String s)  {
 
         tvName.setText(TextUtils.isEmpty(model.getFkDoctorName()) ? "missing name" : model.getFkDoctorName());
-        tvDescription.setText(TextUtils.isEmpty(model.getIssue()) ? "missing name" : model.getIssue());
-        tvTime.setText(TextUtils.isEmpty(s) ? "missing name" : s);
+        tvDescription.setText(TextUtils.isEmpty(model.getIssue()) ? "missing description" : model.getIssue());
+        tvTime.setText(TextUtils.isEmpty(s) ? "missing time" : s);
 
         try {
-            String dayOfTheWeek = (String) DateFormat.format("EEEE", TimeUtils.stringToDate(model.getDate())); // Thursday
-            String day          = (String) DateFormat.format("dd",   TimeUtils.stringToDate(model.getDate())); // 20
-            String monthString  = (String) DateFormat.format("MMM",  TimeUtils.stringToDate(model.getDate())); // Jun
-            String year         = (String) DateFormat.format("yyyy", TimeUtils.stringToDate(model.getDate())); // 2013
+            String dayOfTheWeek;
+            String day;
+            String monthString;
+            String year;
 
+            if(model.getSuggested()!=null&&model.getConfirmed()!=null&&model.getSuggested()&&model.getConfirmed()&&model.getStatus()==1){
+                 dayOfTheWeek = (String) DateFormat.format("EEEE", TimeUtils.stringToDate(model.getSuggestedOn())); // Thursday
+                 day          = (String) DateFormat.format("dd",   TimeUtils.stringToDate(model.getSuggestedOn())); // 20
+                 monthString  = (String) DateFormat.format("MMM",  TimeUtils.stringToDate(model.getSuggestedOn())); // Jun
+                 year         = (String) DateFormat.format("yyyy", TimeUtils.stringToDate(model.getSuggestedOn())); // 2013
+
+            }else{
+                 dayOfTheWeek = (String) DateFormat.format("EEEE", TimeUtils.stringToDate(model.getDate())); // Thursday
+                 day          = (String) DateFormat.format("dd",   TimeUtils.stringToDate(model.getDate())); // 20
+                 monthString  = (String) DateFormat.format("MMM",  TimeUtils.stringToDate(model.getDate())); // Jun
+                 year         = (String) DateFormat.format("yyyy", TimeUtils.stringToDate(model.getDate())); // 2013
+
+            }
             tvDay.setText(dayOfTheWeek);
             tvDate.setText(day);
             tvMonth.setText(monthString+" "+year);
@@ -87,6 +100,11 @@ public class PatAppointmentAdapterViewHolder extends RecyclerView.ViewHolder {
             linearStatus.setVisibility(View.VISIBLE);
             relativeSuggest.setVisibility(View.GONE);
             tvStatus.setText("Rejected");
+            tvStatus.setTextColor(Color.parseColor("#e76060"));
+        }else if (model.getStatus()==4){
+            linearStatus.setVisibility(View.VISIBLE);
+            relativeSuggest.setVisibility(View.GONE);
+            tvStatus.setText("Canceled");
             tvStatus.setTextColor(Color.parseColor("#e76060"));
         }else{
             linearStatus.setVisibility(View.GONE);

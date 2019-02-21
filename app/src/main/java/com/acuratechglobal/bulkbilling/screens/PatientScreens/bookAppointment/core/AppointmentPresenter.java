@@ -71,7 +71,7 @@ public class AppointmentPresenter {
                 .subscribe(response -> {
                     view.hideLoadingDialog();
                     if (response.getStatus() == 1) {
-                        view.showToast(response.getMessage());
+                        view.showToast("Appointment request successfully sent to the doctor. Thanks.");
                         model.finish();
 
                     } else {

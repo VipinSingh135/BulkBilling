@@ -61,12 +61,16 @@
 
             <TextView
                 android:id="@+id/tvName"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/imgProfile"
                 android:layout_marginStart="@dimen/_24sdp"
                 android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="62dp"
+                android:layout_toStartOf="@+id/imgFav"
+                android:layout_toLeftOf="@+id/imgFav"
                 android:layout_toRightOf="@+id/imgProfile"
+                android:layout_toEndOf="@+id/imgProfile"
                 android:fontFamily="@font/raleway_bold"
                 android:text="Dr. John Wright"
                 android:textColor="@color/colorGreyDarker"
@@ -74,12 +78,14 @@
 
             <TextView
                 android:id="@+id/tvPhone"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvName"
                 android:layout_marginStart="@dimen/_24sdp"
-                android:layout_toEndOf="@+id/imgProfile"
-                android:fontFamily="@font/raleway_medium"
+                android:layout_toStartOf="@+id/imgFav"
+                android:layout_toLeftOf="@+id/imgFav"
+                android:layout_toRightOf="@+id/imgProfile"
+                android:layout_toEndOf="@+id/imgProfile"                android:fontFamily="@font/raleway_medium"
                 android:text="B.A.M.S ,M.B.B.S"
                 android:textColor="@color/colorGreyDark"
                 android:textSize="@dimen/_12sdp" />

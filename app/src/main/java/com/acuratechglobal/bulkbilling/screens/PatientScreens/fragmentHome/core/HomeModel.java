@@ -44,10 +44,10 @@ public class HomeModel {
         return  apis.apiGetDoctorList(request);
     }
 
-
     Observable<SpecializationResponse> callLevel1Api() {
         return apis.apiSpecialization1();
     }
+
     Observable<SpecializationResponse> callLevel2Api(String levelId1) {
         return apis.apiSpecialization2(levelId1);
     }
@@ -89,6 +89,7 @@ public class HomeModel {
     private boolean isLevel1Added() {
         return level1Id != null && level1Id.length() > 0;
     }
+
     private boolean isLevel2Added() {
         return level2Id != null && level2Id.length() > 0;
     }

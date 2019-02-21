@@ -47,7 +47,13 @@ public class PatAppointmentFragment extends Fragment {
         presenter.onDestroy();
     }
 
-//    @Override
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        super.onCreateOptionsMenu(menu);
 //        getMenuInflater().inflate(R.menu.menu_add_task, menu);

@@ -177,12 +177,14 @@
             android:layout_marginRight="@dimen/_6sdp"
             android:src="@drawable/star_small_normal" />
 
+
         <View
             android:layout_width="0dp"
             android:layout_height="@dimen/_6sdp"
             android:layout_gravity="center_vertical"
             android:id="@+id/view5"
             android:layout_weight="1"
+            android:visibility="invisible"
             android:background="@drawable/bg_button_green_light" />
 
         <TextView
@@ -192,6 +194,7 @@
             android:layout_marginLeft="@dimen/_6sdp"
             android:fontFamily="@font/raleway_medium"
             android:text="400 people"
+            android:visibility="invisible"
             android:id="@+id/tv5"
             android:textColor="@color/colorGreyDarker"
             android:textSize="@dimen/_10sdp" />
@@ -230,6 +233,7 @@
             android:layout_width="@dimen/_130sdp"
             android:layout_height="@dimen/_6sdp"
             android:layout_gravity="center_vertical"
+            android:visibility="invisible"
             android:id="@+id/view4"
             android:background="@drawable/bg_button_green_light" />
 
@@ -240,6 +244,7 @@
             android:layout_marginLeft="@dimen/_6sdp"
             android:fontFamily="@font/raleway_medium"
             android:text="220 people"
+            android:visibility="invisible"
             android:id="@+id/tv4"
             android:textColor="@color/colorGreyDarker"
             android:textSize="@dimen/_10sdp" />
@@ -278,6 +283,7 @@
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_6sdp"
             android:layout_gravity="center_vertical"
+            android:visibility="invisible"
             android:id="@+id/view3"
             android:background="@drawable/bg_button_green_light" />
 
@@ -288,6 +294,7 @@
             android:layout_marginLeft="@dimen/_6sdp"
             android:fontFamily="@font/raleway_medium"
             android:text="200 people"
+            android:visibility="invisible"
             android:id="@+id/tv3"
             android:textColor="@color/colorGreyDarker"
             android:textSize="@dimen/_10sdp" />
@@ -324,6 +331,7 @@
 
         <View
             android:layout_width="@dimen/_160sdp"
+            android:visibility="invisible"
             android:layout_height="@dimen/_6sdp"
             android:layout_gravity="center_vertical"
             android:id="@+id/view2"
@@ -336,6 +344,7 @@
             android:layout_marginLeft="@dimen/_6sdp"
             android:fontFamily="@font/raleway_medium"
             android:text="250 people"
+            android:visibility="invisible"
             android:id="@+id/tv2"
             android:textColor="@color/colorGreyDarker"
             android:textSize="@dimen/_10sdp" />
@@ -374,6 +383,7 @@
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_6sdp"
             android:layout_gravity="center_vertical"
+            android:visibility="invisible"
             android:id="@+id/view1"
             android:background="@drawable/bg_button_green_light" />
 
@@ -385,6 +395,7 @@
             android:fontFamily="@font/raleway_medium"
             android:text="100 people"
             android:id="@+id/tv1"
+            android:visibility="invisible"
             android:textColor="@color/colorGreyDarker"
             android:textSize="@dimen/_10sdp" />
     </LinearLayout>

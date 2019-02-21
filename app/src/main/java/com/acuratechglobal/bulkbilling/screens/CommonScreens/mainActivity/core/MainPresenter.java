@@ -10,6 +10,7 @@ import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentHome.PatHo
 import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyAppointments.PatAppointmentFragment;
 import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentMyFavourites.PatFavouritesFragment;
 import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentProfile.PatProfileFragment;
+import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentRatings.PatRatingFragment;
 import com.acuratechglobal.bulkbilling.utils.rx.RxSchedulers;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -76,10 +77,10 @@ public class MainPresenter {
                           view.goToFragment(new PatProfileFragment(), false);
 
                   }else if (pos==4){
-//                      if (model.getUserType()==2)
+                      if (model.getUserType()==2) {
 //                          view.goToFragment(new MyProfileDocFragment(), false);
-//                      else
-//                          view.goToFragment(new PatProfileFragment(), false);
+                      }else
+                          view.goToFragment(new PatRatingFragment(), false);
 
                   }else if (pos==5){
                       if (model.getUserType()==2)

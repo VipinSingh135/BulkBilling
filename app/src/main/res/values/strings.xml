@@ -104,7 +104,7 @@
     <string name="strAddress2">Address*</string>
     <string name="strEnterClinicAddress">Add Clinic Address</string>
     <string name="strMyProfile">My Profile</string>
-    <string name="strAvailible">Availibility</string>
+    <string name="strAvailible">Availability</string>
     <string name="strChange">Change</string>
     <string name="strTiming">Timing</string>
     <string name="strViewDetail">View\nDetail</string>
@@ -177,4 +177,8 @@
     <string name="strPending">Pending</string>
     <string name="strRejected">Rejected</string>
     <string name="strContinueAs">Continue As :-</string>
+    <string name="strEditProfile">Edit Profile</string>
+    <string name="strEnterFirstName">Enter First Name</string>
+    <string name="strEnterLastName">Enter Last Name</string>
+    <string name="strCanceled">Canceled</string>
 </resources>

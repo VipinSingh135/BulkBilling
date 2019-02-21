@@ -3,6 +3,8 @@ package com.acuratechglobal.bulkbilling.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class BookAppointmentModel {
 
     @SerializedName("date")
@@ -62,9 +64,20 @@ public class BookAppointmentModel {
     @SerializedName("isDeleted")
     @Expose
     private Boolean isDeleted;
+    @SerializedName("isRated")
+    @Expose
+    private Boolean isRated;
     @SerializedName("deletedOn")
     @Expose
     private String deletedOn;
+
+    @SerializedName("doctorSpecialization")
+    @Expose
+    private List<DoctorSpecializationModel> doctorSpecialization = null;
+    @SerializedName("qualifications")
+    @Expose
+    private List<QualificationModel> qualifications = null;
+
     public String getDate() {
         return date;
     }
@@ -223,5 +236,29 @@ public class BookAppointmentModel {
 
     public void setDoctorPhotoPath(String doctorPhotoPath) {
         this.doctorPhotoPath = doctorPhotoPath;
+    }
+
+    public List<DoctorSpecializationModel> getDoctorSpecialization() {
+        return doctorSpecialization;
+    }
+
+    public void setDoctorSpecialization(List<DoctorSpecializationModel> doctorSpecialization) {
+        this.doctorSpecialization = doctorSpecialization;
+    }
+
+    public List<QualificationModel> getQualifications() {
+        return qualifications;
+    }
+
+    public void setQualifications(List<QualificationModel> qualifications) {
+        this.qualifications = qualifications;
+    }
+
+    public Boolean getRated() {
+        return isRated;
+    }
+
+    public void setRated(Boolean rated) {
+        isRated = rated;
     }
 }

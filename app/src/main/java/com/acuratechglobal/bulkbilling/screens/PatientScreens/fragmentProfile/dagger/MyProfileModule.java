@@ -7,6 +7,7 @@ import com.acuratechglobal.bulkbilling.screens.CommonScreens.mainActivity.MainAc
 import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentProfile.core.MyProfileModel;
 import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentProfile.core.MyProfilePresenter;
 import com.acuratechglobal.bulkbilling.screens.PatientScreens.fragmentProfile.core.MyProfileView;
+import com.acuratechglobal.bulkbilling.utils.SharedPrefsUtil;
 import com.acuratechglobal.bulkbilling.utils.rx.RxSchedulers;
 
 import dagger.Module;
@@ -39,7 +40,7 @@ public class MyProfileModule {
 
     @Provides
     @MyProfileScope
-    MyProfileModel model(Api taskApi) {
-        return new MyProfileModel(activity, taskApi);
+    MyProfileModel model(Api taskApi, SharedPrefsUtil prefs) {
+        return new MyProfileModel(activity, taskApi,prefs);
     }
 }

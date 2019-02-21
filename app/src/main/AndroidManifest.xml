@@ -76,6 +76,7 @@
         <activity android:name=".screens.PatientScreens.viewDoctorProfile.DoctorProfileActivity" android:screenOrientation="portrait"/>
         <activity android:name=".screens.PatientScreens.bookAppointment.BookAppointmentActivity" android:screenOrientation="portrait"/>
         <activity android:name=".screens.PatientScreens.addRating.AddRatingActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".screens.PatientScreens.editProfile.EditProfileActivity" android:screenOrientation="portrait"/>
 
     </application>
 

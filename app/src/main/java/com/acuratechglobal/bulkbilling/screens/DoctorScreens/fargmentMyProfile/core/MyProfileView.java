@@ -35,7 +35,7 @@ public class MyProfileView {
     private TextView tvOpenTime, tvCloseTime;
     private TextView tvName, tvPhone, tvEmail;
     private RecyclerView recyclerDays;
-    private ImageView imgProfile;
+    private ImageView imgProfile,star1,star2,star3,star4,star5;
     private ImageButton btnMenu;
     private Button btnEdit;
     private final MainActivity activity;
@@ -62,6 +62,11 @@ public class MyProfileView {
         imgProfile= view.findViewById(R.id.imgProfile);
         btnMenu= view.findViewById(R.id.btnMenu);
         btnEdit= view.findViewById(R.id.btnEdit);
+        star1= view.findViewById(R.id.star1);
+        star2= view.findViewById(R.id.star2);
+        star3= view.findViewById(R.id.star3);
+        star4= view.findViewById(R.id.star4);
+        star5= view.findViewById(R.id.star5);
 
         if (prefs!=null){
             data= prefs.getObject(SharedPrefsUtil.PREFERENCE_USER_DATA,UserData.class); }
@@ -103,6 +108,11 @@ public class MyProfileView {
         if (profileData.getExperience()!=null){
             setExperience(profileData.getExperience());
         }
+        if (profileData.getRating()!=null){
+            setRatingStars(profileData.getRating());
+        }else
+            setRatingStars(0);
+
 //            toggleRdBtns(profileData.getExperience());
     }
 
@@ -133,6 +143,53 @@ public class MyProfileView {
         selectedDaysAdapter.setAdapterList(selectedDaysList);
     }
 
+    private void setRatingStars(int rating){
+        switch (rating){
+            case 0:
+                star1.setImageResource(R.drawable.info_star_select);
+                star2.setImageResource(R.drawable.info_star_select);
+                star3.setImageResource(R.drawable.info_star_select);
+                star4.setImageResource(R.drawable.info_star_select);
+                star5.setImageResource(R.drawable.info_star_select);
+                break;
+            case 1:
+                star1.setImageResource(R.drawable.info_star_selected);
+                star2.setImageResource(R.drawable.info_star_select);
+                star3.setImageResource(R.drawable.info_star_select);
+                star4.setImageResource(R.drawable.info_star_select);
+                star5.setImageResource(R.drawable.info_star_select);
+                break;
+            case 2:
+                star1.setImageResource(R.drawable.info_star_selected);
+                star2.setImageResource(R.drawable.info_star_selected);
+                star3.setImageResource(R.drawable.info_star_select);
+                star4.setImageResource(R.drawable.info_star_select);
+                star5.setImageResource(R.drawable.info_star_select);
+                break;
+            case 3:
+                star1.setImageResource(R.drawable.info_star_selected);
+                star2.setImageResource(R.drawable.info_star_selected);
+                star3.setImageResource(R.drawable.info_star_selected);
+                star4.setImageResource(R.drawable.info_star_select);
+                star5.setImageResource(R.drawable.info_star_select);
+                break;
+            case 4:
+                star1.setImageResource(R.drawable.info_star_selected);
+                star2.setImageResource(R.drawable.info_star_selected);
+                star3.setImageResource(R.drawable.info_star_selected);
+                star4.setImageResource(R.drawable.info_star_selected);
+                star5.setImageResource(R.drawable.info_star_select);
+                break;
+            case 5:
+                star1.setImageResource(R.drawable.info_star_selected);
+                star2.setImageResource(R.drawable.info_star_selected);
+                star3.setImageResource(R.drawable.info_star_selected);
+                star4.setImageResource(R.drawable.info_star_selected);
+                star5.setImageResource(R.drawable.info_star_selected);
+                break;
+
+        }
+    }
     public View getView() {
         return this.view;
     }

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:scrollbars="none">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_16sdp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorThemeGreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_8sdp"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/_8sdp"
+                android:src="@drawable/back_white" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/raleway_bold"
+                android:text="@string/strEditProfile"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_16sdp" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativeProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_16sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayout">
+
+            <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:fontFamily="@font/raleway_regular"-->
+            <!--android:text="@string/strEdit"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@color/colorThemeGreen"-->
+            <!--android:visibility="gone" />-->
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:src="@drawable/user" />
+
+            <ImageButton
+                android:id="@+id/btnAddImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/imgProfile"
+                android:layout_alignBottom="@+id/imgProfile"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/_2sdp"
+                android:src="@drawable/camera" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgProfile"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                android:fontFamily="@font/raleway_bold"
+                android:gravity="center"
+                android:text="@string/strName"
+                android:textColor="@android:color/background_dark"
+                android:textSize="@dimen/_16sdp" />
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvName"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:fontFamily="@font/raleway_medium"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                android:gravity="center"
+                android:text="@string/strContactNumber"
+                android:textColor="@color/colorGreyDark"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvPhone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginRight="@dimen/_16sdp"
+                android:background="@drawable/bg_curved_yellow"
+                android:fontFamily="@font/raleway_medium"
+                android:gravity="center"
+                android:paddingLeft="@dimen/_16sdp"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingRight="@dimen/_16sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                android:text="@string/strEmail"
+                android:textColor="@color/colorThemeGreen"
+                android:textSize="@dimen/_12sdp" />
+
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGreylight"
+            android:paddingBottom="@dimen/_16sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeProfile">
+
+
+            <TextView
+                android:id="@+id/tvFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="@string/strFirstName"
+                android:textColor="@color/colorTextGreen"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/edFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@drawable/bg_curved_grey_outline"
+                android:fontFamily="@font/raleway_medium"
+                android:hint="@string/strEnterFirstName"
+                android:maxLength="50"
+                android:paddingLeft="@dimen/_6sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_6sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@+id/tvFirstName" />
+
+
+            <TextView
+                android:id="@+id/tvLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="@string/strLastName"
+                android:textColor="@color/colorTextGreen"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edFirstName" />
+
+            <EditText
+                android:id="@+id/edLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@drawable/bg_curved_grey_outline"
+                android:fontFamily="@font/raleway_medium"
+                android:hint="@string/strEnterLastName"
+                android:maxLength="50"
+                android:paddingLeft="@dimen/_6sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_6sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@+id/tvLastName" />
+
+            <TextView
+                android:id="@+id/tvPatAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="@string/strAddress2"
+                android:fontFamily="@font/raleway_medium"
+                android:textColor="@color/colorTextGreen"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edLastName" />
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@drawable/bg_curved_grey_outline"
+                android:drawableRight="@drawable/arrow"
+                android:fontFamily="@font/raleway_medium"
+                android:hint="@string/strEnterClinicAddress"
+                android:paddingLeft="@dimen/_6sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintTop_toBottomOf="@+id/tvPatAddress" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:background="@drawable/bg_button_yellow"
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/strSave"
+            android:textColor="@color/colorTextGreen"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

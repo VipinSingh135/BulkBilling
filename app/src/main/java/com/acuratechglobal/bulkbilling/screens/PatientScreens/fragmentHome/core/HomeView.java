@@ -34,11 +34,15 @@ import com.google.gson.Gson;
 import com.jakewharton.rxbinding3.view.RxView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 import kotlin.Unit;
 
 import static com.acuratechglobal.bulkbilling.utils.UiUtils.getInputText;
@@ -50,6 +54,7 @@ public class HomeView {
     private LinearLayout linearFilter;
     private ImageButton btnMenu,btnFilter,btnCancel;
     private RecyclerView recyclerHome;
+    private SearchView searchView;
     private final MainActivity activity;
     private final ProgressDialog progressDialog;
     private GetDoctorListRequest request;
@@ -74,6 +79,7 @@ public class HomeView {
     private int experience = 0;
     private int level1Id=0,level2Id=0;
     private boolean isStar1=false,isStar2=false,isStar3=false,isStar4=false,isStar5=false;
+    PublishSubject<String> searchDoc;
 
     public HomeView(MainActivity context, ProgressDialog dialog) {
         this.activity= context;
@@ -84,6 +90,7 @@ public class HomeView {
         view = LayoutInflater.from(activity).inflate(R.layout.pat_fragment_home, parent, true);
         btnMenu= view.findViewById(R.id.btnMenu);
         btnFilter= view.findViewById(R.id.btnFilter);
+        searchView= view.findViewById(R.id.searchView);
         btnCancel= view.findViewById(R.id.btnCancel);
         linearFilter= view.findViewById(R.id.linearFilter);
         relativeFilter= view.findViewById(R.id.relativeFilter);
@@ -133,7 +140,31 @@ public class HomeView {
         recyclerSpeciality.setAdapter(adapterLevel3);
         recyclerSpeciality.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
 
+        searchDoc= PublishSubject.create();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchDoc.onNext(query);
+                UiUtils.hideKeyboard(activity);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                 return false;
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                searchDoc.onNext("");
+                return false;
+            }
+        });
     }
+
 
     public View getView() {
         return this.view;
@@ -167,6 +198,7 @@ public class HomeView {
     Observable<Integer> itemClick() {
         return adapter.observeClicks();
     }
+
     Observable<Unit> spclAreaClick() {
         return RxView.clicks(tvSpclArea);
     }
@@ -474,13 +506,16 @@ public class HomeView {
     Observable<Unit> clearFilter() {
         return RxView.clicks(btnClear);
     }
-
     void setFilterParams(){
         if (level1Id!=0) {
             request.setLevel1ID(level1Id);
+        }else {
+            request.setLevel1ID(null);
         }
         if (level2Id!=0) {
             request.setLevel2ID(level2Id);
+        }else {
+            request.setLevel2ID(null);
         }
         if (selectedlistLevel3!=null && selectedlistLevel3.size()!=0){
             List<Integer> list = new ArrayList<>();
@@ -488,11 +523,16 @@ public class HomeView {
                 list.add(model.getId());
             }
             request.setLevel3ID(list);
+        }else {
+            request.setLevel3ID(null);
         }
         if (experience!=0){
             request.setExperience(experience);
+        }else {
+            request.setExperience(null);
         }
-        if (!isStar1 && !isStar2 && !isStar3 && !isStar4 && !isStar5){
+
+        if (isStar1 || isStar2 || isStar3 || isStar4 || isStar5){
             List<Integer> ratinglist = new ArrayList<>();
             if (isStar1){
                 ratinglist.add(1);
@@ -509,10 +549,12 @@ public class HomeView {
             if (isStar5){
                 ratinglist.add(5);
             }
-
             request.setRate(ratinglist);
+        }else {
+            request.setRate(null);
         }
     }
+
     void clearFilterParams(){
         request.setRate(null);
         request.setExperience(null);
@@ -547,5 +589,16 @@ public class HomeView {
         imgStar5.setImageResource(R.drawable.filter_star5_off);
 
     }
+
+
+    //search
+    Observable<String> searchDoctors() {
+        return searchDoc;
+    }
+
+    void setSearchParams(String search){
+       request.setSearch(search);
+    }
+
 
 }

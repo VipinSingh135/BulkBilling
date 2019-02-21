@@ -66,6 +66,7 @@ public class DocRatingsPresenter {
                         String errorMessage =
                                 null == profileResponse.getMessage() ? model.getString(R.string.error_signUp)
                                         : profileResponse.getMessage();
+                        view.bindRatings(profileResponse.getObject());
                         UiUtils.showSnackbar(view.getView(), errorMessage, Snackbar.LENGTH_SHORT);
                     }
                 }, throwable -> {

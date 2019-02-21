@@ -14,6 +14,9 @@ public class AddRatingRequest {
     @SerializedName("fkPatientId")
     @Expose
     private Integer fkPatientId;
+    @SerializedName("fkAppointmentId")
+    @Expose
+    private Integer fkAppointmentId;
     @SerializedName("rate")
     @Expose
     private Integer rate;
@@ -48,5 +51,13 @@ public class AddRatingRequest {
 
     public void setRate(Integer rate) {
         this.rate = rate;
+    }
+
+    public Integer getFkAppointmentId() {
+        return fkAppointmentId;
+    }
+
+    public void setFkAppointmentId(Integer fkAppointmentId) {
+        this.fkAppointmentId = fkAppointmentId;
     }
 }
